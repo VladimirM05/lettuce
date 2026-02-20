@@ -1,0 +1,37 @@
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 472px;
+  border: 1px solid #636363;
+  border-radius: 8px;
+  padding: 0 12px;
+  height: 48px;
+
+  &:focus-within {
+    border-color: #0b4017;
+  }
+}
+
+.searchImg {
+  display: flex;
+  justify-content: center;
+  margin-right: 4px;
+  width: 24px;
+}
+
+.searchInput {
+  flex: 1;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0.5px;
+
+
+  &::placeholder {
+    line-height: 24px;
+  }
+}
+
+.cross {
+  margin-left: 12px;
+  cursor: pointer;
+}

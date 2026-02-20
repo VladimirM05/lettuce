@@ -1,0 +1,19 @@
+@use "sass:color";
+
+$search-btn-bg-color: #1ca139;
+
+.searchBtn {
+  background-color: $search-btn-bg-color;
+  border-radius: 8px;
+  padding: 12px 34.5px;
+  cursor: pointer;
+  transition: background-color ease-out 0.2s;
+
+  &:hover {
+    background-color: color.adjust($search-btn-bg-color, $lightness: -10%);
+  }
+}
+
+.searchBtnText {
+  color: #ffffff;
+}
