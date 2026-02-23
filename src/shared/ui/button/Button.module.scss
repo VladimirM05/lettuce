@@ -1,0 +1,15 @@
+@use 'sass:color';
+
+$button-bg-color: #f2f2f2;
+
+.button {
+  padding: 12px;
+  border-radius: 8px;
+  background-color: $button-bg-color;
+  cursor: pointer;
+  transition: background-color ease-out 0.2s;
+
+  &:hover {
+    background-color: color.adjust($button-bg-color, $lightness: -10%);
+  }
+}

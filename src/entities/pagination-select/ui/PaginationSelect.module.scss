@@ -1,0 +1,44 @@
+.paginationSelect {
+  display: flex;
+  gap: 16px;
+  padding: 12px;
+  border: 1px solid #636363;
+  border-radius: 8px;
+  transition: border-color ease-out 0.2s;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    border-color: #0b4017;
+  }
+}
+
+.paginationOption {
+  width: 32px;
+  text-align: center;
+}
+
+.paginationOptionList {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: -4px -4px 8px rgba(0, 0, 0, 0.04), 4px 4px 8px rgba(0, 0, 0, 0.04);
+}
+
+.selected {
+  color: #1ca139;
+}
+
+.paginationSelectImg {
+  transition: transform ease-out 0.2s;
+}
+
+.open {
+  transform: rotate(180deg);
+}

@@ -1,0 +1,15 @@
+@use "@/shared/styles/mixins/fonts" as fonts;
+
+.adminTableHeader {
+  background-color: #e8f6eb;
+  border-radius: 8px;
+  padding: 16px 32px;
+  display: grid;
+  gap: 32px;
+  margin-bottom: 8px;
+  @include fonts.font-medium;
+}
+
+.adminTableHeaderColumn {
+  color: #16812e;
+}
