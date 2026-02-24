@@ -1,14 +1,14 @@
 import type { FC, SVGProps } from 'react'
 
-import { SidebarMenuItem } from '@/widgets/sidebar/ui/SidebarMenuItem'
+import { SidebarMenuItem } from './SidebarMenuItem.tsx'
 
 import Logo from '@/app/assets/images/logo.svg?react'
-import Users from '@/app/assets/images/users.svg?react'
-import Customers from '@/app/assets/images/customers.svg?react'
-import Scheduled from '@/app/assets/images/scheduled.svg?react'
-import Plans from '@/app/assets/images/plans.svg?react'
-import Subscriptions from '@/app/assets/images/subscriptions.svg?react'
-import SignoutImg from '@/app/assets/images/signout.svg?react'
+import Users from './assets/users.svg?react'
+import Customers from './assets/customers.svg?react'
+import Scheduled from './assets/scheduled.svg?react'
+import Plans from './assets/plans.svg?react'
+import Subscriptions from './assets/subscriptions.svg?react'
+import SignoutImg from './assets/signout.svg?react'
 
 import styles from './Sidebar.module.scss'
 

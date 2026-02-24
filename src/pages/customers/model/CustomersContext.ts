@@ -1,4 +1,4 @@
 import { createContext } from 'react'
-import type { AdminTableColumn } from '@/widgets/admin-table/model/AdminTableColumn.ts'
+import type { TableColumn } from '@/widgets/table/model/TableColumn.ts'
 
-export const CustomerContext = createContext<AdminTableColumn[] | null>(null)
+export const CustomerContext = createContext<TableColumn[] | null>(null)

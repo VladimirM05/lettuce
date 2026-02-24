@@ -1,12 +1,16 @@
 @mixin font-regular {
-  font-family: "Roboto", sans-serif;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+@mixin font-medium {
+  font-weight: 500;
   line-height: 24px;
   letter-spacing: 0.15px;
 }
 
-@mixin font-medium {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: 0.15px;
+@mixin font-bold {
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0.5px;
 }

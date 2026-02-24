@@ -1,8 +1,9 @@
-import { AdminTable } from '@/widgets/admin-table'
+import { Table } from '@/widgets/table'
 import { CustomerContext } from '../model/CustomersContext'
-import type { AdminTableColumn } from '@/widgets/admin-table/model/AdminTableColumn'
+// import { customerData } from '@/pages/customers/model/customerData'
+import type { TableColumn } from '@/widgets/table/model/TableColumn'
 
-const customerColumns: AdminTableColumn[] = [
+const customerColumns: TableColumn[] = [
   { key: 'name', title: 'Name' },
   { key: 'phone', title: 'Phone' },
   { key: 'email', title: 'Email' },
@@ -12,7 +13,7 @@ const customerColumns: AdminTableColumn[] = [
 const Customers = () => {
   return (
     <CustomerContext.Provider value={customerColumns}>
-      <AdminTable />
+      <Table />
     </CustomerContext.Provider>
   )
 }

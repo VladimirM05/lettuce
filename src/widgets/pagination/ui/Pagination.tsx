@@ -1,14 +1,14 @@
 import type { FC, SVGProps } from 'react'
 
-import First from '@/app/assets/images/first.svg?react'
-import AllowLeft from '@/app/assets/images/arrow-left.svg?react'
-import AllowRight from '@/app/assets/images/arrow-right.svg?react'
-import Last from '@/app/assets/images/last.svg?react'
-
-import { Refresh } from '@/entities/buttons/refresh'
+import { Refresh } from './Refresh'
 import { Button } from '@/shared/ui/button/Button'
-import { PaginationSelect } from '@/entities/pagination-select'
-import { PaginationCounter } from '@/entities/pagination-counter'
+import { PaginationSelect } from './PaginationSelect'
+import { PaginationCounter } from './PaginationCounter'
+
+import First from './assets/first.svg?react'
+import AllowLeft from './assets/arrow-left.svg?react'
+import AllowRight from './assets/arrow-right.svg?react'
+import Last from './assets/last.svg?react'
 
 import styles from './Pagination.module.scss'
 
