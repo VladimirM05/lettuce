@@ -1,4 +1,4 @@
-import RefreshImg from './assets/refresh.svg?react'
+import RefreshImg from '@/widgets/pagination/assets/refresh.svg?react'
 import styles from './Refresh.module.scss'
 
 export const Refresh = () => {

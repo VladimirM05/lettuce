@@ -5,10 +5,10 @@ import { Button } from '@/shared/ui/button/Button'
 import { PaginationSelect } from './PaginationSelect'
 import { PaginationCounter } from './PaginationCounter'
 
-import First from './assets/first.svg?react'
-import AllowLeft from './assets/arrow-left.svg?react'
-import AllowRight from './assets/arrow-right.svg?react'
-import Last from './assets/last.svg?react'
+import First from '@/widgets/pagination/assets/first.svg?react'
+import AllowLeft from '@/widgets/pagination/assets/arrow-left.svg?react'
+import AllowRight from '@/widgets/pagination/assets/arrow-right.svg?react'
+import Last from '@/widgets/pagination/assets/last.svg?react'
 
 import styles from './Pagination.module.scss'
 

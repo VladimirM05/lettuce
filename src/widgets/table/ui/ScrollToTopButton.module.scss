@@ -1,4 +1,4 @@
-.scrollToTopBtn {
+.scrollToTopButton {
   position: fixed;
   background-color: #e5831d;
   padding: 16px;
@@ -6,4 +6,10 @@
   bottom: 32px;
   right: 32px;
   cursor: pointer;
+  transition: all ease-out 0.2s;
+  opacity: 0;
+}
+
+.scrollToTopButton.visible {
+  opacity: 1;
 }

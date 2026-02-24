@@ -1,25 +1,33 @@
 @use '@/shared/styles/mixins/fonts.scss' as fonts;
 
-.adminTableBody {
+.tableBody {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  position: relative;
+  max-height: calc(100vh - 240px);
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-.adminTableBodyRow {
+.tableBodyRow {
   border: 1px solid #e5e5e5;
   border-radius: 8px;
-  display: flex;
   gap: 32px;
   padding: 25px 32px;
   transition: border-color ease-out 0.2s;
+  display: grid;
+  cursor: pointer;
 
   &:hover {
     border-color: #0b4017;
   }
 }
 
-.adminTableBodyCell {
+.tableBodyCell {
   @include fonts.font-regular;
 }

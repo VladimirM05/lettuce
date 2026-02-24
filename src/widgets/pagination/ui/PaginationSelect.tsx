@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import clsx from 'clsx'
-import PaginationSelectImg from './assets/arrow-down.svg?react'
+import PaginationSelectImg from '@/widgets/pagination/assets/arrow-down.svg?react'
 import styles from './PaginationSelect.module.scss'
 
 const options: number[] = [10, 50, 100]
