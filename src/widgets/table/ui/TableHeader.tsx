@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { CustomerContext } from '@/pages/customers/model/CustomerContext.ts'
+import { CustomerContext } from '@/pages/customers/model/CustomerContext'
 import styles from './TableHeader.module.scss'
 
 export const TableHeader = () => {

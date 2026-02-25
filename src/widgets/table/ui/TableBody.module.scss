@@ -5,10 +5,12 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: calc(100vh - 240px);
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  max-height: calc(100vh - 64px);
+  height: 100%;
+  position: relative;
 
   &::-webkit-scrollbar {
     display: none;
@@ -31,4 +33,20 @@
 
 .tableBodyCell {
   @include fonts.font-regular;
+}
+
+.noResults {
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.noResultsText {
+  @include fonts.font-medium;
 }

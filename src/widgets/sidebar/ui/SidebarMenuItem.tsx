@@ -1,29 +1,22 @@
-import { NavLink } from 'react-router-dom'
-import type { FC, SVGProps } from 'react'
-import styles from './SidebarMenuItem.module.scss'
+import clsx from "clsx";
+import type { FC, SVGProps } from "react";
+import { NavLink } from "react-router-dom";
+
+import styles from "./SidebarMenuItem.module.scss";
 
 interface SidebarMenuItemProps {
-  icon: FC<SVGProps<SVGSVGElement>>
-  path: string
-  text: string
+  path: string;
+  icon: FC<SVGProps<SVGSVGElement>>;
+  text: string;
 }
 
-export const SidebarMenuItem = ({
-  icon: Icon,
-  path,
-  text,
-}: SidebarMenuItemProps) => {
+export const SidebarMenuItem = ({ path, icon: Icon, text }: SidebarMenuItemProps) => {
   return (
     <li className={styles.item}>
-      <NavLink
-        className={({ isActive }) =>
-          `${styles.link} ${isActive ? styles.active : ''}`
-        }
-        to={path}
-      >
+      <NavLink className={({ isActive }) => clsx(styles.link, isActive && styles.active)} to={path}>
         <Icon aria-hidden />
         <span className={styles.text}>{text}</span>
       </NavLink>
     </li>
-  )
-}
+  );
+};

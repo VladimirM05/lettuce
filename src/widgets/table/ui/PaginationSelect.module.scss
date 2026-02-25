@@ -21,6 +21,7 @@
 }
 
 .paginationOptionList {
+  z-index: 10;
   background-color: colors.$color-bg-primary;
   padding: 16px;
   display: flex;

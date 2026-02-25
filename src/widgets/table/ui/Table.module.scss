@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '@/shared/assets/abstracts/color-semantic' as colors;
 
 .tableWrapper {
@@ -11,4 +12,32 @@
 
 .table {
   width: 100%;
+  height: calc(100% - 108px);
+}
+
+.tableControls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.scrollToTopButton {
+  z-index: 10;
+  position: fixed;
+  background-color: colors.$color-btn-warning;
+  padding: 16px;
+  border-radius: 32px;
+  bottom: 48px;
+  right: 48px;
+  cursor: pointer;
+  transition: all ease-out 0.2s;
+  opacity: 0;
+
+  &:hover {
+    background-color: color.adjust(colors.$color-btn-warning, $lightness: -10%)
+  }
+}
+
+.scrollToTopButton.visible {
+  opacity: 1;
 }

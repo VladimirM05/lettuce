@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react'
 import clsx from 'clsx'
-import PaginationSelectImg from '@/widgets/pagination/assets/arrow-down.svg?react'
+import { TableContext } from '@/widgets/table/model/TableContext'
+import PaginationSelectImg from '@/widgets/table/assets/arrow-down.svg?react'
 import styles from './PaginationSelect.module.scss'
-import { TableContext } from '@/widgets/table/model/TableContext.ts'
 
-const options: number[] = [10, 50, 100]
+const options: readonly number[] = [10, 50, 100]
 
 export const PaginationSelect = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -13,17 +13,16 @@ export const PaginationSelect = () => {
 
   const handleSelect = (option: number): void => {
     setRowsPerPage(option)
-
-    const newTotalPages = Math.ceil(totalPages * (rowsPerPage / option)) // можно пересчитать динамически
-    if (currentPage > newTotalPages) {
-      setCurrentPage(newTotalPages)
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages)
     }
   }
 
   return (
     <div className={styles.paginationSelect} onClick={() => setIsOpen((prev) => !prev)}>
       <span className={styles.paginationOption}>{rowsPerPage}</span>
-      <PaginationSelectImg className={clsx(styles.paginationSelectImg, isOpen ? styles.open : '')} />
+      <PaginationSelectImg className={clsx(styles.paginationSelectImg, isOpen && styles.open)} />
+
       {isOpen && (
         <ul className={styles.paginationOptionList}>
           {options.map((option) => (

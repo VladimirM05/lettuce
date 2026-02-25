@@ -1,20 +1,22 @@
+@use 'sass:color';
 @use '@/shared/assets/abstracts/color-semantic' as colors;
 @use '@/shared/styles/mixins/fonts' as fonts;
-@use 'sass:color';
 
-.searchBtn {
+.search {
+  display: flex;
+  gap: 8px;
+}
+
+.searchButton {
   background-color: colors.$color-btn-primary;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color ease-out 0.2s;
+  color: colors.$color-text-inverse;
+  padding: 12px 34.5px;
+  @include fonts.font-regular;
 
   &:hover {
     background-color: color.adjust(colors.$color-btn-primary, $lightness: -10%);
   }
-}
-
-.searchBtnText {
-  color: colors.$color-text-inverse;
-  @include fonts.font-regular;
-  margin: 12px 34.5px;
 }
