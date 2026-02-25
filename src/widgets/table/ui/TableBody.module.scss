@@ -8,8 +8,7 @@
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  max-height: calc(100vh - 64px);
-  height: 100%;
+  height: calc(100% - 32px);
   position: relative;
 
   &::-webkit-scrollbar {
