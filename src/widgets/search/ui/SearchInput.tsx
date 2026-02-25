@@ -2,7 +2,7 @@ import * as React from 'react'
 import Search from '@/widgets/search/assets/search.svg?react'
 import Cross from '@/widgets/search/assets/cross.svg?react'
 import styles from './SearchInput.module.scss'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { CustomerContext } from '@/pages/customers/model/CustomerContext.ts'
 
 interface SearchInputProps {
@@ -11,6 +11,7 @@ interface SearchInputProps {
 }
 
 export const SearchInput = ({ inputValue, setInputValue }: SearchInputProps) => {
+  const [placeholder, setPlaceholder] = useState<string>('Search')
   const context = useContext(CustomerContext)!
   const { setSearchQuery } = context
 
@@ -29,7 +30,9 @@ export const SearchInput = ({ inputValue, setInputValue }: SearchInputProps) => 
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         type="text"
-        placeholder="Search"
+        onFocus={() => setPlaceholder('')}
+        onBlur={() => setPlaceholder('Search')}
+        placeholder={placeholder}
       />
       {inputValue && (
         <div className={styles.cross} onClick={() => handleClear()}>

@@ -1,3 +1,4 @@
+@use '@/shared/assets/abstracts/color-semantic' as colors;
 @use '@/shared/styles/mixins/fonts.scss' as fonts;
 
 .tableBody {
@@ -15,7 +16,7 @@
 }
 
 .tableBodyRow {
-  border: 1px solid #e5e5e5;
+  border: 1px solid colors.$color-border-muted;
   border-radius: 8px;
   gap: 32px;
   padding: 25px 32px;
@@ -24,7 +25,7 @@
   cursor: pointer;
 
   &:hover {
-    border-color: #0b4017;
+    border-color: colors.$color-border-hover;
   }
 }
 

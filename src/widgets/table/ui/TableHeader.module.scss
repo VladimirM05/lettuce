@@ -1,7 +1,8 @@
+@use '@/shared/assets/abstracts/color-semantic' as colors;
 @use "@/shared/styles/mixins/fonts" as fonts;
 
 .adminTableHeader {
-  background-color: #e8f6eb;
+  background-color: colors.$color-table-bg;
   border-radius: 8px;
   padding: 16px 32px;
   display: grid;
@@ -11,5 +12,5 @@
 }
 
 .adminTableHeaderColumn {
-  color: #16812e;
+  color: colors.$color-text-on-primary;
 }

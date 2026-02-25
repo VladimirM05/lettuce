@@ -1,6 +1,6 @@
 import type { FC, SVGProps } from 'react'
 
-import { SidebarMenuItem } from './SidebarMenuItem.tsx'
+import { SidebarMenuItem } from './SidebarMenuItem'
 
 import Logo from '@/shared/assets/images/logo.svg?react'
 import Users from '@/widgets/sidebar/assets/users.svg?react'
@@ -12,7 +12,7 @@ import SignoutImg from '@/widgets/sidebar/assets/signout.svg?react'
 
 import styles from './Sidebar.module.scss'
 
-const username = 'Vladimir'
+const username = 'Vladimirmalakhov'
 
 export interface MenuItem {
   icon: FC<SVGProps<SVGSVGElement>>
@@ -33,10 +33,7 @@ export const Sidebar = () => {
     <aside className={styles.sidebar}>
       <header className={styles.header}>
         <Logo />
-        <div className={styles.headerText}>
-          <span className={styles.username}>Hi, {username}</span>
-          <span>!</span>
-        </div>
+        <span className={styles.headerText}>Hi, {username}</span>
       </header>
       <hr className={styles.divider} />
       <nav className={styles.nav}>

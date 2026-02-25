@@ -1,8 +1,10 @@
+@use '../../assets/abstracts/color-semantic' as colors;
+
 @mixin sidebar-hover-effect {
   transition: background-color ease-out 0.2s;
   border-radius: 8px;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(colors.$color-bg-hover, 0.1);
   }
 }

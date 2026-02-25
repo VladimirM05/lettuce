@@ -1,3 +1,3 @@
-const Subscriptions = () => <div>Subscriptions</div>
-
-export default Subscriptions
+export const Subscriptions = () => {
+  return <div>Subscriptions</div>
+}

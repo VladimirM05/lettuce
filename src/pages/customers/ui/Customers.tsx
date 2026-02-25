@@ -5,13 +5,13 @@ import { customerData } from '@/pages/customers/model/customerData'
 import type { TableColumn } from '@/widgets/table/model/TableColumn'
 
 const customerColumns: TableColumn[] = [
-  { key: 'name', title: 'Name' },
-  { key: 'phone', title: 'Phone' },
-  { key: 'email', title: 'Email' },
-  { key: 'dateJoined', title: 'Date Joined' },
+  { key: 'name', title: 'Name', searchable: true },
+  { key: 'phone', title: 'Phone', searchable: true },
+  { key: 'email', title: 'Email', searchable: true },
+  { key: 'dateJoined', title: 'Date Joined', searchable: false },
 ]
 
-const Customers = () => {
+export const Customers = () => {
   const [searchQuery, setSearchQuery] = useState<string>('')
 
   return (
@@ -27,5 +27,3 @@ const Customers = () => {
     </CustomerContext.Provider>
   )
 }
-
-export default Customers

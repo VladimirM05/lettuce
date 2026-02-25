@@ -1,15 +1,23 @@
 @use 'sass:color';
-
-$button-bg-color: #f2f2f2;
+@use '@/shared/assets/abstracts/color-semantic' as colors;
 
 .button {
   padding: 12px;
   border-radius: 8px;
-  background-color: $button-bg-color;
+  background-color: colors.$color-btn-secondary;
   cursor: pointer;
   transition: background-color ease-out 0.2s;
 
   &:hover {
-    background-color: color.adjust($button-bg-color, $lightness: -10%);
+    background-color: color.adjust(colors.$color-btn-secondary, $lightness: -10%);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:disabled:hover {
+    background-color: colors.$color-btn-secondary;
   }
 }

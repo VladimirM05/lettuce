@@ -1,15 +1,17 @@
+@use '@/shared/assets/abstracts/color-semantic' as colors;
+
 .search {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 472px;
-  border: 1px solid #636363;
+  border: 1px solid colors.$color-border;
   border-radius: 8px;
   padding: 0 12px;
   height: 48px;
 
   &:hover {
-    border-color: #0b4017;
+    border-color: colors.$color-border-hover;
   }
 }
 

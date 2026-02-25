@@ -1,3 +1,3 @@
-const Scheduled = () => <div>Scheduled</div>
-
-export default Scheduled
+export const Scheduled = () => {
+  return <div>Scheduled</div>
+}

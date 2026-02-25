@@ -1,3 +1,4 @@
+@use '@/shared/assets/abstracts/color-semantic' as colors;
 @use '@/shared/styles/mixins/utils.scss' as utils;
 
 .link {
@@ -9,9 +10,5 @@
 }
 
 .active {
-  background-color: rgba(255, 255, 255, 0.24);
-}
-
-.text {
-  color: #ffffff;
+  background-color: rgba(colors.$color-bg-active, 0.24);
 }

@@ -1,15 +1,17 @@
+@use '@/shared/assets/abstracts/color-semantic' as colors;
+
 .paginationSelect {
   display: flex;
   gap: 16px;
   padding: 12px;
-  border: 1px solid #636363;
+  border: 1px solid colors.$color-border;
   border-radius: 8px;
   transition: border-color ease-out 0.2s;
   cursor: pointer;
   position: relative;
 
   &:hover {
-    border-color: #0b4017;
+    border: 1px solid colors.$color-border-hover;
   }
 }
 
@@ -19,6 +21,7 @@
 }
 
 .paginationOptionList {
+  background-color: colors.$color-bg-primary;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -28,11 +31,19 @@
   left: 0;
   width: 100%;
   border-radius: 8px;
-  box-shadow: -4px -4px 8px rgba(0, 0, 0, 0.04), 4px 4px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: -4px -4px 8px rgba(colors.$color-shadow, 0.04), 4px 4px 8px rgba(colors.$color-shadow, 0.04);
+}
+
+.paginationOptionItem {
+  transition: color ease-out 0.2s;
+
+  &:hover {
+    color: colors.$color-text-selected;
+  }
 }
 
 .selected {
-  color: #1ca139;
+  color: colors.$color-text-selected;
 }
 
 .paginationSelectImg {

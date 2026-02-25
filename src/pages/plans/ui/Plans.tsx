@@ -1,3 +1,3 @@
-const Plans = () => <div>Plans</div>
-
-export default Plans
+export const Plans = () => {
+  return <div>Plans</div>
+}

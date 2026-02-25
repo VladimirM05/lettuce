@@ -1,9 +1,10 @@
+@use '@/shared/assets/abstracts/color-semantic' as colors;
 @use '@/shared/styles/mixins/fonts.scss' as fonts;
 @use '@/shared/styles/mixins/utils.scss' as utils;
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap');
 
 .sidebar {
-  background-color: #0e501c;
+  background-color: colors.$color-sidebar-bg;
+  color: colors.$color-text-inverse;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -13,64 +14,59 @@
   padding: 16px;
   font-family: "Roboto", sans-serif;
   letter-spacing: 0.5px;
+}
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 12px;
-    gap: 0 16px;
-    padding: 16px;
-    background-color: #116122;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  gap: 0 16px;
+  padding: 16px;
+  height: 72px;
+  background-color: colors.$color-sidebar-header-bg;
+}
 
-    .headerText {
-      color: #ffffff;
-      font-size: 18px;
-      display: flex;
-      justify-content: flex-end;
-      min-width: 0;
-      flex: 1;
-      @include fonts.font-bold;
+.headerText {
+  flex: 1;
+  min-width: 0;
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @include fonts.font-medium;
+  letter-spacing: 0.5px;
 
-      .username {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-  }
+}
 
-  .nav {
-    flex: 1;
-    display: flex;
+.nav {
+  flex: 1;
+  display: flex;
+}
 
-    .menuList {
-      display: flex;
-      width: 100%;
-      flex-direction: column;
-      gap: 8px 0;
-    }
-  }
+.menuList {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px 0;
+}
 
-  .footer {
-    .signoutBtn {
-      width: 100%;
-      background-color: transparent;
-      display: flex;
-      gap: 0 8px;
-      padding: 12px;
-      cursor: pointer;
-      color: #ffffff;
-      border: none;
-      @include utils.sidebar-hover-effect;
-    }
-  }
+.signoutBtn {
+  color: inherit;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  gap: 0 8px;
+  padding: 12px;
+  cursor: pointer;
+  border: none;
+  @include utils.sidebar-hover-effect;
+}
 
-  .divider {
-    width: 100%;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.32);
-    height: 1px;
-    margin: 16px 0;
-  }
+.divider {
+  width: 100%;
+  background-color: rgba(colors.$color-divider, 0.32);
+  border: none;
+  height: 1px;
+  margin: 16px 0;
 }

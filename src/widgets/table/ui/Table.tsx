@@ -1,60 +1,59 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
+
+import { CustomerContext } from '@/pages/customers/model/CustomerContext'
+import { TableContext } from '../model/TableContext'
+
+import { useScrollToTop } from '@/widgets/table/model/hooks/useScrollToTop'
+import { useSearch } from '@/widgets/table/model/hooks/useSearch'
+
 import { TableControls } from './TableControls'
 import { TableHeader } from './TableHeader'
 import { TableBody } from './TableBody'
 import { ScrollToTopButton } from './ScrollToTopButton'
+
 import styles from './Table.module.scss'
-import { CustomerContext } from '@/pages/customers/model/CustomerContext.ts'
-import type { CustomerData } from '@/pages/customers/model/customerData'
 
 export const Table = () => {
-  // Скрытие скролла при достижении определенной высоты.
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10)
+  const [currentPage, setCurrentPage] = useState<number>(1)
+
+  // Hiding the scroll when it reaches a certain height.
   const bodyRef = useRef<HTMLTableSectionElement>(null)
-  const [showScrollToTopButton, setShowScrollToTopButton] = useState<boolean>(false)
+  const { visible, scrollToTop } = useScrollToTop(bodyRef)
 
-  useEffect(() => {
-    const element = bodyRef.current
-    if (!element) return
-
-    const handleScroll = () => {
-      const shouldShow = element.scrollTop > 300
-      setShowScrollToTopButton((prev) => (prev !== shouldShow ? shouldShow : prev))
-    }
-
-    element.addEventListener('scroll', handleScroll)
-    return () => element.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const handleScrollToTop = () => {
-    bodyRef.current?.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }
-
-  // Поиск
+  // search
   const context = useContext(CustomerContext)
-  const data = context?.data ?? []
-  const searchQuery = context?.searchQuery ?? ''
+  if (!context) {
+    throw new Error('CustomerContext is not provided')
+  }
+  const { data, columns, searchQuery } = context
+  const { filteredData } = useSearch(data, columns, searchQuery)
 
-  const filteredData = data.filter((customer: CustomerData) => {
-    const query: string = searchQuery.toLowerCase()
+  // A cross-section of the data in the table.
+  const startIndex = (currentPage - 1) * rowsPerPage
+  const endIndex = startIndex + rowsPerPage
+  const displayedData = filteredData.slice(startIndex, endIndex)
 
-    return (
-      customer.name.toLowerCase().includes(query) ||
-      customer.email.toLowerCase().includes(query) ||
-      customer.dateJoined.includes(query)
-    )
-  })
+  const totalPages = Math.ceil(filteredData.length / rowsPerPage)
 
   return (
     <div className={styles.tableWrapper}>
-      <TableControls />
-      <table className={styles.table}>
-        <TableHeader />
-        <TableBody data={filteredData} ref={bodyRef} />
-      </table>
-      <ScrollToTopButton onClick={handleScrollToTop} visible={showScrollToTopButton} />
+      <TableContext.Provider
+        value={{
+          rowsPerPage: rowsPerPage,
+          setRowsPerPage: setRowsPerPage,
+          currentPage: currentPage,
+          setCurrentPage: setCurrentPage,
+          totalPages: totalPages,
+        }}
+      >
+        <TableControls />
+        <table className={styles.table}>
+          <TableHeader />
+          <TableBody data={displayedData} ref={bodyRef} />
+        </table>
+      </TableContext.Provider>
+      <ScrollToTopButton onClick={scrollToTop} visible={visible} />
     </div>
   )
 }
