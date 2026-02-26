@@ -26,12 +26,10 @@
 .paginationOptionList {
   z-index: 10;
   background-color: colors.$color-bg-primary;
-  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
   position: absolute;
-  top: calc(100% + 1px);
+  top: calc(100% + 2px);
   left: 0;
   width: 100%;
   border-radius: 8px;
@@ -40,6 +38,8 @@
 
 .paginationOptionItem {
   transition: color ease-out 0.2s;
+  cursor: pointer;
+  padding: 12px 24px;
 
   &:hover {
     color: colors.$color-text-selected;
