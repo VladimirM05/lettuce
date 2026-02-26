@@ -62,6 +62,7 @@
 
 .footerSignoutButtonText {
   @include fonts.font-regular;
+  letter-spacing: 0.15px;
 }
 
 .divider {

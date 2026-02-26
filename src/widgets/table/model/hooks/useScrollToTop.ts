@@ -1,7 +1,6 @@
-import * as React from 'react'
-import { useEffect, useState } from 'react'
+import { type RefObject, useEffect, useState } from 'react'
 
-export const useScrollToTop = <G extends HTMLElement>(ref: React.RefObject<G | null>) => {
+export const useScrollToTop = <T extends HTMLElement>(ref: RefObject<T | null>) => {
   const [visible, setVisible] = useState<boolean>(false)
 
   useEffect(() => {

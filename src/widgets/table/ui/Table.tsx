@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import clsx from 'clsx'
 
-import type { TableColumn } from '@/widgets/table/model/TableColumn'
+import type { TableColumn } from '@/shared/types/TableColumn.ts'
 
 import { useScrollToTop } from '@/widgets/table/model/hooks/useScrollToTop'
 import { useSearch } from '@/widgets/table/model/hooks/useSearch'

@@ -17,12 +17,14 @@
 }
 
 .tableBodyRow {
+  min-height: 74px;
   border: 1px solid colors.$color-border-muted;
   border-radius: 8px;
   gap: 32px;
-  padding: 25px 32px;
+  padding: 0 32px;
   transition: border-color ease-out 0.2s;
   display: grid;
+  align-items: center;
   cursor: pointer;
 
   &:hover {

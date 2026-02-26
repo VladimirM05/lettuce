@@ -8,13 +8,15 @@
 }
 
 .searchButton {
+  width: 120px;
   background-color: colors.$color-btn-primary;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color ease-out 0.2s;
   color: colors.$color-text-inverse;
-  padding: 12px 34.5px;
+  padding: 12px 0;
   @include fonts.font-regular;
+  letter-spacing: 0.15px;
 
   &:hover {
     background-color: color.adjust(colors.$color-btn-primary, $lightness: -10%);

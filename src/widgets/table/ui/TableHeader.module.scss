@@ -1,16 +1,17 @@
 @use '@/shared/assets/abstracts/color-semantic' as colors;
 @use "@/shared/styles/mixins/fonts" as fonts;
 
-.adminTableHeader {
+.tableHeader {
   background-color: colors.$color-table-bg;
   border-radius: 8px;
   padding: 16px 32px;
   display: grid;
   gap: 32px;
   margin-bottom: 8px;
-  @include fonts.font-medium;
 }
 
-.adminTableHeaderColumn {
+.tableHeaderColumn {
   color: colors.$color-text-on-primary;
+  @include fonts.font-regular;
+  letter-spacing: 0.15px;
 }

@@ -1,5 +1,5 @@
 import { forwardRef, type ReactNode, type Ref } from 'react'
-import type { TableColumn } from '@/widgets/table/model/TableColumn'
+import type { TableColumn } from '@/shared/types/TableColumn.ts'
 import NoResults from '../assets/no-results.svg?react'
 import styles from './TableBody.module.scss'
 
