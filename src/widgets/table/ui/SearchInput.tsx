@@ -1,22 +1,19 @@
-import { type Dispatch, type SetStateAction, useContext } from 'react'
-import { CustomerContext } from '@/pages/customers/model/CustomerContext'
-import Search from '@/widgets/table/assets/search.svg?react'
-import Cross from '@/widgets/table/assets/cross.svg?react'
-import styles from './SearchInput.module.scss'
+import { type Dispatch, type SetStateAction } from "react"
+import Search from "@/widgets/table/assets/search.svg?react"
+import Cross from "@/widgets/table/assets/cross.svg?react"
+import styles from "./SearchInput.module.scss"
 
 interface SearchInputProps {
   inputValue: string
   setInputValue: Dispatch<SetStateAction<string>>
   onEnter: Dispatch<SetStateAction<string>>
+  setSearch: Dispatch<SetStateAction<string>>
 }
 
-export const SearchInput = ({ inputValue, setInputValue, onEnter }: SearchInputProps) => {
-  const context = useContext(CustomerContext)!
-  const { setSearchQuery } = context
-
+export const SearchInput = ({ inputValue, setInputValue, onEnter, setSearch }: SearchInputProps) => {
   const handleClear = () => {
-    setInputValue('')
-    setSearchQuery('')
+    setInputValue("")
+    setSearch("")
   }
 
   return (
@@ -26,11 +23,11 @@ export const SearchInput = ({ inputValue, setInputValue, onEnter }: SearchInputP
         className={styles.searchInput}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={(e) => e.key === 'Enter' && onEnter(inputValue)}
+        onKeyDown={(e) => e.key === "Enter" && onEnter(inputValue)}
         placeholder="Search"
         type="text"
       />
-      {inputValue && <Cross className={styles.cross} onClick={() => handleClear()} />}
+      {inputValue && <Cross className={styles.cross} onClick={handleClear} />}
     </div>
   )
 }

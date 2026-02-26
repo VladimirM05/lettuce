@@ -1,42 +1,49 @@
-import { forwardRef, useContext } from 'react'
-import { CustomerContext } from '@/pages/customers/model/CustomerContext'
-import type { CustomerData } from '@/pages/customers/model/customerData'
+import { forwardRef, type ReactNode, type Ref } from 'react'
+import type { TableColumn } from '@/widgets/table/model/TableColumn'
 import NoResults from '../assets/no-results.svg?react'
 import styles from './TableBody.module.scss'
 
-interface TableBodyProps {
-  data?: CustomerData[]
+interface TableBodyProps<T> {
+  columns: TableColumn[]
+  filteredData?: T[]
+  currentPage: number
+  rowsPerPage: number
 }
 
-export const TableBody = forwardRef<HTMLTableSectionElement, TableBodyProps>((props, ref) => {
-  const { data = [] } = props
-  const context = useContext(CustomerContext)!
+export const TableBody = forwardRef(
+  <T extends object>(
+    { columns, filteredData = [], currentPage, rowsPerPage }: TableBodyProps<T>,
+    ref: Ref<HTMLTableSectionElement>,
+  ) => {
+    const startIndex: number = (currentPage - 1) * rowsPerPage
+    const endIndex: number = startIndex + rowsPerPage
+    const displayedData = filteredData.length > 0 ? filteredData.slice(startIndex, endIndex) : []
 
-  const { columns } = context
-  if (!columns) return null
-
-  const gridTemplateColumns: string = `repeat(${columns.length}, 1fr)`
-
-  return (
-    <tbody className={styles.tableBody} ref={ref}>
-      {data.length > 0 ? (
-        data.map((customer, rowIndex) => (
-          <tr className={styles.tableBodyRow} style={{ gridTemplateColumns: gridTemplateColumns }} key={rowIndex}>
-            {columns.map((column, columnIndex) => (
-              <td className={styles.tableBodyCell} key={columnIndex}>
-                {customer[column.key as keyof typeof customer]}
-              </td>
-            ))}
+    return (
+      <tbody className={styles.tableBody} ref={ref}>
+        {displayedData.length > 0 ? (
+          displayedData.map((row, rowIndex) => (
+            <tr
+              className={styles.tableBodyRow}
+              style={{ gridTemplateColumns: `repeat(${columns.length}, 1fr)` }}
+              key={rowIndex}
+            >
+              {columns.map((column, columnIndex) => (
+                <td className={styles.tableBodyCell} key={columnIndex}>
+                  {String(row[column.key as keyof T]) as ReactNode}
+                </td>
+              ))}
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td className={styles.noResults} colSpan={columns.length || 1}>
+              <NoResults />
+              <span className={styles.noResultsText}>No results found</span>
+            </td>
           </tr>
-        ))
-      ) : (
-        <tr>
-          <td className={styles.noResults} colSpan={columns.length || 1}>
-            <NoResults />
-            <span className={styles.noResultsText}>No results found</span>
-          </td>
-        </tr>
-      )}
-    </tbody>
-  )
-})
+        )}
+      </tbody>
+    )
+  },
+)

@@ -1,15 +1,13 @@
-import { useContext } from 'react'
-import { CustomerContext } from '@/pages/customers/model/CustomerContext'
-import styles from './TableHeader.module.scss'
+import type { TableColumn } from "@/widgets/table/model/TableColumn"
+import styles from "./TableHeader.module.scss"
 
-export const TableHeader = () => {
-  const context = useContext(CustomerContext)!
-  const { columns } = context
+interface TableHeaderProps {
+  columns: TableColumn[]
+}
 
-  const gridTemplateColumns = `repeat(${columns?.length}, 1fr)`
-
+export const TableHeader = ({ columns }: TableHeaderProps) => {
   return (
-    <thead className={styles.adminTableHeader} style={{ gridTemplateColumns }}>
+    <thead className={styles.adminTableHeader} style={{ gridTemplateColumns: `repeat(${columns?.length}, 1fr)` }}>
       {columns.map((column) => (
         <tr className={styles.adminTableHeaderRow} key={column.key}>
           <th className={styles.adminTableHeaderColumn}>{column.title}</th>

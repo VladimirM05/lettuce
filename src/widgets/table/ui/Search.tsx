@@ -1,26 +1,23 @@
-import { useContext, useState } from "react"
+import { type Dispatch, type SetStateAction, useState } from "react"
 import { SearchInput } from "./SearchInput"
-import { CustomerContext } from "@/pages/customers/model/CustomerContext"
-import { TableContext } from "@/widgets/table/model/TableContext.ts"
 import styles from "./Search.module.scss"
 
-export const Search = () => {
-  const { setSearchQuery } = useContext(CustomerContext)!
-  const { setCurrentPage } = useContext(TableContext)!
+interface SearchProps {
+  setSearch: Dispatch<SetStateAction<string>>
+  setCurrentPage: Dispatch<SetStateAction<number>>
+}
+
+export const Search = ({ setSearch, setCurrentPage }: SearchProps) => {
   const [inputValue, setInputValue] = useState("")
 
   const handleSearch = () => {
-    setSearchQuery(inputValue)
+    setSearch(inputValue)
     setCurrentPage(1)
   }
 
   return (
     <div className={styles.search}>
-      <SearchInput
-        inputValue={inputValue}
-        setInputValue={setInputValue}
-        onEnter={handleSearch}
-      />
+      <SearchInput inputValue={inputValue} setInputValue={setInputValue} onEnter={handleSearch} setSearch={setSearch} />
       <button className={styles.searchButton} onClick={handleSearch}>
         Search
       </button>
