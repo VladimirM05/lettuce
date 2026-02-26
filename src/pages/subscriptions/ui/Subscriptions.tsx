@@ -1,3 +1,1 @@
-export const Subscriptions = () => {
-  return <div>Subscriptions</div>
-}
+export const Subscriptions = () => <div>Subscriptions</div>

@@ -1,3 +1,1 @@
-export const Scheduled = () => {
-  return <div>Scheduled</div>
-}
+export const Scheduled = () => <div>Scheduled</div>

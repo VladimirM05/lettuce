@@ -1,3 +1,1 @@
-export const Users = () => {
-  return <div>Users</div>
-}
+export const Users = () => <div>Users</div>

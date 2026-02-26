@@ -1,18 +1,19 @@
 import { useRef, useState } from 'react'
 import clsx from 'clsx'
 
-import { useScrollToTop } from '@/widgets/table/model/hooks/useScrollToTop'
+import type { TableColumn } from '@/widgets/table/model/TableColumn'
 
+import { useScrollToTop } from '@/widgets/table/model/hooks/useScrollToTop'
 import { useSearch } from '@/widgets/table/model/hooks/useSearch'
+
 import { Search } from '@/widgets/table/ui/Search'
 import { Pagination } from '@/widgets/table/ui/Pagination'
 import { TableHeader } from './TableHeader'
-
 import { TableBody } from './TableBody'
 
 import ArrowUp from '../assets/arrow-up.svg?react'
+
 import styles from './Table.module.scss'
-import type { TableColumn } from '@/widgets/table/model/TableColumn'
 
 interface TableProps<T> {
   columns: TableColumn[]
@@ -23,9 +24,9 @@ export const Table = <T extends object>({ columns, data }: TableProps<T>) => {
   const [search, setSearch] = useState<string>('')
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [rowsPerPage, setRowsPerPage] = useState<number>(10)
+  const bodyRef = useRef<HTMLTableSectionElement | null>(null)
 
   // Hiding the scroll when it reaches a certain height.
-  const bodyRef = useRef<HTMLTableSectionElement | null>(null)
   const { visible, scrollToTop } = useScrollToTop(bodyRef)
 
   // search
