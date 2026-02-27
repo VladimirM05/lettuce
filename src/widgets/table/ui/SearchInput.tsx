@@ -1,19 +1,18 @@
-import { type Dispatch, type SetStateAction } from "react"
-import Search from "@/widgets/table/assets/search.svg?react"
-import Cross from "@/widgets/table/assets/cross.svg?react"
-import styles from "./SearchInput.module.scss"
+import { type Dispatch, type SetStateAction } from 'react'
+import Search from '@/widgets/table/assets/search.svg?react'
+import Cross from '@/widgets/table/assets/cross.svg?react'
+import styles from './SearchInput.module.scss'
 
 interface SearchInputProps {
   inputValue: string
   setInputValue: Dispatch<SetStateAction<string>>
-  onEnter: Dispatch<SetStateAction<string>>
-  setSearch: Dispatch<SetStateAction<string>>
+  handleSearch: (searchValue: string) => void
 }
 
-export const SearchInput = ({ inputValue, setInputValue, onEnter, setSearch }: SearchInputProps) => {
+export const SearchInput = ({ inputValue, setInputValue, handleSearch }: SearchInputProps) => {
   const handleClear = () => {
-    setInputValue("")
-    setSearch("")
+    setInputValue('')
+    handleSearch('')
   }
 
   return (
@@ -23,7 +22,7 @@ export const SearchInput = ({ inputValue, setInputValue, onEnter, setSearch }: S
         className={styles.searchInput}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && onEnter(inputValue)}
+        onKeyDown={(e) => e.key === 'Enter' && handleSearch(inputValue)}
         placeholder="Search"
         type="text"
       />

@@ -1,15 +1,15 @@
-import { useRef, useState } from 'react'
+import { type Dispatch, type SetStateAction, useRef } from 'react'
 import clsx from 'clsx'
 
-import type { TableColumn } from '@/shared/types/TableColumn.ts'
-
-import { useScrollToTop } from '@/widgets/table/model/hooks/useScrollToTop'
-import { useSearch } from '@/widgets/table/model/hooks/useSearch'
+import type { TableColumn } from '@/shared/types/TableColumn'
 
 import { Search } from '@/widgets/table/ui/Search'
+
 import { Pagination } from '@/widgets/table/ui/Pagination'
 import { TableHeader } from './TableHeader'
 import { TableBody } from './TableBody'
+
+import { useScrollToTop } from '@/widgets/table/model/useScrollToTop'
 
 import ArrowUp from '../assets/arrow-up.svg?react'
 
@@ -18,44 +18,46 @@ import styles from './Table.module.scss'
 interface TableProps<T> {
   columns: TableColumn[]
   data: T[]
+  setSearchValue: Dispatch<SetStateAction<string>>
+  rowsCount: number
+  setRowsCount: Dispatch<SetStateAction<number>>
+  currentPage: number
+  setCurrentPage: Dispatch<SetStateAction<number>>
+  totalPages: number
 }
 
-export const Table = <T extends object>({ columns, data }: TableProps<T>) => {
-  const [search, setSearch] = useState<string>('')
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const [rowsPerPage, setRowsPerPage] = useState<number>(10)
+export const Table = <T extends object>({
+  columns,
+  data,
+  setSearchValue,
+  rowsCount,
+  setRowsCount,
+  currentPage,
+  setCurrentPage,
+  totalPages,
+}: TableProps<T>) => {
+  // const [currentPage, setCurrentPage] = useState<number>(1)
   const bodyRef = useRef<HTMLTableSectionElement | null>(null)
 
   // Hiding the scroll when it reaches a certain height.
   const { visible, scrollToTop } = useScrollToTop(bodyRef)
 
-  // search
-  const { filteredData } = useSearch(columns, data, search)
-
   return (
     <div className={styles.tableWrapper}>
       <div className={styles.tableControls}>
-        <Search setSearch={setSearch} setCurrentPage={setCurrentPage} />
+        <Search setSearchValue={setSearchValue} setCurrentPage={setCurrentPage} />
         <Pagination
-          data={data}
+          rowsCount={rowsCount}
+          setRowsCount={setRowsCount}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-          rowsPerPage={rowsPerPage}
-          setRowsPerPage={setRowsPerPage}
+          totalPages={totalPages}
         />
       </div>
-
       <table className={styles.table}>
         <TableHeader columns={columns} />
-        <TableBody
-          ref={bodyRef}
-          columns={columns}
-          filteredData={filteredData}
-          currentPage={currentPage}
-          rowsPerPage={rowsPerPage}
-        />
+        <TableBody ref={bodyRef} columns={columns} data={data} />
       </table>
-
       <button className={clsx(styles.scrollToTopButton, visible && styles.visible)} onClick={scrollToTop}>
         <ArrowUp />
       </button>

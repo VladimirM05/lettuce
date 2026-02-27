@@ -6,12 +6,11 @@ import styles from './PaginationSelect.module.scss'
 const options: readonly number[] = [10, 50, 100]
 
 interface PaginationSelectProps {
-  rowsPerPage: number
-  setRowsPerPage: Dispatch<SetStateAction<number>>
-  setCurrentPage: Dispatch<SetStateAction<number>>
+  setRowsCount: Dispatch<SetStateAction<number>>
+  rowsCount: number
 }
 
-export const PaginationSelect = ({ rowsPerPage, setRowsPerPage, setCurrentPage }: PaginationSelectProps) => {
+export const PaginationSelect = ({ setRowsCount, rowsCount }: PaginationSelectProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const selectRef = useRef<HTMLDivElement | null>(null)
 
@@ -30,15 +29,16 @@ export const PaginationSelect = ({ rowsPerPage, setRowsPerPage, setCurrentPage }
   }, [])
 
   const handleSelect = (option: number): void => {
-    setRowsPerPage(option)
-    setCurrentPage(1)
+    setRowsCount(option)
+    // setStartIndex(option)
+    // setCurrentPage(1)
     setIsOpen(false)
   }
 
   return (
     <div ref={selectRef} className={styles.paginationSelect}>
       <div className={styles.paginationSelectInner} onClick={() => setIsOpen((prev) => !prev)}>
-        <span className={styles.paginationOption}>{rowsPerPage}</span>
+        <span className={styles.paginationOption}>{rowsCount}</span>
         <PaginationSelectImg className={clsx(styles.paginationSelectImg, isOpen && styles.open)} />
       </div>
 
@@ -46,7 +46,7 @@ export const PaginationSelect = ({ rowsPerPage, setRowsPerPage, setCurrentPage }
         <ul className={styles.paginationOptionList}>
           {options.map((option) => (
             <li
-              className={clsx(styles.paginationOptionItem, option === rowsPerPage && styles.selected)}
+              className={clsx(styles.paginationOptionItem, option === rowsCount && styles.selected)}
               onClick={() => handleSelect(option)}
               key={option}
             >

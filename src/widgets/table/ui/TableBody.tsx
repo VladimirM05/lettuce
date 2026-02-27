@@ -1,28 +1,19 @@
 import { forwardRef, type ReactNode, type Ref } from 'react'
-import type { TableColumn } from '@/shared/types/TableColumn.ts'
+import type { TableColumn } from '@/shared/types/TableColumn'
 import NoResults from '../assets/no-results.svg?react'
 import styles from './TableBody.module.scss'
 
 interface TableBodyProps<T> {
   columns: TableColumn[]
-  filteredData?: T[]
-  currentPage: number
-  rowsPerPage: number
+  data: T[]
 }
 
 export const TableBody = forwardRef(
-  <T extends object>(
-    { columns, filteredData = [], currentPage, rowsPerPage }: TableBodyProps<T>,
-    ref: Ref<HTMLTableSectionElement>,
-  ) => {
-    const startIndex: number = (currentPage - 1) * rowsPerPage
-    const endIndex: number = startIndex + rowsPerPage
-    const displayedData = filteredData.length > 0 ? filteredData.slice(startIndex, endIndex) : []
-
+  <T extends object>({ columns, data }: TableBodyProps<T>, ref: Ref<HTMLTableSectionElement>) => {
     return (
       <tbody className={styles.tableBody} ref={ref}>
-        {displayedData.length > 0 ? (
-          displayedData.map((row, rowIndex) => (
+        {data.length > 0 ? (
+          data.map((row, rowIndex) => (
             <tr
               className={styles.tableBodyRow}
               style={{ gridTemplateColumns: `repeat(${columns.length}, 1fr)` }}

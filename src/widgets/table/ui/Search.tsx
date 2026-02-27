@@ -1,24 +1,24 @@
-import { type Dispatch, type SetStateAction, useState } from "react"
-import { SearchInput } from "./SearchInput"
-import styles from "./Search.module.scss"
+import { type Dispatch, type SetStateAction, useState } from 'react'
+import { SearchInput } from './SearchInput'
+import styles from './Search.module.scss'
 
 interface SearchProps {
-  setSearch: Dispatch<SetStateAction<string>>
+  setSearchValue: Dispatch<SetStateAction<string>>
   setCurrentPage: Dispatch<SetStateAction<number>>
 }
 
-export const Search = ({ setSearch, setCurrentPage }: SearchProps) => {
-  const [inputValue, setInputValue] = useState("")
+export const Search = ({ setSearchValue, setCurrentPage }: SearchProps) => {
+  const [inputValue, setInputValue] = useState<string>('')
 
-  const handleSearch = () => {
-    setSearch(inputValue)
+  const handleSearch = (searchValue: string): void => {
+    setSearchValue(searchValue)
     setCurrentPage(1)
   }
 
   return (
     <div className={styles.search}>
-      <SearchInput inputValue={inputValue} setInputValue={setInputValue} onEnter={handleSearch} setSearch={setSearch} />
-      <button className={styles.searchButton} onClick={handleSearch}>
+      <SearchInput inputValue={inputValue} setInputValue={setInputValue} handleSearch={handleSearch} />
+      <button className={styles.searchButton} onClick={() => handleSearch(inputValue)}>
         Search
       </button>
     </div>

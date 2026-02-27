@@ -1,4 +1,4 @@
-import { useState, useEffect, type Dispatch, type SetStateAction } from 'react'
+import { useState, type Dispatch, type SetStateAction, useEffect } from 'react'
 
 import { Button } from '@/shared/ui/button/Button'
 import { PaginationSelect } from './PaginationSelect'
@@ -11,28 +11,20 @@ import Last from '@/widgets/table/assets/last.svg?react'
 
 import styles from './Pagination.module.scss'
 
-interface PaginationProps<T> {
-  data: T[]
+interface PaginationProps {
+  setRowsCount: Dispatch<SetStateAction<number>>
+  rowsCount: number
   currentPage: number
-  setCurrentPage: Dispatch<SetStateAction<number>>
-  rowsPerPage: number
-  setRowsPerPage: Dispatch<SetStateAction<number>>
+  setCurrentPage: (currentPage: number) => void
+  totalPages: number
 }
 
-export const Pagination = <T extends object>({
-  data,
-  currentPage,
-  setCurrentPage,
-  rowsPerPage,
-  setRowsPerPage,
-}: PaginationProps<T>) => {
+export const Pagination = ({ setRowsCount, rowsCount, currentPage, setCurrentPage, totalPages }: PaginationProps) => {
   const [inputValue, setInputValue] = useState(String(currentPage))
 
   useEffect(() => {
     setInputValue(String(currentPage))
   }, [currentPage])
-
-  const totalPages: number = Math.max(1, Math.ceil(data.length / rowsPerPage))
 
   const clampPage = (value: number) => Math.min(Math.max(value, 1), totalPages)
 
@@ -58,7 +50,7 @@ export const Pagination = <T extends object>({
           <ArrowLeft />
         </Button>
 
-        <PaginationSelect rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} setCurrentPage={setCurrentPage} />
+        <PaginationSelect setRowsCount={setRowsCount} rowsCount={rowsCount} />
 
         <Button onClick={() => setCurrentPage(clampPage(currentPage + 1))} disabled={currentPage === totalPages}>
           <ArrowRight />
