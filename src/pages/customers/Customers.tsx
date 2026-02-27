@@ -11,22 +11,12 @@ const customerColumns: TableColumn[] = [
 ]
 
 const Customers = () => {
-  const customerData1 = useTableData({
+  const customerData = useTableData({
     fetchFn: customers,
     columns: customerColumns,
   })
 
-  const customerData2 = useTableData({
-    fetchFn: customers,
-    columns: customerColumns,
-  })
-
-  return (
-    <>
-      <Table {...customerData1} columns={customerColumns} />
-      <Table {...customerData2} columns={customerColumns} />
-    </>
-  )
+  return <Table {...customerData} />
 }
 
 export default Customers
