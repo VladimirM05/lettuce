@@ -1,14 +1,19 @@
 @use '@/shared/styles/mixins/utils.scss' as utils;
 @use '@/shared/assets/abstracts/color-semantic' as colors;
 
-.link {
+.menuLink {
   display: flex;
   padding: 12px;
   gap: 0 8px;
   cursor: pointer;
+  white-space: nowrap;
   @include utils.sidebar-hover-effect;
 }
 
 .active {
   background-color: rgba(colors.$color-bg-active, 0.24);
+}
+
+.menuLinkText {
+  white-space: nowrap;
 }

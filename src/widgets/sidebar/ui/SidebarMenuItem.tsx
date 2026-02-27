@@ -12,10 +12,10 @@ interface SidebarMenuItemProps {
 
 export const SidebarMenuItem = ({ path, icon: Icon, text }: SidebarMenuItemProps) => {
   return (
-    <li className={styles.item}>
-      <NavLink className={({ isActive }) => clsx(styles.link, isActive && styles.active)} to={path}>
+    <li className={styles.menuItem}>
+      <NavLink className={({ isActive }) => clsx(styles.menuLink, isActive && styles.active)} to={path}>
         <Icon aria-hidden />
-        <span className={styles.text}>{text}</span>
+        <span className={styles.menuLinkText}>{text}</span>
       </NavLink>
     </li>
   )

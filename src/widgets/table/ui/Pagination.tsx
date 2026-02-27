@@ -72,7 +72,7 @@ export const Pagination = ({ setRowsCount, rowsCount, currentPage, setCurrentPag
           onKeyDown={(e) => e.key === 'Enter' && applyPage(inputValue)}
           onBlur={() => applyPage(inputValue)}
         />
-        <span>of {totalPages}</span>
+        <span className={styles.lastPage}>of {totalPages}</span>
       </div>
     </div>
   )

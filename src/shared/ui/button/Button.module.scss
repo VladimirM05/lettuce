@@ -2,6 +2,7 @@
 @use '@/shared/assets/abstracts/color-semantic' as colors;
 
 .button {
+  width: 48px;
   padding: 12px;
   border-radius: 8px;
   background-color: colors.$color-btn-secondary;
