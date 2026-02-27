@@ -36,7 +36,6 @@ export const Table = <T extends object>({
   setCurrentPage,
   totalPages,
 }: TableProps<T>) => {
-  // const [currentPage, setCurrentPage] = useState<number>(1)
   const bodyRef = useRef<HTMLTableSectionElement | null>(null)
 
   // Hiding the scroll when it reaches a certain height.

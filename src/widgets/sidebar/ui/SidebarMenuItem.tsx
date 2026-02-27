@@ -1,13 +1,13 @@
-import clsx from "clsx";
-import type { FC, SVGProps } from "react";
-import { NavLink } from "react-router-dom";
+import clsx from 'clsx'
+import type { FC, SVGProps } from 'react'
+import { NavLink } from 'react-router-dom'
 
-import styles from "./SidebarMenuItem.module.scss";
+import styles from './SidebarMenuItem.module.scss'
 
 interface SidebarMenuItemProps {
-  path: string;
-  icon: FC<SVGProps<SVGSVGElement>>;
-  text: string;
+  path: string
+  icon: FC<SVGProps<SVGSVGElement>>
+  text: string
 }
 
 export const SidebarMenuItem = ({ path, icon: Icon, text }: SidebarMenuItemProps) => {
@@ -18,5 +18,5 @@ export const SidebarMenuItem = ({ path, icon: Icon, text }: SidebarMenuItemProps
         <span className={styles.text}>{text}</span>
       </NavLink>
     </li>
-  );
-};
+  )
+}

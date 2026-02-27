@@ -1,38 +1,39 @@
-import type { FC, SVGProps } from "react";
-import { NavLink } from "react-router-dom";
+import type { FC, SVGProps } from 'react'
+import { NavLink } from 'react-router-dom'
 
-import Logo from "@/shared/assets/images/logo.svg?react";
-import Customers from "@/widgets/sidebar/assets/customers.svg?react";
-import Plans from "@/widgets/sidebar/assets/plans.svg?react";
-import Scheduled from "@/widgets/sidebar/assets/scheduled.svg?react";
-import SignoutImg from "@/widgets/sidebar/assets/signout.svg?react";
-import Subscriptions from "@/widgets/sidebar/assets/subscriptions.svg?react";
-import Users from "@/widgets/sidebar/assets/users.svg?react";
+import { SidebarMenuItem } from './SidebarMenuItem'
 
-import styles from "./Sidebar.module.scss";
-import { SidebarMenuItem } from "./SidebarMenuItem";
+import LogoIcon from '@/shared/assets/images/logo.svg?react'
+import CustomersIcon from '@/widgets/sidebar/assets/customers.svg?react'
+import PlansIcon from '@/widgets/sidebar/assets/plans.svg?react'
+import ScheduledIcon from '@/widgets/sidebar/assets/scheduled.svg?react'
+import SignoutIcon from '@/widgets/sidebar/assets/signout.svg?react'
+import SubscriptionsIcon from '@/widgets/sidebar/assets/subscriptions.svg?react'
+import UsersIcon from '@/widgets/sidebar/assets/users.svg?react'
+
+import styles from './Sidebar.module.scss'
 
 export interface MenuItem {
-  icon: FC<SVGProps<SVGSVGElement>>;
-  path: string;
-  text: string;
+  icon: FC<SVGProps<SVGSVGElement>>
+  path: string
+  text: string
 }
 
-const username = "Vladimirmalakhov";
+const username = 'Vladimirmalakhov'
 
 const menuItems: readonly MenuItem[] = [
-  { icon: Users, path: "users", text: "Users" },
-  { icon: Customers, path: "customers", text: "Customers" },
-  { icon: Scheduled, path: "scheduled", text: "Scheduled Cancellations" },
-  { icon: Plans, path: "plans", text: "Plans" },
-  { icon: Subscriptions, path: "subscriptions", text: "Subscriptions" },
-];
+  { icon: UsersIcon, path: 'users', text: 'Users' },
+  { icon: CustomersIcon, path: 'customers', text: 'Customers' },
+  { icon: ScheduledIcon, path: 'scheduled', text: 'Scheduled Cancellations' },
+  { icon: PlansIcon, path: 'plans', text: 'Plans' },
+  { icon: SubscriptionsIcon, path: 'subscriptions', text: 'Subscriptions' },
+]
 
 export const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <header className={styles.header}>
-        <Logo />
+        <LogoIcon />
         <span className={styles.helloText}>Hi, {username}</span>
       </header>
 
@@ -50,10 +51,10 @@ export const Sidebar = () => {
 
       <footer className={styles.footer}>
         <NavLink className={styles.footerSignoutButton} to="/">
-          <SignoutImg />
+          <SignoutIcon />
           <span className={styles.footerSignoutButtonText}>Sign out</span>
         </NavLink>
       </footer>
     </aside>
-  );
-};
+  )
+}
