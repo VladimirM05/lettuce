@@ -1,5 +1,5 @@
-import type { FC, SVGProps } from 'react'
 import { NavLink } from 'react-router-dom'
+import type { ComponentType, JSX, SVGProps } from 'react'
 
 import { SidebarMenuItem } from './SidebarMenuItem'
 
@@ -13,23 +13,25 @@ import UsersIcon from '@/widgets/sidebar/assets/users.svg?react'
 
 import styles from './Sidebar.module.scss'
 
+type AdminRoute = 'users' | 'customers' | 'scheduled' | 'plans' | 'subscriptions'
+
 export interface MenuItem {
-  icon: FC<SVGProps<SVGSVGElement>>
-  path: string
+  icon: ComponentType<SVGProps<SVGSVGElement>>
+  path: AdminRoute
   text: string
 }
 
 const username = 'Vladimirmalakhov'
 
-const menuItems: readonly MenuItem[] = [
+const menuItems = [
   { icon: UsersIcon, path: 'users', text: 'Users' },
   { icon: CustomersIcon, path: 'customers', text: 'Customers' },
   { icon: ScheduledIcon, path: 'scheduled', text: 'Scheduled Cancellations' },
   { icon: PlansIcon, path: 'plans', text: 'Plans' },
   { icon: SubscriptionsIcon, path: 'subscriptions', text: 'Subscriptions' },
-]
+] as const satisfies readonly MenuItem[]
 
-export const Sidebar = () => {
+export const Sidebar = (): JSX.Element => {
   return (
     <aside className={styles.sidebar}>
       <header className={styles.header}>
@@ -41,7 +43,7 @@ export const Sidebar = () => {
 
       <nav className={styles.nav}>
         <ul className={styles.menuList}>
-          {menuItems.map((item: MenuItem) => (
+          {menuItems.map((item) => (
             <SidebarMenuItem key={item.path} {...item} />
           ))}
         </ul>

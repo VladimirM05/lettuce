@@ -1,15 +1,15 @@
 import { type Dispatch, type SetStateAction, useRef } from 'react'
 import clsx from 'clsx'
 
-import type { TableColumn } from '@/shared/types/TableColumn.ts'
+import type { TableColumn } from '@/shared/types/TableColumn'
 
-import { Search } from '@/shared/ui/table/ui/Search.tsx'
+import { Search } from '@/shared/ui/table/ui/Search'
 
-import { Pagination } from '@/shared/ui/table/ui/Pagination.tsx'
-import { TableHeader } from './TableHeader.tsx'
-import { TableBody } from './TableBody.tsx'
+import { Pagination } from '@/shared/ui/table/ui/Pagination'
+import { TableHeader } from './TableHeader'
+import { TableBody } from './TableBody'
 
-import { useScrollToTop } from '@/shared/ui/table/model/useScrollToTop.ts'
+import { useScrollToTop } from '@/shared/ui/table/model/useScrollToTop'
 
 import ArrowUp from '../assets/arrow-up.svg?react'
 
