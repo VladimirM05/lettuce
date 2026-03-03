@@ -1,6 +1,6 @@
 import { type Dispatch, type SetStateAction } from 'react'
-import Search from '@/widgets/table/assets/search.svg?react'
-import Cross from '@/widgets/table/assets/cross.svg?react'
+import Search from '@/shared/ui/table/assets/search.svg?react'
+import Cross from '@/shared/ui/table/assets/cross.svg?react'
 import styles from './SearchInput.module.scss'
 
 interface SearchInputProps {

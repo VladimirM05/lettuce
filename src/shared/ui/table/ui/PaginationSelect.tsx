@@ -1,6 +1,6 @@
 import { type Dispatch, type SetStateAction, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
-import PaginationSelectImg from '@/widgets/table/assets/arrow-down.svg?react'
+import PaginationSelectImg from '@/shared/ui/table/assets/arrow-down.svg?react'
 import styles from './PaginationSelect.module.scss'
 
 const options: readonly number[] = [10, 50, 100]

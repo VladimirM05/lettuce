@@ -1,4 +1,4 @@
-import { Table } from '@/widgets/table'
+import { Table } from '@/shared/ui/table'
 import { useTableData } from '@/shared/hooks/useTableData'
 import { customers } from '@/entities/customers/api/customers.api'
 import type { TableColumn } from '@/shared/types/TableColumn'

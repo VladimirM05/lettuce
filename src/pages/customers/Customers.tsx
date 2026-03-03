@@ -1,7 +1,7 @@
 import { useTableData } from '@/shared/hooks/useTableData'
 import type { TableColumn } from '@/shared/types/TableColumn'
 import { customers } from '@/entities/customers/api/customers.api'
-import { Table } from '@/widgets/table'
+import { Table } from '@/shared/ui/table'
 
 const customerColumns: TableColumn[] = [
   { key: 'name', title: 'Name', searchable: true },

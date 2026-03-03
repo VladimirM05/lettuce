@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { searchData } from '@/widgets/table/model/searchData'
+import { searchData } from '@/shared/ui/table/model/searchData'
 import type { TableColumn } from '@/shared/types/TableColumn'
 
 interface UseTableDataProps<T> {

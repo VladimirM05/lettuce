@@ -1,5 +1,5 @@
 import { type Dispatch, type SetStateAction, useState } from 'react'
-import { SearchInput } from './SearchInput'
+import { SearchInput } from './SearchInput.tsx'
 import styles from './Search.module.scss'
 
 interface SearchProps {

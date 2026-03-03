@@ -1,13 +1,13 @@
 import { useState, type Dispatch, type SetStateAction, useEffect } from 'react'
 
-import { Button } from '@/shared/ui/button/Button'
-import { PaginationSelect } from './PaginationSelect'
+import { Button } from '@/shared/ui/button/Button.tsx'
+import { PaginationSelect } from './PaginationSelect.tsx'
 
-import Refresh from '@/widgets/table/assets/refresh.svg?react'
-import First from '@/widgets/table/assets/first.svg?react'
-import ArrowLeft from '@/widgets/table/assets/arrow-left.svg?react'
-import ArrowRight from '@/widgets/table/assets/arrow-right.svg?react'
-import Last from '@/widgets/table/assets/last.svg?react'
+import Refresh from '@/shared/ui/table/assets/refresh.svg?react'
+import First from '@/shared/ui/table/assets/first.svg?react'
+import ArrowLeft from '@/shared/ui/table/assets/arrow-left.svg?react'
+import ArrowRight from '@/shared/ui/table/assets/arrow-right.svg?react'
+import Last from '@/shared/ui/table/assets/last.svg?react'
 
 import styles from './Pagination.module.scss'
 
