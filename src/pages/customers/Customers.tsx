@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { TableColumn } from '@/shared/types/TableColumn'
-import { FetchCustomersInteractor } from '@/entities/customers/domain/fetchCustomersInteractor'
+import { FetchCustomersInteractor } from '@/entities/customers/interactor/fetchCustomersInteractor.ts'
 import type { CustomerData } from '@/entities/customers/types/customers'
 import { Table } from '@/shared/ui/table'
 
@@ -36,14 +36,12 @@ const Customers = () => {
     void loadCustomers()
   }, [searchValue, currentPage, rowsCount])
 
-  const onSearchValueChange = (value: string): void => {
+  const handleSearchValue = (value: string) => {
     setSearchValue(value)
     setCurrentPage(1)
   }
-
-  const onCurrentPageChange = (value: number): void => setCurrentPage(value)
-
-  const onRowsCountChange = (value: number): void => {
+  const handleCurrentPage = (page: number) => setCurrentPage(page)
+  const handleRowsCount = (value: number) => {
     setRowsCount(value)
     setCurrentPage(1)
   }
@@ -52,12 +50,12 @@ const Customers = () => {
     <Table
       columns={customerColumns}
       data={customers}
-      onSearchValueChange={onSearchValueChange}
+      onSearchValueChange={handleSearchValue}
       rowsCount={rowsCount}
       currentPage={currentPage}
       totalPages={totalPages}
-      onCurrentPageChange={onCurrentPageChange}
-      onRowsCountChange={onRowsCountChange}
+      onCurrentPageChange={handleCurrentPage}
+      onRowsCountChange={handleRowsCount}
     />
   )
 }
