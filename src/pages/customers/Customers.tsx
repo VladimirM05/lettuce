@@ -1,16 +1,10 @@
 import { useTableData } from '@/shared/hooks/useTableData'
 import type { TableColumn } from '@/shared/types/TableColumn'
 import { customers } from '@/entities/customers/api/customers.api'
+import type { CustomerData } from '@/entities/customers/types/customers'
 import { Table } from '@/shared/ui/table'
 
-interface Customer {
-  name: string
-  phone: string
-  email?: string
-  dateJoined: string
-}
-
-const customerColumns: TableColumn<Customer>[] = [
+const customerColumns: TableColumn<CustomerData>[] = [
   { key: 'name', title: 'Name', searchable: true },
   { key: 'phone', title: 'Phone', searchable: true },
   { key: 'email', title: 'Email', searchable: true },
@@ -18,10 +12,11 @@ const customerColumns: TableColumn<Customer>[] = [
 ]
 
 const Customers = () => {
-  const { columns, data, onSearch, rowsCount, currentPage, totalPages, applyPage, onRowsChange } = useTableData({
-    fetchFn: customers,
-    columns: customerColumns,
-  })
+  const { columns, data, onSearch, rowsCount, currentPage, totalPages, applyPage, onRowsChange } =
+    useTableData<CustomerData>({
+      fetchFn: customers,
+      columns: customerColumns,
+    })
 
   return (
     <Table

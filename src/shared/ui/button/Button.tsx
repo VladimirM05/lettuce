@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 import styles from './Button.module.scss'
 
 interface ButtonProps {
-  children?: ReactNode
+  children: ReactNode
   onClick: () => void
   disabled: boolean
 }
