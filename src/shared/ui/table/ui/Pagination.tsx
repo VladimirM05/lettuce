@@ -15,12 +15,22 @@ interface PaginationProps {
   rowsCount: number
   currentPage: number
   totalPages: number
-  applyPage: (value: number) => void
-  onRowsChange: (value: number) => void
+  onRowsCountChange: (value: number) => void
+  onCurrentPageChange: (value: number) => void
 }
 
-export const Pagination = ({ rowsCount, currentPage, totalPages, applyPage, onRowsChange }: PaginationProps) => {
+export const Pagination = ({
+  rowsCount,
+  currentPage,
+  totalPages,
+  onRowsCountChange,
+  onCurrentPageChange,
+}: PaginationProps) => {
   const [inputValue, setInputValue] = useState<string | null>(null)
+
+  const checkInputValue = (value: number): string => {
+    return String(Math.min(Math.max(value, 1), totalPages))
+  }
 
   return (
     <div className={styles.pagination}>
@@ -30,21 +40,21 @@ export const Pagination = ({ rowsCount, currentPage, totalPages, applyPage, onRo
       </button>
 
       <div className={styles.paginationControls}>
-        <Button onClick={() => applyPage(1)} disabled={currentPage === 1}>
+        <Button onClick={() => onRowsCountChange(1)} disabled={currentPage === 1}>
           <FirstIcon />
         </Button>
 
-        <Button onClick={() => applyPage(currentPage - 1)} disabled={currentPage === 1}>
+        <Button onClick={() => onRowsCountChange(currentPage - 1)} disabled={currentPage === 1}>
           <ArrowLeftIcon />
         </Button>
 
-        <PaginationSelect rowsCount={rowsCount} onChange={onRowsChange} />
+        <PaginationSelect rowsCount={rowsCount} onChange={onCurrentPageChange} />
 
-        <Button onClick={() => applyPage(currentPage + 1)} disabled={currentPage === totalPages}>
+        <Button onClick={() => onRowsCountChange(currentPage + 1)} disabled={currentPage === totalPages}>
           <ArrowRightIcon />
         </Button>
 
-        <Button onClick={() => applyPage(totalPages)} disabled={currentPage === totalPages}>
+        <Button onClick={() => onRowsCountChange(totalPages)} disabled={currentPage === totalPages}>
           <LastIcon />
         </Button>
       </div>
@@ -53,22 +63,16 @@ export const Pagination = ({ rowsCount, currentPage, totalPages, applyPage, onRo
         <input
           className={styles.currentPage}
           type="number"
-          min={1}
-          max={totalPages}
-          value={inputValue ?? currentPage}
-          onChange={(e) => {
-            setInputValue(e.target.value)
-          }}
+          value={inputValue ?? currentPage.toString()}
+          onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              applyPage(Number(inputValue))
-              setInputValue(null)
+              const page: string = checkInputValue(Number(inputValue))
+              setInputValue(page)
+              onRowsCountChange(Number(page))
             }
           }}
-          onBlur={() => {
-            applyPage(Number(inputValue))
-            setInputValue(null)
-          }}
+          onBlur={() => setInputValue(checkInputValue(Number(inputValue)))}
         />
         <span className={styles.lastPage}>of {totalPages}</span>
       </div>

@@ -1,6 +1,7 @@
 import clsx from 'clsx'
-import type { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import styles from './Button.module.scss'
+import * as React from 'react'
 
 interface ButtonProps {
   children: ReactNode
@@ -8,10 +9,10 @@ interface ButtonProps {
   disabled: boolean
 }
 
-export const Button = ({ children, onClick, disabled }: ButtonProps) => {
+export const Button = React.memo(({ children, onClick, disabled }: ButtonProps) => {
   return (
     <button className={clsx(styles.button, disabled && styles.disabled)} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   )
-}
+})

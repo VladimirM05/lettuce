@@ -1,18 +1,19 @@
+import * as React from 'react'
 import { useState } from 'react'
 import SearchIcon from '../assets/search.svg?react'
 import CrossIcon from '@/shared/ui/table/assets/cross.svg?react'
 import styles from './Search.module.scss'
 
 interface SearchProps {
-  onSearch: (value: string) => void
+  onSearchValueChange: (value: string) => void
 }
 
-export const Search = ({ onSearch }: SearchProps) => {
+export const Search = React.memo(({ onSearchValueChange }: SearchProps) => {
   const [inputValue, setInputValue] = useState('')
 
   const handleClear = () => {
     setInputValue('')
-    onSearch('')
+    onSearchValueChange('')
   }
 
   return (
@@ -23,15 +24,15 @@ export const Search = ({ onSearch }: SearchProps) => {
           className={styles.searchInput}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && onSearch(inputValue)}
+          onKeyDown={(e) => e.key === 'Enter' && onSearchValueChange(inputValue)}
           placeholder="Search"
           type="text"
         />
         {inputValue && <CrossIcon className={styles.cross} onClick={handleClear} />}
       </div>
-      <button className={styles.searchButton} onClick={() => onSearch(inputValue)}>
+      <button className={styles.searchButton} onClick={() => onSearchValueChange(inputValue)}>
         Search
       </button>
     </div>
   )
-}
+})

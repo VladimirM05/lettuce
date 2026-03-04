@@ -16,23 +16,23 @@ import styles from './Table.module.scss'
 interface TableProps<T> {
   columns: TableColumn<T>[]
   data: T[]
-  onSearch: (value: string) => void
+  onSearchValueChange: (value: string) => void
   rowsCount: number
   currentPage: number
   totalPages: number
-  applyPage: (value: number) => void
-  onRowsChange: (value: number) => void
+  onCurrentPageChange: (value: number) => void
+  onRowsCountChange: (value: number) => void
 }
 
 export const Table = <T extends object>({
   columns,
   data,
-  onSearch,
+  onSearchValueChange,
   rowsCount,
   currentPage,
   totalPages,
-  applyPage,
-  onRowsChange,
+  onCurrentPageChange,
+  onRowsCountChange,
 }: TableProps<T>) => {
   const bodyRef = useRef<HTMLTableSectionElement | null>(null)
 
@@ -42,13 +42,13 @@ export const Table = <T extends object>({
   return (
     <div className={styles.tableWrapper}>
       <div className={styles.tableControls}>
-        <Search onSearch={onSearch} />
+        <Search onSearchValueChange={onSearchValueChange} />
         <Pagination
           rowsCount={rowsCount}
           currentPage={currentPage}
           totalPages={totalPages}
-          applyPage={applyPage}
-          onRowsChange={onRowsChange}
+          onRowsCountChange={onRowsCountChange}
+          onCurrentPageChange={onCurrentPageChange}
         />
       </div>
       <table className={styles.table}>
