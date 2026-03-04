@@ -4,11 +4,11 @@ import NoResults from '../assets/no-results.svg?react'
 import styles from './TableBody.module.scss'
 
 interface TableBodyProps<T> {
-  columns: TableColumn[]
+  columns: TableColumn<T>[]
   data: T[]
 }
 
-export const TableBody = forwardRef(
+export const TableBody = forwardRef<any, TableBodyProps<any>>(
   <T extends object>({ columns, data }: TableBodyProps<T>, ref: Ref<HTMLTableSectionElement>) => {
     return (
       <tbody className={styles.tableBody} ref={ref}>

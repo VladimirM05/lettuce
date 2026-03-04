@@ -1,12 +1,10 @@
-import { type Dispatch, type SetStateAction, useRef } from 'react'
+import { useRef } from 'react'
 import clsx from 'clsx'
 
 import type { TableColumn } from '@/shared/types/TableColumn'
 
 import { Search } from '@/shared/ui/table/ui/Search'
-
 import { Pagination } from '@/shared/ui/table/ui/Pagination'
-import { TableHeader } from './TableHeader'
 import { TableBody } from './TableBody'
 
 import { useScrollToTop } from '@/shared/ui/table/model/useScrollToTop'
@@ -16,25 +14,25 @@ import ArrowUp from '../assets/arrow-up.svg?react'
 import styles from './Table.module.scss'
 
 interface TableProps<T> {
-  columns: TableColumn[]
+  columns: TableColumn<T>[]
   data: T[]
-  setSearchValue: Dispatch<SetStateAction<string>>
+  onSearch: (value: string) => void
   rowsCount: number
-  setRowsCount: Dispatch<SetStateAction<number>>
   currentPage: number
-  setCurrentPage: Dispatch<SetStateAction<number>>
   totalPages: number
+  applyPage: (value: number) => void
+  onRowsChange: (value: number) => void
 }
 
 export const Table = <T extends object>({
   columns,
   data,
-  setSearchValue,
+  onSearch,
   rowsCount,
-  setRowsCount,
   currentPage,
-  setCurrentPage,
   totalPages,
+  applyPage,
+  onRowsChange,
 }: TableProps<T>) => {
   const bodyRef = useRef<HTMLTableSectionElement | null>(null)
 
@@ -44,17 +42,23 @@ export const Table = <T extends object>({
   return (
     <div className={styles.tableWrapper}>
       <div className={styles.tableControls}>
-        <Search setSearchValue={setSearchValue} setCurrentPage={setCurrentPage} />
+        <Search onSearch={onSearch} />
         <Pagination
           rowsCount={rowsCount}
-          setRowsCount={setRowsCount}
           currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
           totalPages={totalPages}
+          applyPage={applyPage}
+          onRowsChange={onRowsChange}
         />
       </div>
       <table className={styles.table}>
-        <TableHeader columns={columns} />
+        <thead className={styles.tableHeader} style={{ gridTemplateColumns: `repeat(${columns?.length}, 1fr)` }}>
+          {columns.map((column) => (
+            <tr className={styles.tableHeaderRow} key={column.title}>
+              <th className={styles.tableHeaderColumn}>{column.title}</th>
+            </tr>
+          ))}
+        </thead>
         <TableBody ref={bodyRef} columns={columns} data={data} />
       </table>
       <button className={clsx(styles.scrollToTopButton, visible && styles.visible)} onClick={scrollToTop}>

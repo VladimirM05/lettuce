@@ -1,63 +1,51 @@
-import { useState, type Dispatch, type SetStateAction, useEffect } from 'react'
+import { useState } from 'react'
 
-import { Button } from '@/shared/ui/button/Button.tsx'
-import { PaginationSelect } from './PaginationSelect.tsx'
+import { Button } from '@/shared/ui/button/Button'
+import { PaginationSelect } from './PaginationSelect'
 
-import Refresh from '@/shared/ui/table/assets/refresh.svg?react'
-import First from '@/shared/ui/table/assets/first.svg?react'
-import ArrowLeft from '@/shared/ui/table/assets/arrow-left.svg?react'
-import ArrowRight from '@/shared/ui/table/assets/arrow-right.svg?react'
-import Last from '@/shared/ui/table/assets/last.svg?react'
+import RefreshIcon from '@/shared/ui/table/assets/refresh.svg?react'
+import FirstIcon from '@/shared/ui/table/assets/first.svg?react'
+import ArrowLeftIcon from '@/shared/ui/table/assets/arrow-left.svg?react'
+import ArrowRightIcon from '@/shared/ui/table/assets/arrow-right.svg?react'
+import LastIcon from '@/shared/ui/table/assets/last.svg?react'
 
 import styles from './Pagination.module.scss'
 
 interface PaginationProps {
-  setRowsCount: Dispatch<SetStateAction<number>>
   rowsCount: number
   currentPage: number
-  setCurrentPage: (currentPage: number) => void
   totalPages: number
+  applyPage: (value: number) => void
+  onRowsChange: (value: number) => void
 }
 
-export const Pagination = ({ setRowsCount, rowsCount, currentPage, setCurrentPage, totalPages }: PaginationProps) => {
-  const [inputValue, setInputValue] = useState(String(currentPage))
-
-  useEffect(() => {
-    setInputValue(String(currentPage))
-  }, [currentPage])
-
-  const clampPage = (value: number) => Math.min(Math.max(value, 1), totalPages)
-
-  const applyPage = (value: string) => {
-    const page = clampPage(Number(value) || currentPage)
-    setCurrentPage(page)
-    setInputValue(String(page))
-  }
+export const Pagination = ({ rowsCount, currentPage, totalPages, applyPage, onRowsChange }: PaginationProps) => {
+  const [inputValue, setInputValue] = useState<string | null>(null)
 
   return (
     <div className={styles.pagination}>
       <button className={styles.refresh}>
-        <Refresh />
+        <RefreshIcon />
         <span className={styles.refreshText}>Refresh</span>
       </button>
 
       <div className={styles.paginationControls}>
-        <Button onClick={() => setCurrentPage(1)} disabled={currentPage === 1}>
-          <First />
+        <Button onClick={() => applyPage(1)} disabled={currentPage === 1}>
+          <FirstIcon />
         </Button>
 
-        <Button onClick={() => setCurrentPage(clampPage(currentPage - 1))} disabled={currentPage === 1}>
-          <ArrowLeft />
+        <Button onClick={() => applyPage(currentPage - 1)} disabled={currentPage === 1}>
+          <ArrowLeftIcon />
         </Button>
 
-        <PaginationSelect setRowsCount={setRowsCount} rowsCount={rowsCount} />
+        <PaginationSelect rowsCount={rowsCount} onChange={onRowsChange} />
 
-        <Button onClick={() => setCurrentPage(clampPage(currentPage + 1))} disabled={currentPage === totalPages}>
-          <ArrowRight />
+        <Button onClick={() => applyPage(currentPage + 1)} disabled={currentPage === totalPages}>
+          <ArrowRightIcon />
         </Button>
 
-        <Button onClick={() => setCurrentPage(totalPages)} disabled={currentPage === totalPages}>
-          <Last />
+        <Button onClick={() => applyPage(totalPages)} disabled={currentPage === totalPages}>
+          <LastIcon />
         </Button>
       </div>
 
@@ -67,10 +55,20 @@ export const Pagination = ({ setRowsCount, rowsCount, currentPage, setCurrentPag
           type="number"
           min={1}
           max={totalPages}
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && applyPage(inputValue)}
-          onBlur={() => applyPage(inputValue)}
+          value={inputValue ?? currentPage}
+          onChange={(e) => {
+            setInputValue(e.target.value)
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              applyPage(Number(inputValue))
+              setInputValue(null)
+            }
+          }}
+          onBlur={() => {
+            applyPage(Number(inputValue))
+            setInputValue(null)
+          }}
         />
         <span className={styles.lastPage}>of {totalPages}</span>
       </div>

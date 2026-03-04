@@ -1,16 +1,16 @@
-import { type Dispatch, type SetStateAction, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
-import PaginationSelectImg from '@/shared/ui/table/assets/arrow-down.svg?react'
+import PaginationSelectIcon from '@/shared/ui/table/assets/arrow-down.svg?react'
 import styles from './PaginationSelect.module.scss'
+
+interface PaginationSelectProps {
+  rowsCount: number
+  onChange: (value: number) => void
+}
 
 const options: readonly number[] = [10, 50, 100]
 
-interface PaginationSelectProps {
-  setRowsCount: Dispatch<SetStateAction<number>>
-  rowsCount: number
-}
-
-export const PaginationSelect = ({ setRowsCount, rowsCount }: PaginationSelectProps) => {
+export const PaginationSelect = ({ rowsCount, onChange }: PaginationSelectProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const selectRef = useRef<HTMLDivElement | null>(null)
 
@@ -23,15 +23,11 @@ export const PaginationSelect = ({ setRowsCount, rowsCount }: PaginationSelectPr
 
     document.addEventListener('mousedown', handleClickOutside)
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   const handleSelect = (option: number): void => {
-    setRowsCount(option)
-    // setStartIndex(option)
-    // setCurrentPage(1)
+    onChange(option)
     setIsOpen(false)
   }
 
@@ -39,7 +35,7 @@ export const PaginationSelect = ({ setRowsCount, rowsCount }: PaginationSelectPr
     <div ref={selectRef} className={styles.paginationSelect}>
       <div className={styles.paginationSelectInner} onClick={() => setIsOpen((prev) => !prev)}>
         <span className={styles.paginationOption}>{rowsCount}</span>
-        <PaginationSelectImg className={clsx(styles.paginationSelectImg, isOpen && styles.open)} />
+        <PaginationSelectIcon className={clsx(styles.paginationSelectImg, isOpen && styles.open)} />
       </div>
 
       {isOpen && (

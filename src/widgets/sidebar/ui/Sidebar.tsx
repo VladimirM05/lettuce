@@ -1,15 +1,15 @@
 import { NavLink } from 'react-router-dom'
-import type { ComponentType, JSX, SVGProps } from 'react'
+import clsx from 'clsx'
 
-import { SidebarMenuItem } from './SidebarMenuItem'
+import type { ComponentType, SVGProps } from 'react'
 
 import LogoIcon from '@/shared/assets/images/logo.svg?react'
-import CustomersIcon from '@/widgets/sidebar/assets/customers.svg?react'
-import PlansIcon from '@/widgets/sidebar/assets/plans.svg?react'
-import ScheduledIcon from '@/widgets/sidebar/assets/scheduled.svg?react'
-import SignoutIcon from '@/widgets/sidebar/assets/signout.svg?react'
-import SubscriptionsIcon from '@/widgets/sidebar/assets/subscriptions.svg?react'
 import UsersIcon from '@/widgets/sidebar/assets/users.svg?react'
+import CustomersIcon from '@/widgets/sidebar/assets/customers.svg?react'
+import ScheduledIcon from '@/widgets/sidebar/assets/scheduled.svg?react'
+import PlansIcon from '@/widgets/sidebar/assets/plans.svg?react'
+import SubscriptionsIcon from '@/widgets/sidebar/assets/subscriptions.svg?react'
+import SignoutIcon from '@/widgets/sidebar/assets/signout.svg?react'
 
 import styles from './Sidebar.module.scss'
 
@@ -31,7 +31,7 @@ const menuItems = [
   { icon: SubscriptionsIcon, path: 'subscriptions', text: 'Subscriptions' },
 ] as const satisfies readonly MenuItem[]
 
-export const Sidebar = (): JSX.Element => {
+export const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <header className={styles.header}>
@@ -43,8 +43,16 @@ export const Sidebar = (): JSX.Element => {
 
       <nav className={styles.nav}>
         <ul className={styles.menuList}>
-          {menuItems.map((item) => (
-            <SidebarMenuItem key={item.path} {...item} />
+          {menuItems.map((menuItem) => (
+            <li className={styles.menuItem} key={menuItem.path}>
+              <NavLink
+                className={({ isActive }) => clsx(styles.menuLink, isActive && styles.active)}
+                to={menuItem.path}
+              >
+                <menuItem.icon aria-hidden />
+                <span className={styles.menuLinkText}>{menuItem.text}</span>
+              </NavLink>
+            </li>
           ))}
         </ul>
       </nav>

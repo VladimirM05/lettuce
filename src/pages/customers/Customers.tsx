@@ -3,7 +3,14 @@ import type { TableColumn } from '@/shared/types/TableColumn'
 import { customers } from '@/entities/customers/api/customers.api'
 import { Table } from '@/shared/ui/table'
 
-const customerColumns: TableColumn[] = [
+interface Customer {
+  name: string
+  phone: string
+  email?: string
+  dateJoined: string
+}
+
+const customerColumns: TableColumn<Customer>[] = [
   { key: 'name', title: 'Name', searchable: true },
   { key: 'phone', title: 'Phone', searchable: true },
   { key: 'email', title: 'Email', searchable: true },
@@ -11,12 +18,23 @@ const customerColumns: TableColumn[] = [
 ]
 
 const Customers = () => {
-  const customerData = useTableData({
+  const { columns, data, onSearch, rowsCount, currentPage, totalPages, applyPage, onRowsChange } = useTableData({
     fetchFn: customers,
     columns: customerColumns,
   })
 
-  return <Table {...customerData} />
+  return (
+    <Table
+      columns={columns}
+      data={data}
+      onSearch={onSearch}
+      rowsCount={rowsCount}
+      currentPage={currentPage}
+      totalPages={totalPages}
+      applyPage={applyPage}
+      onRowsChange={onRowsChange}
+    />
+  )
 }
 
 export default Customers
