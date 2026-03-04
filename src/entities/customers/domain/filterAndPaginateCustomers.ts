@@ -28,7 +28,7 @@ export const filterAndPaginateCustomers = ({
     searchQuery: searchValue,
   })
 
-  const totalPages = Math.ceil(filteredCustomers.length / rowsCount) || 1
+  const totalPages = Math.max(Math.ceil(filteredCustomers.length / rowsCount), 1)
 
   const start = (currentPage - 1) * rowsCount
   const slicedCustomers = filteredCustomers.slice(start, start + rowsCount)

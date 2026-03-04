@@ -40,21 +40,21 @@ export const Pagination = ({
       </button>
 
       <div className={styles.paginationControls}>
-        <Button onClick={() => onRowsCountChange(1)} disabled={currentPage === 1}>
+        <Button onClick={() => onCurrentPageChange(1)} disabled={currentPage === 1}>
           <FirstIcon />
         </Button>
 
-        <Button onClick={() => onRowsCountChange(currentPage - 1)} disabled={currentPage === 1}>
+        <Button onClick={() => onCurrentPageChange(currentPage - 1)} disabled={currentPage === 1}>
           <ArrowLeftIcon />
         </Button>
 
-        <PaginationSelect rowsCount={rowsCount} onChange={onCurrentPageChange} />
+        <PaginationSelect rowsCount={rowsCount} onChange={onRowsCountChange} />
 
-        <Button onClick={() => onRowsCountChange(currentPage + 1)} disabled={currentPage === totalPages}>
+        <Button onClick={() => onCurrentPageChange(currentPage + 1)} disabled={currentPage === totalPages}>
           <ArrowRightIcon />
         </Button>
 
-        <Button onClick={() => onRowsCountChange(totalPages)} disabled={currentPage === totalPages}>
+        <Button onClick={() => onCurrentPageChange(totalPages)} disabled={currentPage === totalPages}>
           <LastIcon />
         </Button>
       </div>
