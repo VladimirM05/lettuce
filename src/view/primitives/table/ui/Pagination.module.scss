@@ -1,0 +1,73 @@
+@use 'sass:color';
+@use '@/view/shared/assets/abstracts/color-semantic' as colors;
+@use '@/view/shared/styles/mixins/fonts' as fonts;
+
+.pagination {
+  display: flex;
+  gap: 24px;
+  height: 48px;
+}
+
+.paginationControls {
+  display: flex;
+  gap: 8px;
+}
+
+.refresh {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  background-color: colors.$color-btn-warning;
+  height: 48px;
+  width: 120px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color ease-out 0.2s;
+
+  &:hover {
+    background-color: color.adjust(colors.$color-btn-warning, $lightness: -10%);
+  }
+}
+
+.refreshText {
+  letter-spacing: 0.15px;
+  color: #ffffff;
+  @include fonts.font-regular;
+}
+
+.paginationCounter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  @include fonts.font-regular;
+}
+
+.currentPage {
+  border: 1px solid colors.$color-border;
+  border-radius: 8px;
+  transition: border-color ease-out 0.2s;
+  width: 64px !important;
+  height: 48px;
+  text-align: center;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  &:hover {
+    border-color: colors.$color-border-hover;
+  }
+}
+
+
+.lastPage {
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}

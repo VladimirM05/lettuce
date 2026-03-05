@@ -1,0 +1,91 @@
+@use '@/view/shared/assets/abstracts/color-semantic' as colors;
+@use '@/view/shared/styles/mixins/fonts' as fonts;
+@use '@/view/shared/styles/mixins/utils' as utils;
+
+.sidebar {
+  background-color: colors.$color-sidebar-bg;
+  color: colors.$color-text-inverse;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 320px;
+  border-radius: 16px;
+  padding: 16px;
+  letter-spacing: 0.5px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  gap: 0 16px;
+  padding: 16px;
+  height: 72px;
+  background-color: colors.$color-sidebar-header-bg;
+}
+
+.helloText {
+  @include fonts.font-medium;
+  flex: 1;
+  min-width: 0;
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.5px;
+}
+
+.divider {
+  width: 100%;
+  background-color: rgba(colors.$color-divider, 0.32);
+  border: none;
+  height: 1px;
+  margin: 16px 0;
+}
+
+.nav {
+  flex: 1;
+  display: flex;
+}
+
+.menuList {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px 0;
+}
+
+.menuLink {
+  display: flex;
+  padding: 12px;
+  gap: 0 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  @include utils.sidebar-hover-effect;
+}
+
+.active {
+  background-color: rgba(colors.$color-bg-active, 0.24);
+}
+
+.menuLinkText {
+  white-space: nowrap;
+}
+
+.footerSignoutButton {
+  color: inherit;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  gap: 0 8px;
+  padding: 12px;
+  cursor: pointer;
+  border: none;
+  @include utils.sidebar-hover-effect;
+}
+
+.footerSignoutButtonText {
+  @include fonts.font-regular;
+  letter-spacing: 0.15px;
+}

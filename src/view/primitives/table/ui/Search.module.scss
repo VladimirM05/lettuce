@@ -1,0 +1,62 @@
+@use 'sass:color';
+@use '@/view/shared/assets/abstracts/color-semantic' as colors;
+@use '@/view/shared/styles/mixins/fonts' as fonts;
+
+.search {
+  display: flex;
+  gap: 8px;
+}
+
+.searchButton {
+  width: 120px;
+  background-color: colors.$color-btn-primary;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color ease-out 0.2s;
+  color: colors.$color-text-inverse;
+  padding: 12px 0;
+  @include fonts.font-regular;
+  letter-spacing: 0.15px;
+
+  &:hover {
+    background-color: color.adjust(colors.$color-btn-primary, $lightness: -10%);
+  }
+}
+
+.searchInputWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 472px;
+  border: 1px solid colors.$color-border;
+  border-radius: 8px;
+  padding: 0 12px;
+  height: 48px;
+
+  &:hover {
+    border-color: colors.$color-border-hover;
+  }
+}
+
+.searchImg {
+  display: flex;
+  justify-content: center;
+  margin-right: 4px;
+  width: 24px;
+}
+
+.searchInput {
+  flex: 1;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0.5px;
+
+
+  &::placeholder {
+    line-height: 24px;
+  }
+}
+
+.cross {
+  margin-left: 12px;
+  cursor: pointer;
+}

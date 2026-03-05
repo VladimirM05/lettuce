@@ -1,25 +1,25 @@
-import { lazy } from 'react'
-import { createBrowserRouter, Navigate } from 'react-router-dom'
-import { AdminLayout } from '@/pages/layouts/AdminLayout'
+import { lazy } from "react"
+import { createBrowserRouter, Navigate } from "react-router-dom"
+import { AdminLayout } from "@/view/layouts/AdminLayout"
 
-const Users = lazy(() => import('@/pages/users/Users'))
-const Customers = lazy(() => import('@/pages/customers/Customers'))
-const Scheduled = lazy(() => import('@/pages/scheduled/Scheduled'))
-const Plans = lazy(() => import('@/pages/plans/Plans'))
-const Subscriptions = lazy(() => import('@/pages/subscriptions/Subscriptions'))
+const Users = lazy(() => import("@/view/pages/Users.tsx"))
+const Customers = lazy(() => import("@/view/pages/Customers.tsx"))
+const Scheduled = lazy(() => import("@/view/pages/Scheduled.tsx"))
+const Plans = lazy(() => import("@/view/pages/Plans.tsx"))
+const Subscriptions = lazy(() => import("@/view/pages/Subscriptions.tsx"))
 
 export const router = createBrowserRouter([
-  { path: '/', element: <Navigate to="/admin" replace /> },
+  { path: "/", element: <Navigate to="/admin" replace /> },
   {
-    path: '/admin',
+    path: "/admin",
     element: <AdminLayout />,
     children: [
       { index: true, element: <Navigate to="customers" replace /> },
-      { path: 'users', element: <Users /> },
-      { path: 'customers', element: <Customers /> },
-      { path: 'scheduled', element: <Scheduled /> },
-      { path: 'plans', element: <Plans /> },
-      { path: 'subscriptions', element: <Subscriptions /> },
+      { path: "users", element: <Users /> },
+      { path: "customers", element: <Customers /> },
+      { path: "scheduled", element: <Scheduled /> },
+      { path: "plans", element: <Plans /> },
+      { path: "subscriptions", element: <Subscriptions /> },
     ],
   },
 ])

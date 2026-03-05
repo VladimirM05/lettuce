@@ -1,0 +1,59 @@
+@use '@/view/shared/assets/abstracts/color-semantic' as colors;
+
+.paginationSelect {
+  position: relative;
+}
+
+.paginationSelectInner {
+  display: flex;
+  gap: 16px;
+  padding: 11px;
+  border: 1px solid colors.$color-border;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: border-color ease-out 0.2s;
+
+  &:hover {
+    border: 1px solid colors.$color-border-hover;
+  }
+}
+
+.paginationOption {
+  width: 32px;
+  text-align: center;
+}
+
+.paginationOptionList {
+  z-index: 10;
+  background-color: colors.$color-bg-primary;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: -4px -4px 8px rgba(colors.$color-shadow, 0.04), 4px 4px 8px rgba(colors.$color-shadow, 0.04);
+}
+
+.paginationOptionItem {
+  transition: color ease-out 0.2s;
+  cursor: pointer;
+  padding: 12px 24px;
+
+  &:hover {
+    color: colors.$color-text-selected;
+  }
+}
+
+.selected {
+  color: colors.$color-text-selected;
+}
+
+.paginationSelectImg {
+  transition: transform ease-out 0.2s;
+}
+
+.open {
+  transform: rotate(180deg);
+}
