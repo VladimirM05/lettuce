@@ -3,7 +3,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom"
 import { AdminLayout } from "@/view/layouts/AdminLayout"
 
 const Users = lazy(() => import("@/view/pages/Users.tsx"))
-const Customers = lazy(() => import("@/view/pages/Customers.tsx"))
+const Customers = lazy(() => import("@/view/pages/customers/Customers.tsx"))
 const CustomerDetail = lazy(() => import("@/view/pages/customer-detail"))
 const Scheduled = lazy(() => import("@/view/pages/Scheduled.tsx"))
 const Plans = lazy(() => import("@/view/pages/Plans.tsx"))

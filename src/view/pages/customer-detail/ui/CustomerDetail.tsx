@@ -1,13 +1,35 @@
-import { useLocation, useNavigate } from "react-router-dom"
-import type { Customer } from "@/domain/entities/Customer.ts"
-import type { TableColumn } from "@/view/primitives/table/types/TableColumn.ts"
-import BackIcon from "../images/back.svg?react"
-import styles from "./CustomerDetail.module.scss"
+import { useNavigate, useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
 import clsx from "clsx"
 
+import { customerColumns } from "@/view/pages/customers/customerColumns"
+import { CustomersInteractor } from "@/domain/interactors/CustomersInteractor"
+
+import type { Customer } from "@/domain/entities/Customer"
+import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
+
+import BackIcon from "../images/back.svg?react"
+import PencilIcon from "../images/pencil.svg?react"
+import ConfirmIcon from "../images/confirm.svg?react"
+import GoToIcon from "../images/go-to.svg?react"
+
+import styles from "./CustomerDetail.module.scss"
+
 export const CustomerDetail = () => {
-  const { state } = useLocation()
+  const { id } = useParams()
   const navigate = useNavigate()
+
+  const [activeFields, setActiveFields] = useState<Record<string, boolean>>({})
+  const [customer, setCustomer] = useState<Customer | null>(null)
+
+  useEffect(() => {
+    const loadCustomer = async () => {
+      const customer = await CustomersInteractor.getCustomerById(Number(id))
+      setCustomer(customer)
+    }
+
+    void loadCustomer()
+  }, [id])
 
   return (
     <section className={styles["customer-detail"]}>
@@ -25,21 +47,56 @@ export const CustomerDetail = () => {
           </div>
           <div className={styles["customer_info__wrapper"]}>
             <ul className={styles["customer-info__list"]}>
-              {state.columns.map((column: TableColumn<Customer>) => (
+              {customerColumns.map((column: TableColumn<Customer>) => (
                 <li className={styles["customer-info__item"]} key={column.key}>
                   <b className={styles["customer-info__label"]}>
                     {column.title}
                   </b>
-                  <span className={styles["customer-info__value"]}>
-                    {state.customer[column.key as keyof Customer] ?? ""}
-                  </span>
+                  <input
+                    className={styles["customer-info__value"]}
+                    type="text"
+                    value={customer ? customer[column.key] : ""}
+                    onChange={(e) => {
+                      if (!customer) return
+
+                      const updatedCustomer = {
+                        ...customer,
+                        [column.key]: column.key !== "id" ? e.target.value : id,
+                      }
+
+                      setCustomer(updatedCustomer)
+                      CustomersInteractor.updateCustomer(updatedCustomer)
+                    }}
+                    disabled={!activeFields[column.key]}
+                  />
+                  <button
+                    className={styles["customer-info__pencil"]}
+                    onClick={() =>
+                      setActiveFields((prev) => ({
+                        ...prev,
+                        [column.key]: !prev[column.key],
+                      }))
+                    }
+                  >
+                    {activeFields[column.key] ? (
+                      <ConfirmIcon />
+                    ) : (
+                      <PencilIcon />
+                    )}
+                  </button>
                 </li>
               ))}
             </ul>
             <div className={styles["customer-info__action-bar"]}>
-              <button className={styles["customer-info__action-bar-button"]}>
+              <a
+                className={styles["customer-info__action-bar-button"]}
+                href="https://admin.getmeadow.com/sign-in"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GoToIcon />
                 View in Meadow
-              </button>
+              </a>
               <button
                 className={clsx(
                   styles["customer-info__action-bar-button"],

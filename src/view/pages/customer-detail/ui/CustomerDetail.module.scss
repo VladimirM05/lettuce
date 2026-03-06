@@ -66,7 +66,25 @@
 
         .customer-info__value {
           @include fonts.font-regular;
-          letter-spacing: 0.5px
+          letter-spacing: 0.5px;
+          flex: 0 0 auto;
+          width: 240px;
+        }
+
+        .customer-info__pencil {
+          margin-left: -16px;
+          transition: background-color ease-out 0.3s;
+          border-radius: 4px;
+          width: 24px;
+          height: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+
+          &:hover {
+            background-color: color.adjust(colors.$color-btn-secondary, $lightness: -8%);
+          }
         }
       }
     }
@@ -79,6 +97,8 @@
     .customer-info__action-bar-button {
       cursor: pointer;
       padding: 12px 16px;
+      display: flex;
+      gap: 4px;
     }
 
     .customer-info__action-bar-button--schedule {
@@ -88,7 +108,7 @@
       transition: background-color ease-out 0.3s;
 
       &:hover {
-        background-color: color.adjust(colors.$color-btn-warning, $lightness: -10%);
+        background-color: color.adjust(colors.$color-btn-warning, $lightness: -8%);
       }
     }
   }

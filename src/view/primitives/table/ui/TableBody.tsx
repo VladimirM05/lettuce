@@ -21,11 +21,7 @@ export const TableBody = forwardRef(
             <tr
               className={styles.tableBodyRow}
               style={{ gridTemplateColumns: `repeat(${columns.length}, 1fr)` }}
-              onClick={() =>
-                navigate(`/admin/customers/${row.id}`, {
-                  state: { columns: columns, customer: row },
-                })
-              }
+              onClick={() => navigate(`/admin/customers/${row.id}`)}
               key={rowIndex}
             >
               {columns.map((column, columnIndex) => (

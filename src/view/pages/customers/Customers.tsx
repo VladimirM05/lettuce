@@ -1,17 +1,8 @@
 import { useEffect, useState } from "react"
-import { CustomersInteractor } from "@/domain/interactors/CustomersInteractor"
-import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
 import { Table } from "@/view/primitives/table"
-import type { Customer } from "@/domain/entities/Customer"
-
-const customerColumns: TableColumn<Customer>[] = [
-  { key: "name", title: "Name", searchable: true },
-  { key: "phone", title: "Phone", searchable: true },
-  { key: "email", title: "Email", searchable: true },
-  { key: "dateJoined", title: "Date Joined", searchable: false },
-]
-
-const customersInteractor = new CustomersInteractor()
+import type { Customer } from "@/domain/entities/Customer.ts"
+import { CustomersInteractor } from "@/domain/interactors/CustomersInteractor.ts"
+import { customerColumns } from "@/view/pages/customers/customerColumns.ts"
 
 const Customers = () => {
   const [customers, setCustomers] = useState<Customer[]>([])
@@ -22,7 +13,7 @@ const Customers = () => {
 
   useEffect(() => {
     const loadCustomers = async () => {
-      const result = await customersInteractor.getCustomers({
+      const result = await CustomersInteractor.getCustomers({
         searchQuery: searchValue,
         currentPage: currentPage,
         rowsCount: rowsCount,
