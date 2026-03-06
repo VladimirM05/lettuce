@@ -1,0 +1,95 @@
+@use "sass:color";
+@use "@/view/shared/assets/abstracts/color-semantic" as colors;
+@use "@/view/shared/styles/mixins/fonts" as fonts;
+
+.customer-detail {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px;
+  background-color: colors.$color-bg-primary;
+  border-radius: 16px;
+  box-shadow: -4px -4px 8px rgba(colors.$color-shadow, 0.04), 4px 4px 8px rgba(colors.$color-shadow, 0.04);
+}
+
+.customer-detail__go-back-button {
+  display: flex;
+  width: fit-content;
+  padding: 12px 16px;
+  cursor: pointer;
+
+  .go-back-button__text {
+    @include fonts.font-medium
+  }
+}
+
+.customer-info {
+  width: 50%;
+  border-radius: 8px;
+  border: 1px solid colors.$color-border-muted;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .customer-info__title {
+    @include fonts.font-medium;
+    border-bottom: 1px solid colors.$color-border-muted;
+    padding: 20px 0;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .customer_info__wrapper {
+    padding: 16px 32px 24px 32px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+
+    .customer-info__list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+
+      .customer-info__item {
+        display: flex;
+        gap: 24px;
+
+        .customer-info__label {
+          @include fonts.font-medium;
+          width: 120px;
+        }
+
+        .customer-info__value {
+          @include fonts.font-regular;
+          letter-spacing: 0.5px
+        }
+      }
+    }
+  }
+
+  .customer-info__action-bar {
+    display: flex;
+    gap: 16px;
+
+    .customer-info__action-bar-button {
+      cursor: pointer;
+      padding: 12px 16px;
+    }
+
+    .customer-info__action-bar-button--schedule {
+      background-color: colors.$color-btn-warning;
+      border-radius: 8px;
+      color: colors.$color-text-inverse;
+      transition: background-color ease-out 0.3s;
+
+      &:hover {
+        background-color: color.adjust(colors.$color-btn-warning, $lightness: -10%);
+      }
+    }
+  }
+}

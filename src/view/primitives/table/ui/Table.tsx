@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import clsx from "clsx"
 
 import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
+import type { Customer } from "@/domain/entities/Customer"
 
 import { Search } from "./Search"
 import { Pagination } from "./Pagination"
@@ -11,9 +12,9 @@ import ArrowUp from "../images/arrow-up.svg?react"
 
 import styles from "./Table.module.scss"
 
-interface TableProps<T> {
-  columns: TableColumn<T>[]
-  data: T[]
+interface TableProps {
+  columns: TableColumn<Customer>[]
+  data: Customer[]
   onSearchValueChange: (value: string) => void
   rowsCount: number
   currentPage: number
@@ -22,7 +23,7 @@ interface TableProps<T> {
   onRowsCountChange: (value: number) => void
 }
 
-export const Table = <T extends object>({
+export const Table = ({
   columns,
   data,
   onSearchValueChange,
@@ -31,11 +32,9 @@ export const Table = <T extends object>({
   totalPages,
   onCurrentPageChange,
   onRowsCountChange,
-}: TableProps<T>) => {
+}: TableProps) => {
+  const [visibleScrollButton, setVisibleScrollButton] = useState<boolean>(false)
   const ref = useRef<HTMLTableSectionElement | null>(null)
-
-  // Hiding the scroll when it reaches a certain height.
-  const [visible, setVisible] = useState<boolean>(false)
 
   useEffect(() => {
     const element = ref.current
@@ -43,7 +42,9 @@ export const Table = <T extends object>({
 
     const handleScroll = () => {
       const shouldShow = element.scrollTop > 300
-      setVisible((prev) => (prev !== shouldShow ? shouldShow : prev))
+      setVisibleScrollButton((prev) =>
+        prev !== shouldShow ? shouldShow : prev,
+      )
     }
 
     element.addEventListener("scroll", handleScroll)
@@ -65,6 +66,7 @@ export const Table = <T extends object>({
           onCurrentPageChange={onCurrentPageChange}
         />
       </div>
+
       <table className={styles.table}>
         <thead
           className={styles.tableHeader}
@@ -79,7 +81,10 @@ export const Table = <T extends object>({
         <TableBody ref={ref} columns={columns} data={data} />
       </table>
       <button
-        className={clsx(styles.scrollToTopButton, visible && styles.visible)}
+        className={clsx(
+          styles.scrollToTopButton,
+          visibleScrollButton && styles.visible,
+        )}
         onClick={scrollToTop}
       >
         <ArrowUp />

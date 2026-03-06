@@ -1,18 +1,19 @@
-import { forwardRef, type ReactNode, type Ref } from "react"
-import type { TableColumn } from "@/view/primitives/table/types/TableColumn.ts"
+import { forwardRef, type Ref } from "react"
+import { useNavigate } from "react-router-dom"
+import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
+import type { Customer } from "@/domain/entities/Customer"
 import NoResults from "../images/no-results.svg?react"
 import styles from "./TableBody.module.scss"
 
-interface TableBodyProps<T> {
-  columns: TableColumn<T>[]
-  data: T[]
+interface TableBodyProps {
+  columns: TableColumn<Customer>[]
+  data: Customer[]
 }
 
-export const TableBody = forwardRef<any, TableBodyProps<any>>(
-  <T extends object>(
-    { columns, data }: TableBodyProps<T>,
-    ref: Ref<HTMLTableSectionElement>,
-  ) => {
+export const TableBody = forwardRef(
+  ({ columns, data }: TableBodyProps, ref: Ref<HTMLTableSectionElement>) => {
+    const navigate = useNavigate()
+
     return (
       <tbody className={styles.tableBody} ref={ref}>
         {data.length > 0 ? (
@@ -20,11 +21,16 @@ export const TableBody = forwardRef<any, TableBodyProps<any>>(
             <tr
               className={styles.tableBodyRow}
               style={{ gridTemplateColumns: `repeat(${columns.length}, 1fr)` }}
+              onClick={() =>
+                navigate(`/admin/customers/${row.id}`, {
+                  state: { columns: columns, customer: row },
+                })
+              }
               key={rowIndex}
             >
               {columns.map((column, columnIndex) => (
                 <td className={styles.tableBodyCell} key={columnIndex}>
-                  {String(row[column.key as keyof T]) as ReactNode}
+                  {row[column.key as keyof Customer]}
                 </td>
               ))}
             </tr>
