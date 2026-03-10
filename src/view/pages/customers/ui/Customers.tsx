@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import { CustomerPopUp } from "@/view/components/customer-pop-up/ui/CustomerPopUp"
+import { CustomerPopUp } from "@/view/components/customer-pop-up"
 import { Search } from "@/view/primitives/search"
 import { Pagination } from "@/view/primitives/pagination"
 import { Table } from "@/view/primitives/table"
@@ -53,16 +53,18 @@ export const Customers = () => {
   const handleRowsCount = (rows: number) => setRowsCount(rows)
 
   // Customer pop-up logic.
-  const handleSelectedCustomer = (selectedCustomer: Customer) =>
+  const handleSelectedCustomer = (selectedCustomer: Customer) => {
     setSelectedCustomer(selectedCustomer)
+    setVisibleCustomerPopUp(true)
+  }
 
   const handleVisibleCustomerPopUp = (visible: boolean) =>
     setVisibleCustomerPopUp(visible)
 
   const handleUpdateCustomer = (updatedCustomer: Customer) => {
     CustomersInteractor.updateCustomer(updatedCustomer)
-    setCustomers((prev) =>
-      prev.map((oldCustomer) =>
+    setCustomers(prev =>
+      prev.map(oldCustomer =>
         oldCustomer.id === updatedCustomer.id ? updatedCustomer : oldCustomer,
       ),
     )
@@ -93,8 +95,7 @@ export const Customers = () => {
       <Table
         columns={customerColumns}
         data={customers}
-        onSelectedCustomerChange={handleSelectedCustomer}
-        onVisibleCustomerPopUpChange={handleVisibleCustomerPopUp}
+        onSelectedRowChange={handleSelectedCustomer}
       />
     </section>
   )

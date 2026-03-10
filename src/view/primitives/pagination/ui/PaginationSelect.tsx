@@ -32,24 +32,28 @@ export const PaginationSelect = ({
   }, [])
 
   return (
-    <div ref={selectRef} className={styles.paginationSelect}>
+    <div className={styles["pagination-select"]} ref={selectRef}>
       <div
-        className={styles.paginationSelectInner}
-        onClick={() => setIsOpen((prev) => !prev)}
+        className={styles["pagination-select__inner"]}
+        onClick={() => setIsOpen(prev => !prev)}
       >
-        <span className={styles.paginationOption}>{rowsCount}</span>
+        <span className={styles["pagination-select__option"]}>{rowsCount}</span>
         <PaginationSelectIcon
-          className={clsx(styles.paginationSelectImg, isOpen && styles.open)}
+          className={clsx(
+            styles["pagination-select__img"],
+            isOpen && styles["pagination-select__img--open"],
+          )}
         />
       </div>
 
       {isOpen && (
-        <ul className={styles.paginationOptionList}>
-          {options.map((option) => (
+        <ul className={styles["pagination-select__list"]}>
+          {options.map(option => (
             <li
               className={clsx(
-                styles.paginationOptionItem,
-                option === rowsCount && styles.selected,
+                styles["pagination-select__item"],
+                option === rowsCount &&
+                  styles["pagination-select__item--selected"],
               )}
               onClick={() => {
                 onChange(option)

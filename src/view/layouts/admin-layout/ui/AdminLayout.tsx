@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import { Sidebar } from "@/view/components/sidebar/ui/Sidebar.tsx"
+import { Sidebar } from "@/view/components/sidebar"
 import styles from "./AdminLayout.module.scss"
 
 export const AdminLayout = () => {

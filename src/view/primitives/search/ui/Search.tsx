@@ -1,4 +1,5 @@
 import { useState } from "react"
+import clsx from "clsx"
 import SearchIcon from "../images/search.svg?react"
 import CrossIcon from "../images/cross.svg?react"
 import styles from "./Search.module.scss"
@@ -15,22 +16,23 @@ export const Search = ({
   const [inputValue, setInputValue] = useState("")
 
   return (
-    <div className={styles.search}>
-      <div className={styles.searchInputWrapper}>
-        <SearchIcon />
+    <div className={styles["search"]}>
+      <div className={styles["search__input-wrapper"]}>
+        <SearchIcon className={styles["search__img"]} />
         <input
-          className={styles.searchInput}
+          className={styles["search__input"]}
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={(e) =>
-            e.key === "Enter" && onSearchValueChange(inputValue)
-          }
+          onChange={e => setInputValue(e.target.value)}
+          onKeyDown={e => e.key === "Enter" && onSearchValueChange(inputValue)}
           placeholder="Search"
           type="text"
         />
         {inputValue && (
           <CrossIcon
-            className={styles.cross}
+            className={clsx(
+              styles["search__img"],
+              styles["search__img--cross"],
+            )}
             onClick={() => {
               setInputValue("")
               onSearchValueChange("")
@@ -39,7 +41,7 @@ export const Search = ({
         )}
       </div>
       <button
-        className={styles.searchButton}
+        className={styles["search__button"]}
         onClick={() => {
           onSearchValueChange(inputValue)
           onCurrentPageChange(1)

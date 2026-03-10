@@ -1,50 +1,101 @@
 @use 'sass:color';
-@use '@/view/shared/mixins/colors' as colors;
-@use '@/view/shared/mixins/fonts' as fonts;
+@use '@/view/shared/styles/colors' as colors;
+@use '@/view/shared/styles/mixins/fonts' as fonts;
 
-.tableWrapper {
+.table-wrapper {
   position: relative;
   flex: 1;
-}
 
-.table {
-  width: 100%;
-  height: calc(100% - 108px);
-}
-
-.tableHeader {
-  background-color: colors.$color-table-bg;
-  border-radius: 8px;
-  padding: 16px 32px;
-  display: grid;
-  gap: 32px;
-  margin-bottom: 8px;
-}
-
-.tableHeaderColumn {
-  color: colors.$color-text-on-primary;
-  @include fonts.font-regular;
-  letter-spacing: 0.15px;
-}
-
-
-.scrollToTopButton {
-  z-index: 10;
-  position: fixed;
-  background-color: colors.$color-btn-warning;
-  padding: 16px;
-  border-radius: 32px;
-  bottom: 48px;
-  right: 48px;
-  cursor: pointer;
-  transition: all ease-out 0.2s;
-  opacity: 0;
-
-  &:hover {
-    background-color: color.adjust(colors.$color-btn-warning, $lightness: -10%)
+  &__table {
+    width: 100%;
+    height: calc(100% - 108px);
   }
-}
 
-.scrollToTopButton.visible {
-  opacity: 1;
+  &__header {
+    background-color: colors.$color-table-bg;
+    border-radius: 8px;
+    padding: 16px 32px;
+    display: grid;
+    gap: 32px;
+    margin-bottom: 8px;
+  }
+
+  &__header-cell {
+    @include fonts.font-regular;
+    color: colors.$color-text-on-primary;
+    letter-spacing: 0.15px;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    height: calc(100% - 32px);
+    position: relative;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__body-row {
+    min-height: 74px;
+    border: 1px solid colors.$color-border-muted;
+    border-radius: 8px;
+    gap: 32px;
+    padding: 0 32px;
+    transition: border-color ease-out 0.2s;
+    display: grid;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      border-color: colors.$color-border-hover;
+    }
+  }
+
+  &__body-cell {
+    @include fonts.font-regular;
+    letter-spacing: 0.5px;
+  }
+
+  &__no-results {
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__no-results-text {
+    @include fonts.font-medium;
+  }
+
+  &__scroll-button {
+    z-index: 10;
+    position: fixed;
+    background-color: colors.$color-btn-warning;
+    padding: 16px;
+    border-radius: 32px;
+    bottom: 48px;
+    right: 48px;
+    cursor: pointer;
+    transition: all ease-out 0.2s;
+    opacity: 0;
+
+    &:hover {
+      background-color: color.adjust(colors.$color-btn-warning, $lightness: -10%)
+    }
+
+    &--visible {
+      opacity: 1;
+    }
+  }
 }

@@ -1,7 +1,8 @@
+import * as React from "react"
 import { useState } from "react"
 import clsx from "clsx"
 
-import { PaginationSelect } from "./PaginationSelect.tsx"
+import { PaginationSelect } from "./PaginationSelect"
 
 import RefreshIcon from "../images/refresh.svg?react"
 import FirstIcon from "../images/first.svg?react"
@@ -32,16 +33,28 @@ export const Pagination = ({
     return String(Math.min(Math.max(value, 1), totalPages))
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== "Enter") return
+
+    const page: string = checkInputValue(Number(inputValue))
+
+    setInputValue(page)
+    onCurrentPageChange(Number(page))
+  }
+
   return (
-    <div className={styles.pagination}>
-      <button className={styles.refresh}>
+    <div className={styles["pagination"]}>
+      <button className={styles["pagination__refresh-button"]}>
         <RefreshIcon />
-        <span className={styles.refreshText}>Refresh</span>
+        <span className={styles["pagination__refresh-text"]}>Refresh</span>
       </button>
 
-      <div className={styles.paginationControls}>
+      <div className={styles["pagination__controls"]}>
         <button
-          className={clsx(styles.button, currentPage === 1 && styles.disabled)}
+          className={clsx(
+            styles["pagination__button"],
+            currentPage === 1 && styles["pagination__button--disabled"],
+          )}
           onClick={() => onCurrentPageChange(1)}
           disabled={currentPage === 1}
         >
@@ -49,7 +62,10 @@ export const Pagination = ({
         </button>
 
         <button
-          className={clsx(styles.button, currentPage === 1 && styles.disabled)}
+          className={clsx(
+            styles["pagination__button"],
+            currentPage === 1 && styles["pagination__button--disabled"],
+          )}
           onClick={() => onCurrentPageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
@@ -64,8 +80,9 @@ export const Pagination = ({
 
         <button
           className={clsx(
-            styles.button,
-            currentPage === totalPages && styles.disabled,
+            styles["pagination__button"],
+            currentPage === totalPages &&
+              styles["pagination__button--disabled"],
           )}
           onClick={() => onCurrentPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
@@ -75,8 +92,9 @@ export const Pagination = ({
 
         <button
           className={clsx(
-            styles.button,
-            currentPage === totalPages && styles.disabled,
+            styles["pagination__button"],
+            currentPage === totalPages &&
+              styles["pagination__button--disabled"],
           )}
           onClick={() => onCurrentPageChange(totalPages)}
           disabled={currentPage === totalPages}
@@ -85,22 +103,16 @@ export const Pagination = ({
         </button>
       </div>
 
-      <div className={styles.paginationCounter}>
+      <div className={styles["pagination__counter"]}>
         <input
-          className={styles.currentPage}
+          className={styles["pagination__current-page"]}
           type="number"
           value={inputValue ?? currentPage.toString()}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              const page: string = checkInputValue(Number(inputValue))
-              setInputValue(page)
-              onRowsCountChange(Number(page))
-            }
-          }}
+          onChange={e => setInputValue(e.target.value)}
+          onKeyDown={handleKeyDown}
           onBlur={() => setInputValue(checkInputValue(Number(inputValue)))}
         />
-        <span className={styles.lastPage}>of {totalPages}</span>
+        <span className={styles["pagination__last-page"]}>of {totalPages}</span>
       </div>
     </div>
   )

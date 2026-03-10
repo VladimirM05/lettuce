@@ -8,26 +8,14 @@ type GetCustomersParams = {
 }
 
 export class CustomersInteractor {
-  private static _customers: Customer[] = []
-
-  static get customers(): Customer[] {
-    return this._customers
-  }
-
-  static set customers(customers: Customer[]) {
-    this._customers = customers
-  }
-
   static getCustomers = async ({
     searchQuery,
     currentPage,
     rowsCount,
   }: GetCustomersParams) => {
-    if (this._customers.length === 0) {
-      this._customers = await new CustomersGateway().getCustomers()
-    }
+    const customers = await CustomersGateway.getCustomers()
 
-    const filteredCustomers = this._customers.filter((customer) => {
+    const filteredCustomers = customers.filter(customer => {
       const searchField = customer.name + customer.phone + customer.email
       return searchField.includes(searchQuery)
     })
@@ -43,11 +31,7 @@ export class CustomersInteractor {
     return { slicedCustomers, totalPages }
   }
 
-  static updateCustomer(customer: Customer) {
-    const index = this._customers.findIndex((c) => c.id === customer.id)
-
-    if (index !== -1) {
-      this._customers[index] = customer
-    }
+  static updateCustomer(customer: Customer): void {
+    CustomersGateway.updateCustomer(customer)
   }
 }
