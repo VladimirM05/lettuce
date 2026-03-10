@@ -21,6 +21,7 @@ interface TableProps {
   totalPages: number
   onCurrentPageChange: (value: number) => void
   onRowsCountChange: (value: number) => void
+  handleUpdateCustomer: (updatedCustomer: Customer) => void
 }
 
 export const Table = ({
@@ -32,6 +33,7 @@ export const Table = ({
   totalPages,
   onCurrentPageChange,
   onRowsCountChange,
+  handleUpdateCustomer,
 }: TableProps) => {
   const [visibleScrollButton, setVisibleScrollButton] = useState<boolean>(false)
   const ref = useRef<HTMLTableSectionElement | null>(null)
@@ -78,7 +80,12 @@ export const Table = ({
             </tr>
           ))}
         </thead>
-        <TableBody ref={ref} columns={columns} data={data} />
+        <TableBody
+          ref={ref}
+          columns={columns}
+          data={data}
+          handleUpdateCustomer={handleUpdateCustomer}
+        />
       </table>
       <button
         className={clsx(

@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react"
-import { CustomersInteractor } from "@/domain/interactors/CustomersInteractor"
+import { type Dispatch, type SetStateAction, useState } from "react"
+import clsx from "clsx"
 import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
 import type { Customer } from "@/domain/entities/Customer"
 import styles from "./CustomerPopUp.module.scss"
-import clsx from "clsx"
 
 interface CustomerPopUpProps {
   columns: TableColumn<Customer>[]
   customer: Customer
+  setVisiblePopUp: Dispatch<SetStateAction<boolean>>
+  handleUpdateCustomer: (customer: Customer) => void
 }
 
-export const CustomerPopUp = ({ columns, customer }: CustomerPopUpProps) => {
+export const CustomerPopUp = ({
+  columns,
+  customer,
+  setVisiblePopUp,
+  handleUpdateCustomer,
+}: CustomerPopUpProps) => {
   const [editedCustomer, setEditedCustomer] = useState<Customer>(customer)
-
-  useEffect(() => {
-    CustomersInteractor.updateCustomer(editedCustomer)
-  }, [editedCustomer])
 
   return (
     <form className={styles["customer-pop-up"]} action="/" method="POST">
@@ -23,7 +25,10 @@ export const CustomerPopUp = ({ columns, customer }: CustomerPopUpProps) => {
       <ul className={styles["customer-pop-up__list"]}>
         {columns.map((column) => (
           <li className={styles["customer-pop-up__item"]} key={column.key}>
-            <label className={styles["customer-pop-up__label"]}>
+            <label
+              className={styles["customer-pop-up__label"]}
+              htmlFor={column.key}
+            >
               {column.title}
             </label>
             <input
@@ -46,6 +51,7 @@ export const CustomerPopUp = ({ columns, customer }: CustomerPopUpProps) => {
             styles["customer-pop-up__button"],
             styles["customer-pop-up__button--cancel"],
           )}
+          onClick={() => setVisiblePopUp(false)}
         >
           Cancel
         </button>
@@ -54,6 +60,10 @@ export const CustomerPopUp = ({ columns, customer }: CustomerPopUpProps) => {
             styles["customer-pop-up__button"],
             styles["customer-pop-up__button--confirm"],
           )}
+          onClick={() => {
+            handleUpdateCustomer(editedCustomer)
+            setVisiblePopUp(false)
+          }}
         >
           Confirm
         </button>

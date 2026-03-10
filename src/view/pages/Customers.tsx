@@ -33,14 +33,26 @@ const Customers = () => {
     void loadCustomers()
   }, [searchValue, currentPage, rowsCount])
 
+  // Вызывается при поиске.
   const handleSearchValue = (value: string) => {
     setSearchValue(value)
     setCurrentPage(1)
   }
+  // Вызывается при смене страницы.
   const handleCurrentPage = (page: number) => setCurrentPage(page)
+  // Вызывается при изменении количества отображаемых строк.
   const handleRowsCount = (value: number) => {
     setRowsCount(value)
     setCurrentPage(1)
+  }
+  // Вызывается при обновлении кастомера в попапе.
+  const handleUpdateCustomer = (updatedCustomer: Customer) => {
+    CustomersInteractor.updateCustomer(updatedCustomer)
+    setCustomers((prev) =>
+      prev.map((oldCustomer) =>
+        oldCustomer.id === updatedCustomer.id ? updatedCustomer : oldCustomer,
+      ),
+    )
   }
 
   return (
@@ -53,6 +65,7 @@ const Customers = () => {
       totalPages={totalPages}
       onCurrentPageChange={handleCurrentPage}
       onRowsCountChange={handleRowsCount}
+      handleUpdateCustomer={handleUpdateCustomer}
     />
   )
 }

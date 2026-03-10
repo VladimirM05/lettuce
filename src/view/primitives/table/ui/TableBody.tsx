@@ -9,10 +9,14 @@ import { createPortal } from "react-dom"
 interface TableBodyProps {
   columns: TableColumn<Customer>[]
   data: Customer[]
+  handleUpdateCustomer: (customer: Customer) => void
 }
 
 export const TableBody = forwardRef(
-  ({ columns, data }: TableBodyProps, ref: Ref<HTMLTableSectionElement>) => {
+  (
+    { columns, data, handleUpdateCustomer }: TableBodyProps,
+    ref: Ref<HTMLTableSectionElement>,
+  ) => {
     const [visiblePopUp, setVisiblePopUp] = useState(false)
     const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(
       null,
@@ -23,7 +27,12 @@ export const TableBody = forwardRef(
         {visiblePopUp &&
           selectedCustomer &&
           createPortal(
-            <CustomerPopUp columns={columns} customer={selectedCustomer} />,
+            <CustomerPopUp
+              columns={columns}
+              customer={selectedCustomer}
+              setVisiblePopUp={setVisiblePopUp}
+              handleUpdateCustomer={handleUpdateCustomer}
+            />,
             document.body,
           )}
 
