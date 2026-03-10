@@ -1,4 +1,3 @@
-import * as React from "react"
 import { useState } from "react"
 import SearchIcon from "../images/search.svg?react"
 import CrossIcon from "../images/cross.svg?react"
@@ -6,15 +5,14 @@ import styles from "./Search.module.scss"
 
 interface SearchProps {
   onSearchValueChange: (value: string) => void
+  onCurrentPageChange: (page: number) => void
 }
 
-export const Search = React.memo(({ onSearchValueChange }: SearchProps) => {
+export const Search = ({
+  onSearchValueChange,
+  onCurrentPageChange,
+}: SearchProps) => {
   const [inputValue, setInputValue] = useState("")
-
-  const handleClear = () => {
-    setInputValue("")
-    onSearchValueChange("")
-  }
 
   return (
     <div className={styles.search}>
@@ -31,15 +29,24 @@ export const Search = React.memo(({ onSearchValueChange }: SearchProps) => {
           type="text"
         />
         {inputValue && (
-          <CrossIcon className={styles.cross} onClick={handleClear} />
+          <CrossIcon
+            className={styles.cross}
+            onClick={() => {
+              setInputValue("")
+              onSearchValueChange("")
+            }}
+          />
         )}
       </div>
       <button
         className={styles.searchButton}
-        onClick={() => onSearchValueChange(inputValue)}
+        onClick={() => {
+          onSearchValueChange(inputValue)
+          onCurrentPageChange(1)
+        }}
       >
         Search
       </button>
     </div>
   )
-})
+}

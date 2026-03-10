@@ -21,7 +21,8 @@ interface TableProps {
   totalPages: number
   onCurrentPageChange: (value: number) => void
   onRowsCountChange: (value: number) => void
-  handleUpdateCustomer: (updatedCustomer: Customer) => void
+  onSelectedCustomerChange: (selectedCustomer: Customer) => void
+  onVisibleCustomerPopUpChange: (visible: boolean) => void
 }
 
 export const Table = ({
@@ -33,7 +34,8 @@ export const Table = ({
   totalPages,
   onCurrentPageChange,
   onRowsCountChange,
-  handleUpdateCustomer,
+  onSelectedCustomerChange,
+  onVisibleCustomerPopUpChange,
 }: TableProps) => {
   const [visibleScrollButton, setVisibleScrollButton] = useState<boolean>(false)
   const ref = useRef<HTMLTableSectionElement | null>(null)
@@ -59,7 +61,10 @@ export const Table = ({
   return (
     <div className={styles.tableWrapper}>
       <div className={styles.tableControls}>
-        <Search onSearchValueChange={onSearchValueChange} />
+        <Search
+          onSearchValueChange={onSearchValueChange}
+          onCurrentPageChange={onCurrentPageChange}
+        />
         <Pagination
           rowsCount={rowsCount}
           currentPage={currentPage}
@@ -84,7 +89,8 @@ export const Table = ({
           ref={ref}
           columns={columns}
           data={data}
-          handleUpdateCustomer={handleUpdateCustomer}
+          onSelectedCustomerChange={onSelectedCustomerChange}
+          onVisibleCustomerPopUpChange={onVisibleCustomerPopUpChange}
         />
       </table>
       <button

@@ -1,6 +1,6 @@
 import { useState } from "react"
+import clsx from "clsx"
 
-import { Button } from "@/view/primitives/button/Button"
 import { PaginationSelect } from "./PaginationSelect"
 
 import RefreshIcon from "../images/refresh.svg?react"
@@ -40,35 +40,49 @@ export const Pagination = ({
       </button>
 
       <div className={styles.paginationControls}>
-        <Button
+        <button
+          className={clsx(styles.button, currentPage === 1 && styles.disabled)}
           onClick={() => onCurrentPageChange(1)}
           disabled={currentPage === 1}
         >
           <FirstIcon />
-        </Button>
+        </button>
 
-        <Button
+        <button
+          className={clsx(styles.button, currentPage === 1 && styles.disabled)}
           onClick={() => onCurrentPageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
           <ArrowLeftIcon />
-        </Button>
+        </button>
 
-        <PaginationSelect rowsCount={rowsCount} onChange={onRowsCountChange} />
+        <PaginationSelect
+          rowsCount={rowsCount}
+          onChange={onRowsCountChange}
+          onCurrentPageChange={onCurrentPageChange}
+        />
 
-        <Button
+        <button
+          className={clsx(
+            styles.button,
+            currentPage === totalPages && styles.disabled,
+          )}
           onClick={() => onCurrentPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
         >
           <ArrowRightIcon />
-        </Button>
+        </button>
 
-        <Button
+        <button
+          className={clsx(
+            styles.button,
+            currentPage === totalPages && styles.disabled,
+          )}
           onClick={() => onCurrentPageChange(totalPages)}
           disabled={currentPage === totalPages}
         >
           <LastIcon />
-        </Button>
+        </button>
       </div>
 
       <div className={styles.paginationCounter}>

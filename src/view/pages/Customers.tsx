@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
+import { CustomersInteractor } from "@/domain/interactors/CustomersInteractor"
 import { Table } from "@/view/primitives/table"
-import type { TableColumn } from "@/view/primitives/table/types/TableColumn.ts"
-import type { Customer } from "@/domain/entities/Customer.ts"
-import { CustomersInteractor } from "@/domain/interactors/CustomersInteractor.ts"
+import type { Customer } from "@/domain/entities/Customer"
+import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
+import CustomerPopUp from "@/view/components/customer-pop-up"
 
 const customerColumns: TableColumn<Customer>[] = [
   { key: "name", title: "Name", searchable: true },
@@ -13,10 +14,14 @@ const customerColumns: TableColumn<Customer>[] = [
 
 const Customers = () => {
   const [customers, setCustomers] = useState<Customer[]>([])
-  const [searchValue, setSearchValue] = useState("")
-  const [rowsCount, setRowsCount] = useState(10)
+
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
+  const [searchValue, setSearchValue] = useState("")
+  const [rowsCount, setRowsCount] = useState(10)
+
+  const [selectedCustomer, setSelectedCustomer] = useState<Customer>()
+  const [visibleCustomerPopUp, setVisibleCustomerPopUp] = useState(false)
 
   useEffect(() => {
     const loadCustomers = async () => {
@@ -33,19 +38,20 @@ const Customers = () => {
     void loadCustomers()
   }, [searchValue, currentPage, rowsCount])
 
-  // Вызывается при поиске.
-  const handleSearchValue = (value: string) => {
-    setSearchValue(value)
-    setCurrentPage(1)
-  }
-  // Вызывается при смене страницы.
+  // Search and pagination logic.
   const handleCurrentPage = (page: number) => setCurrentPage(page)
-  // Вызывается при изменении количества отображаемых строк.
-  const handleRowsCount = (value: number) => {
-    setRowsCount(value)
-    setCurrentPage(1)
-  }
-  // Вызывается при обновлении кастомера в попапе.
+
+  const handleSearchValue = (search: string) => setSearchValue(search)
+
+  const handleRowsCount = (rows: number) => setRowsCount(rows)
+
+  // Customer pop-up logic.
+  const handleSelectedCustomer = (selectedCustomer: Customer) =>
+    setSelectedCustomer(selectedCustomer)
+
+  const handleVisibleCustomerPopUp = (visible: boolean) =>
+    setVisibleCustomerPopUp(visible)
+
   const handleUpdateCustomer = (updatedCustomer: Customer) => {
     CustomersInteractor.updateCustomer(updatedCustomer)
     setCustomers((prev) =>
@@ -56,17 +62,27 @@ const Customers = () => {
   }
 
   return (
-    <Table
-      columns={customerColumns}
-      data={customers}
-      onSearchValueChange={handleSearchValue}
-      rowsCount={rowsCount}
-      currentPage={currentPage}
-      totalPages={totalPages}
-      onCurrentPageChange={handleCurrentPage}
-      onRowsCountChange={handleRowsCount}
-      handleUpdateCustomer={handleUpdateCustomer}
-    />
+    <>
+      {visibleCustomerPopUp && selectedCustomer && (
+        <CustomerPopUp
+          customer={selectedCustomer}
+          onVisibleCustomerPopUpChange={handleVisibleCustomerPopUp}
+          handleUpdateCustomer={handleUpdateCustomer}
+        />
+      )}
+      <Table
+        columns={customerColumns}
+        data={customers}
+        onSearchValueChange={handleSearchValue}
+        rowsCount={rowsCount}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onCurrentPageChange={handleCurrentPage}
+        onRowsCountChange={handleRowsCount}
+        onSelectedCustomerChange={handleSelectedCustomer}
+        onVisibleCustomerPopUpChange={handleVisibleCustomerPopUp}
+      />
+    </>
   )
 }
 

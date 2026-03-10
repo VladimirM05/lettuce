@@ -12,80 +12,80 @@
   border-radius: 16px;
   padding: 16px;
   letter-spacing: 0.5px;
-}
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 12px;
-  gap: 0 16px;
-  padding: 16px;
-  height: 72px;
-  background-color: colors.$color-sidebar-header-bg;
-}
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+    gap: 16px;
+    padding: 16px;
+    height: 72px;
+    background-color: colors.$color-sidebar-header-bg;
+  }
 
-.helloText {
-  @include fonts.font-medium;
-  flex: 1;
-  min-width: 0;
-  font-size: 18px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  letter-spacing: 0.5px;
-}
+  &__hello-text {
+    @include fonts.font-medium;
+    flex: 1;
+    min-width: 0;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.5px;
+  }
 
-.divider {
-  width: 100%;
-  background-color: rgba(colors.$color-divider, 0.32);
-  border: none;
-  height: 1px;
-  margin: 16px 0;
-}
+  &__divider {
+    width: 100%;
+    background-color: rgba(colors.$color-divider, 0.32);
+    border: none;
+    height: 1px;
+    margin: 16px 0;
+  }
 
-.nav {
-  flex: 1;
-  display: flex;
-}
+  &__nav {
+    flex: 1;
+    display: flex;
+  }
 
-.menuList {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  gap: 8px 0;
-}
+  &__list {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+  }
 
-.menuLink {
-  display: flex;
-  padding: 12px;
-  gap: 0 8px;
-  cursor: pointer;
-  white-space: nowrap;
-  @include utils.sidebar-hover-effect;
-}
+  &__link {
+    @include utils.sidebar-hover-effect;
+    display: flex;
+    padding: 12px;
+    gap: 8px;
+    cursor: pointer;
+    white-space: nowrap;
 
-.active {
-  background-color: rgba(colors.$color-bg-active, 0.24);
-}
+    &--active {
+      background-color: rgba(colors.$color-bg-active, 0.24);
+    }
+  }
 
-.menuLinkText {
-  white-space: nowrap;
-}
+  &__text {
+    white-space: nowrap;
+  }
 
-.footerSignoutButton {
-  color: inherit;
-  width: 100%;
-  background-color: transparent;
-  display: flex;
-  gap: 0 8px;
-  padding: 12px;
-  cursor: pointer;
-  border: none;
-  @include utils.sidebar-hover-effect;
-}
+  &__signout-button {
+    @include utils.sidebar-hover-effect;
+    color: inherit;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    cursor: pointer;
+    border: none;
+  }
 
-.footerSignoutButtonText {
-  @include fonts.font-regular;
-  letter-spacing: 0.15px;
+  &__signout-text {
+    @include fonts.font-regular;
+    letter-spacing: 0.15px;
+  }
 }

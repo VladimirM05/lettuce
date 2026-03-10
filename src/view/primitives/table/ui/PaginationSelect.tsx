@@ -6,6 +6,7 @@ import styles from "./PaginationSelect.module.scss"
 interface PaginationSelectProps {
   rowsCount: number
   onChange: (value: number) => void
+  onCurrentPageChange: (page: number) => void
 }
 
 const options: readonly number[] = [10, 50, 100]
@@ -13,6 +14,7 @@ const options: readonly number[] = [10, 50, 100]
 export const PaginationSelect = ({
   rowsCount,
   onChange,
+  onCurrentPageChange,
 }: PaginationSelectProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const selectRef = useRef<HTMLDivElement | null>(null)
@@ -28,11 +30,6 @@ export const PaginationSelect = ({
 
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
-
-  const handleSelect = (option: number): void => {
-    onChange(option)
-    setIsOpen(false)
-  }
 
   return (
     <div ref={selectRef} className={styles.paginationSelect}>
@@ -54,7 +51,11 @@ export const PaginationSelect = ({
                 styles.paginationOptionItem,
                 option === rowsCount && styles.selected,
               )}
-              onClick={() => handleSelect(option)}
+              onClick={() => {
+                onChange(option)
+                setIsOpen(false)
+                onCurrentPageChange(1)
+              }}
               key={option}
             >
               {option}
