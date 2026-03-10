@@ -1,5 +1,5 @@
 export class Customer {
-  id: number
+  readonly id: number
   name: string
   phone: string
   dateJoined: string

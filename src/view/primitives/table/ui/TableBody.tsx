@@ -1,9 +1,10 @@
-import { forwardRef, type Ref } from "react"
-import { useNavigate } from "react-router-dom"
+import { forwardRef, type Ref, useState } from "react"
 import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
 import type { Customer } from "@/domain/entities/Customer"
+import CustomerPopUp from "@/view/components/customer-pop-up"
 import NoResults from "../images/no-results.svg?react"
 import styles from "./TableBody.module.scss"
+import { createPortal } from "react-dom"
 
 interface TableBodyProps {
   columns: TableColumn<Customer>[]
@@ -12,34 +13,51 @@ interface TableBodyProps {
 
 export const TableBody = forwardRef(
   ({ columns, data }: TableBodyProps, ref: Ref<HTMLTableSectionElement>) => {
-    const navigate = useNavigate()
+    const [visiblePopUp, setVisiblePopUp] = useState(false)
+    const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(
+      null,
+    )
 
     return (
-      <tbody className={styles.tableBody} ref={ref}>
-        {data.length > 0 ? (
-          data.map((row, rowIndex) => (
-            <tr
-              className={styles.tableBodyRow}
-              style={{ gridTemplateColumns: `repeat(${columns.length}, 1fr)` }}
-              onClick={() => navigate(`/admin/customers/${row.id}`)}
-              key={rowIndex}
-            >
-              {columns.map((column, columnIndex) => (
-                <td className={styles.tableBodyCell} key={columnIndex}>
-                  {row[column.key as keyof Customer]}
-                </td>
-              ))}
+      <>
+        {visiblePopUp &&
+          selectedCustomer &&
+          createPortal(
+            <CustomerPopUp columns={columns} customer={selectedCustomer} />,
+            document.body,
+          )}
+
+        <tbody className={styles.tableBody} ref={ref}>
+          {data.length > 0 ? (
+            data.map((row, rowIndex) => (
+              <tr
+                className={styles.tableBodyRow}
+                style={{
+                  gridTemplateColumns: `repeat(${columns.length}, 1fr)`,
+                }}
+                onClick={() => {
+                  setVisiblePopUp(true)
+                  setSelectedCustomer(row)
+                }}
+                key={rowIndex}
+              >
+                {columns.map((column, columnIndex) => (
+                  <td className={styles.tableBodyCell} key={columnIndex}>
+                    {row[column.key as keyof Customer]}
+                  </td>
+                ))}
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td className={styles.noResults} colSpan={columns.length || 1}>
+                <NoResults />
+                <span className={styles.noResultsText}>No results found</span>
+              </td>
             </tr>
-          ))
-        ) : (
-          <tr>
-            <td className={styles.noResults} colSpan={columns.length || 1}>
-              <NoResults />
-              <span className={styles.noResultsText}>No results found</span>
-            </td>
-          </tr>
-        )}
-      </tbody>
+          )}
+        </tbody>
+      </>
     )
   },
 )
