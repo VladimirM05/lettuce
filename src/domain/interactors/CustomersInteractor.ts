@@ -43,15 +43,6 @@ export class CustomersInteractor {
     return { slicedCustomers, totalPages }
   }
 
-  static getCustomerById = async (id: number) => {
-    let customer = this._customers.find((c) => c.id === id) ?? null
-    if (!customer) {
-      customer = await new CustomersGateway().getCustomerById(id)
-      if (customer) this._customers.push(customer)
-    }
-    return customer
-  }
-
   static updateCustomer(customer: Customer) {
     const index = this._customers.findIndex((c) => c.id === customer.id)
 
