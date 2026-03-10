@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom"
-import { Sidebar } from "@/view/components/sidebar/Sidebar"
+import { Sidebar } from "@/view/components/sidebar/ui/Sidebar.tsx"
 import styles from "./AdminLayout.module.scss"
 
 export const AdminLayout = () => {
   return (
-    <div className={styles.adminLayout}>
+    <div className={styles["admin-layout"]}>
       <Sidebar />
       <Outlet />
     </div>

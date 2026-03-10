@@ -1,1 +1,1 @@
-export { CustomerPopUp as default } from "./ui/CustomerPopUp.tsx"
+export { CustomerPopUp } from "./ui/CustomerPopUp.tsx"

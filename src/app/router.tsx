@@ -1,10 +1,9 @@
 import { lazy } from "react"
 import { createBrowserRouter, Navigate } from "react-router-dom"
-import { AdminLayout } from "@/view/layouts/AdminLayout"
+import { AdminLayout } from "@/view/layouts/admin-layout"
 
 const Users = lazy(() => import("@/view/pages/Users.tsx"))
 const Customers = lazy(() => import("@/view/pages/Customers.tsx"))
-const CustomerDetail = lazy(() => import("@/view/components/customer-pop-up"))
 const Scheduled = lazy(() => import("@/view/pages/Scheduled.tsx"))
 const Plans = lazy(() => import("@/view/pages/Plans.tsx"))
 const Subscriptions = lazy(() => import("@/view/pages/Subscriptions.tsx"))
@@ -18,7 +17,6 @@ export const router = createBrowserRouter([
       { index: true, element: <Navigate to="customers" replace /> },
       { path: "users", element: <Users /> },
       { path: "customers", element: <Customers /> },
-      { path: "customers/:id", element: <CustomerDetail /> },
       { path: "scheduled", element: <Scheduled /> },
       { path: "plans", element: <Plans /> },
       { path: "subscriptions", element: <Subscriptions /> },

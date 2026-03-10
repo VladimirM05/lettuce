@@ -1,6 +1,6 @@
 import { useState } from "react"
 import clsx from "clsx"
-import type { Customer } from "@/domain/entities/Customer"
+import type { Customer } from "@/domain/entities/Customer.ts"
 import styles from "./CustomerPopUp.module.scss"
 
 interface CustomerPopUpProps {
@@ -17,7 +17,7 @@ export const CustomerPopUp = ({
   const [editedCustomer, setEditedCustomer] = useState<Customer>(customer)
 
   return (
-    <form className={styles["customer-pop-up"]} action="/" method="POST">
+    <form className={styles["customer-pop-up"]} action="/public" method="POST">
       <h4 className={styles["customer-pop-up__title"]}>Customer information</h4>
       <ul className={styles["customer-pop-up__list"]}>
         {Object.keys(customer)

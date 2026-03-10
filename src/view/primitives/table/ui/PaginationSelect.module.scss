@@ -1,4 +1,4 @@
-@use '@/view/shared/assets/abstracts/color-semantic' as colors;
+@use '@/view/shared/mixins/colors' as colors;
 
 .paginationSelect {
   position: relative;

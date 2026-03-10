@@ -1,5 +1,5 @@
-@use '@/view/shared/assets/abstracts/color-semantic' as colors;
-@use '@/view/shared/styles/mixins/fonts' as fonts;
+@use '@/view/shared/mixins/colors' as colors;
+@use '@/view/shared/mixins/fonts' as fonts;
 
 .tableBody {
   display: flex;

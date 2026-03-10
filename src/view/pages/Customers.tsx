@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { CustomersInteractor } from "@/domain/interactors/CustomersInteractor"
+import { CustomerPopUp } from "@/view/components/customer-pop-up/ui/CustomerPopUp.tsx"
 import { Table } from "@/view/primitives/table"
-import type { Customer } from "@/domain/entities/Customer"
 import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
-import CustomerPopUp from "@/view/components/customer-pop-up"
+import type { Customer } from "@/domain/entities/Customer"
+import { CustomersInteractor } from "@/domain/interactors/CustomersInteractor"
 
 const customerColumns: TableColumn<Customer>[] = [
   { key: "name", title: "Name", searchable: true },
@@ -16,7 +16,7 @@ const Customers = () => {
   const [customers, setCustomers] = useState<Customer[]>([])
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [totalPages, setTotalPages] = useState(0)
+  const [totalPages, setTotalPages] = useState(1)
   const [searchValue, setSearchValue] = useState("")
   const [rowsCount, setRowsCount] = useState(10)
 
