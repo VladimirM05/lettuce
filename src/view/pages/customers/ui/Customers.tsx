@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react"
-import { CustomerPopUp } from "@/view/components/customer-pop-up/ui/CustomerPopUp.tsx"
+
+import { CustomerPopUp } from "@/view/components/customer-pop-up/ui/CustomerPopUp"
+import { Search } from "@/view/primitives/search"
+import { Pagination } from "@/view/primitives/pagination"
 import { Table } from "@/view/primitives/table"
+
 import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
 import type { Customer } from "@/domain/entities/Customer"
+
 import { CustomersInteractor } from "@/domain/interactors/CustomersInteractor"
+
+import styles from "./Customers.module.scss"
 
 const customerColumns: TableColumn<Customer>[] = [
   { key: "name", title: "Name", searchable: true },
@@ -12,7 +19,7 @@ const customerColumns: TableColumn<Customer>[] = [
   { key: "dateJoined", title: "Date Joined", searchable: false },
 ]
 
-const Customers = () => {
+export const Customers = () => {
   const [customers, setCustomers] = useState<Customer[]>([])
 
   const [currentPage, setCurrentPage] = useState(1)
@@ -62,7 +69,7 @@ const Customers = () => {
   }
 
   return (
-    <>
+    <section className={styles["customers"]}>
       {visibleCustomerPopUp && selectedCustomer && (
         <CustomerPopUp
           customer={selectedCustomer}
@@ -70,20 +77,25 @@ const Customers = () => {
           handleUpdateCustomer={handleUpdateCustomer}
         />
       )}
+      <div className={styles["customers__controls"]}>
+        <Search
+          onSearchValueChange={handleSearchValue}
+          onCurrentPageChange={handleCurrentPage}
+        />
+        <Pagination
+          rowsCount={rowsCount}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onRowsCountChange={handleRowsCount}
+          onCurrentPageChange={handleCurrentPage}
+        />
+      </div>
       <Table
         columns={customerColumns}
         data={customers}
-        onSearchValueChange={handleSearchValue}
-        rowsCount={rowsCount}
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onCurrentPageChange={handleCurrentPage}
-        onRowsCountChange={handleRowsCount}
         onSelectedCustomerChange={handleSelectedCustomer}
         onVisibleCustomerPopUpChange={handleVisibleCustomerPopUp}
       />
-    </>
+    </section>
   )
 }
-
-export default Customers

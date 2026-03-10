@@ -1,0 +1,17 @@
+@use '@/view/shared/mixins/colors' as colors;
+
+.customers {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 32px;
+  padding: 32px;
+  background-color: colors.$color-bg-primary;
+  border-radius: 16px;
+  box-shadow: -4px -4px 8px rgba(colors.$color-shadow, 0.04), 4px 4px 8px rgba(colors.$color-shadow, 0.04);
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+  }
+}

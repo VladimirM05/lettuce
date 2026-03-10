@@ -1,6 +1,6 @@
 import { useState } from "react"
 import clsx from "clsx"
-import type { Customer } from "@/domain/entities/Customer.ts"
+import type { Customer } from "@/domain/entities/Customer"
 import styles from "./CustomerPopUp.module.scss"
 
 interface CustomerPopUpProps {
@@ -17,18 +17,23 @@ export const CustomerPopUp = ({
   const [editedCustomer, setEditedCustomer] = useState<Customer>(customer)
 
   return (
-    <form className={styles["customer-pop-up"]} action="/public" method="POST">
-      <h4 className={styles["customer-pop-up__title"]}>Customer information</h4>
+    <section className={styles["customer-pop-up"]}>
+      <h2 className={styles["customer-pop-up__title"]}>Customer information</h2>
+
       <ul className={styles["customer-pop-up__list"]}>
-        {Object.keys(customer)
+        {(Object.keys(customer) as (keyof Customer)[])
           .slice(1)
           .map((column) => (
             <li className={styles["customer-pop-up__item"]} key={column}>
-              <label className={styles["customer-pop-up__label"]}>
+              <label
+                className={styles["customer-pop-up__label"]}
+                htmlFor={column}
+              >
                 {column}
               </label>
               <input
-                className={styles["customer-pop-up__value"]}
+                id={column}
+                className={styles["customer-pop-up__input"]}
                 type="text"
                 value={editedCustomer[column]}
                 onChange={(e) => {
@@ -41,13 +46,15 @@ export const CustomerPopUp = ({
             </li>
           ))}
       </ul>
-      <div className={styles["customer-pop-up__action-bar"]}>
+
+      <div className={styles["customer-pop-up__actions"]}>
         <button
           className={clsx(
             styles["customer-pop-up__button"],
             styles["customer-pop-up__button--cancel"],
           )}
           onClick={() => onVisibleCustomerPopUpChange(false)}
+          type="button"
         >
           Cancel
         </button>
@@ -60,10 +67,11 @@ export const CustomerPopUp = ({
             handleUpdateCustomer(editedCustomer)
             onVisibleCustomerPopUpChange(false)
           }}
+          type="button"
         >
           Confirm
         </button>
       </div>
-    </form>
+    </section>
   )
 }

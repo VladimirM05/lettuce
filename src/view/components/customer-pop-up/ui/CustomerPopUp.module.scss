@@ -14,73 +14,72 @@
   background-color: colors.$color-bg-primary;
   border-radius: 16px;
   box-shadow: -4px -4px 8px rgba(colors.$color-shadow, 0.04), 4px 4px 8px rgba(colors.$color-shadow, 0.04);
-}
 
-.customer-pop-up__title {
-  @include fonts.font-medium;
-  width: 100%;
-  border-bottom: 1px solid colors.$color-border-muted;
-  padding: 20px 0;
-  text-align: center;
-  font-size: 20px;
-}
+  &__title {
+    @include fonts.font-medium;
+    width: 100%;
+    border-bottom: 1px solid colors.$color-border-muted;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 20px;
+  }
 
-.customer-pop-up__list {
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 100%;
+  &__list {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
 
-  .customer-pop-up__item {
+  &__item {
     display: flex;
     align-items: center;
     gap: 24px;
-
-    .customer-pop-up__label {
-      @include fonts.font-medium;
-      width: 120px;
-    }
-
-    .customer-pop-up__value {
-      @include fonts.font-regular;
-      letter-spacing: 0.5px;
-      flex: 0 0 auto;
-      width: 240px;
-      border: 1px solid colors.$color-border-muted;
-      padding: 12px;
-      border-radius: 8px;
-    }
   }
-}
 
-.customer-pop-up__action-bar {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
+  &__label {
+    @include fonts.font-medium;
+    width: 120px;
+  }
 
-  .customer-pop-up__button {
+  &__input {
+    @include fonts.font-regular;
+    letter-spacing: 0.5px;
+    width: 360px;
+    border: 1px solid colors.$color-border-muted;
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  &__button {
     width: 120px;
     padding: 16px 0;
     border-radius: 8px;
     cursor: pointer;
     color: colors.$color-text-inverse;
     transition: background-color ease-out 0.3s;
-  }
 
-  .customer-pop-up__button--cancel {
-    background-color: colors.$color-btn-warning;
+    &--cancel {
+      background-color: colors.$color-btn-warning;
 
-    &:hover {
-      background-color: adjust-color(colors.$color-btn-warning, $lightness: -8%);
+      &:hover {
+        background-color: color.adjust(colors.$color-btn-warning, $lightness: -8%);
+      }
     }
-  }
 
-  .customer-pop-up__button--confirm {
-    background-color: colors.$color-btn-primary;
+    &--confirm {
+      background-color: colors.$color-btn-primary;
 
-    &:hover {
-      background-color: adjust-color(colors.$color-btn-primary, $lightness: -8%);
+      &:hover {
+        background-color: color.adjust(colors.$color-btn-primary, $lightness: -8%);
+      }
     }
   }
 }

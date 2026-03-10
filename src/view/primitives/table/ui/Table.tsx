@@ -4,8 +4,6 @@ import clsx from "clsx"
 import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
 import type { Customer } from "@/domain/entities/Customer"
 
-import { Search } from "./Search"
-import { Pagination } from "./Pagination"
 import { TableBody } from "./TableBody"
 
 import ArrowUp from "../images/arrow-up.svg?react"
@@ -15,12 +13,6 @@ import styles from "./Table.module.scss"
 interface TableProps {
   columns: TableColumn<Customer>[]
   data: Customer[]
-  onSearchValueChange: (value: string) => void
-  rowsCount: number
-  currentPage: number
-  totalPages: number
-  onCurrentPageChange: (value: number) => void
-  onRowsCountChange: (value: number) => void
   onSelectedCustomerChange: (selectedCustomer: Customer) => void
   onVisibleCustomerPopUpChange: (visible: boolean) => void
 }
@@ -28,12 +20,6 @@ interface TableProps {
 export const Table = ({
   columns,
   data,
-  onSearchValueChange,
-  rowsCount,
-  currentPage,
-  totalPages,
-  onCurrentPageChange,
-  onRowsCountChange,
   onSelectedCustomerChange,
   onVisibleCustomerPopUpChange,
 }: TableProps) => {
@@ -60,20 +46,6 @@ export const Table = ({
 
   return (
     <div className={styles.tableWrapper}>
-      <div className={styles.tableControls}>
-        <Search
-          onSearchValueChange={onSearchValueChange}
-          onCurrentPageChange={onCurrentPageChange}
-        />
-        <Pagination
-          rowsCount={rowsCount}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onRowsCountChange={onRowsCountChange}
-          onCurrentPageChange={onCurrentPageChange}
-        />
-      </div>
-
       <table className={styles.table}>
         <thead
           className={styles.tableHeader}

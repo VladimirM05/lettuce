@@ -1,7 +1,7 @@
 import { useState } from "react"
 import clsx from "clsx"
 
-import { PaginationSelect } from "./PaginationSelect"
+import { PaginationSelect } from "./PaginationSelect.tsx"
 
 import RefreshIcon from "../images/refresh.svg?react"
 import FirstIcon from "../images/first.svg?react"

@@ -2,11 +2,11 @@ import { lazy } from "react"
 import { createBrowserRouter, Navigate } from "react-router-dom"
 import { AdminLayout } from "@/view/layouts/admin-layout"
 
-const Users = lazy(() => import("@/view/pages/Users.tsx"))
-const Customers = lazy(() => import("@/view/pages/Customers.tsx"))
-const Scheduled = lazy(() => import("@/view/pages/Scheduled.tsx"))
-const Plans = lazy(() => import("@/view/pages/Plans.tsx"))
-const Subscriptions = lazy(() => import("@/view/pages/Subscriptions.tsx"))
+const Users = lazy(() => import("@/view/pages/users"))
+const Customers = lazy(() => import("@/view/pages/customers"))
+const Scheduled = lazy(() => import("@/view/pages/scheduled"))
+const Plans = lazy(() => import("@/view/pages/plans"))
+const Subscriptions = lazy(() => import("@/view/pages/subscriptions"))
 
 export const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/admin" replace /> },
