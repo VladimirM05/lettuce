@@ -58,7 +58,7 @@ export const Customers = () => {
     setVisibleCustomerPopUp(true)
   }
 
-  const handleVisibleCustomerPopUp = (visible: boolean) =>
+  const handleCloseCustomerPopUp = (visible: boolean) =>
     setVisibleCustomerPopUp(visible)
 
   const handleUpdateCustomer = (updatedCustomer: Customer) => {
@@ -75,7 +75,7 @@ export const Customers = () => {
       {visibleCustomerPopUp && selectedCustomer && (
         <CustomerPopUp
           customer={selectedCustomer}
-          onClose={handleVisibleCustomerPopUp}
+          onClose={handleCloseCustomerPopUp}
           onCustomerChange={handleUpdateCustomer}
         />
       )}

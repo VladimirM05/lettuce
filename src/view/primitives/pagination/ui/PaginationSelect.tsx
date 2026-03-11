@@ -17,22 +17,21 @@ export const PaginationSelect = ({
   onCurrentPageChange,
 }: PaginationSelectProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const selectRef = useRef<HTMLDivElement | null>(null)
+  const ref = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (selectRef.current && !selectRef.current.contains(e.target as Node)) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
         setIsOpen(false)
       }
     }
-
     document.addEventListener("mousedown", handleClickOutside)
 
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
   return (
-    <div className={styles["pagination-select"]} ref={selectRef}>
+    <div className={styles["pagination-select"]} ref={ref}>
       <div
         className={styles["pagination-select__inner"]}
         onClick={() => setIsOpen(prev => !prev)}

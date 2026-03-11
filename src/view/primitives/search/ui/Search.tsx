@@ -1,5 +1,6 @@
 import { useState } from "react"
 import clsx from "clsx"
+import { ActionButton } from "@/view/primitives/action-button"
 import SearchIcon from "../images/search.svg?react"
 import CrossIcon from "../images/cross.svg?react"
 import styles from "./Search.module.scss"
@@ -40,15 +41,14 @@ export const Search = ({
           />
         )}
       </div>
-      <button
-        className={styles["search__button"]}
+      <ActionButton
         onClick={() => {
           onSearchValueChange(inputValue)
           onCurrentPageChange(1)
         }}
       >
         Search
-      </button>
+      </ActionButton>
     </div>
   )
 }

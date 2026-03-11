@@ -1,8 +1,8 @@
 import * as React from "react"
 import { useState } from "react"
-import clsx from "clsx"
 
 import { PaginationSelect } from "./PaginationSelect"
+import { ActionButton } from "@/view/primitives/action-button"
 
 import RefreshIcon from "../images/refresh.svg?react"
 import FirstIcon from "../images/first.svg?react"
@@ -29,9 +29,8 @@ export const Pagination = ({
 }: PaginationProps) => {
   const [inputValue, setInputValue] = useState<string | null>(null)
 
-  const checkInputValue = (value: number): string => {
-    return String(Math.min(Math.max(value, 1), totalPages))
-  }
+  const checkInputValue = (value: number): string =>
+    String(Math.min(Math.max(value, 1), totalPages))
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return
@@ -44,63 +43,44 @@ export const Pagination = ({
 
   return (
     <div className={styles["pagination"]}>
-      <button className={styles["pagination__refresh-button"]}>
-        <RefreshIcon />
-        <span className={styles["pagination__refresh-text"]}>Refresh</span>
-      </button>
+      <ActionButton color="warning" icon={<RefreshIcon />}>
+        Refresh
+      </ActionButton>
 
       <div className={styles["pagination__controls"]}>
-        <button
-          className={clsx(
-            styles["pagination__button"],
-            currentPage === 1 && styles["pagination__button--disabled"],
-          )}
+        <ActionButton
           onClick={() => onCurrentPageChange(1)}
+          color={currentPage !== 1 ? "secondary" : "disabled"}
+          shape="square"
+          icon={<FirstIcon />}
           disabled={currentPage === 1}
-        >
-          <FirstIcon />
-        </button>
-
-        <button
-          className={clsx(
-            styles["pagination__button"],
-            currentPage === 1 && styles["pagination__button--disabled"],
-          )}
+        />
+        <ActionButton
           onClick={() => onCurrentPageChange(currentPage - 1)}
+          color={currentPage !== 1 ? "secondary" : "disabled"}
+          shape="square"
+          icon={<ArrowLeftIcon />}
           disabled={currentPage === 1}
-        >
-          <ArrowLeftIcon />
-        </button>
-
+        />
         <PaginationSelect
           rowsCount={rowsCount}
           onChange={onRowsCountChange}
           onCurrentPageChange={onCurrentPageChange}
         />
-
-        <button
-          className={clsx(
-            styles["pagination__button"],
-            currentPage === totalPages &&
-              styles["pagination__button--disabled"],
-          )}
+        <ActionButton
           onClick={() => onCurrentPageChange(currentPage + 1)}
+          color={currentPage !== totalPages ? "secondary" : "disabled"}
+          shape="square"
+          icon={<ArrowRightIcon />}
           disabled={currentPage === totalPages}
-        >
-          <ArrowRightIcon />
-        </button>
-
-        <button
-          className={clsx(
-            styles["pagination__button"],
-            currentPage === totalPages &&
-              styles["pagination__button--disabled"],
-          )}
+        />
+        <ActionButton
           onClick={() => onCurrentPageChange(totalPages)}
+          color={currentPage !== totalPages ? "secondary" : "disabled"}
+          shape="square"
+          icon={<LastIcon />}
           disabled={currentPage === totalPages}
-        >
-          <LastIcon />
-        </button>
+        />
       </div>
 
       <div className={styles["pagination__counter"]}>

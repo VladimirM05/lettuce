@@ -58,36 +58,20 @@
     &:hover {
       border-color: color.adjust(colors.$color-border-muted, $lightness: -12%);
     }
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.8;
+
+      &:hover {
+        border-color: colors.$color-border-muted;
+      }
+    }
   }
 
   &__actions {
     display: flex;
     gap: 16px;
     margin-bottom: 16px;
-  }
-
-  &__button {
-    width: 120px;
-    height: 48px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: colors.$color-text-inverse;
-    transition: background-color ease-out 0.3s;
-
-    &--cancel {
-      background-color: colors.$color-btn-warning;
-
-      &:hover {
-        background-color: color.adjust(colors.$color-btn-warning, $lightness: -8%);
-      }
-    }
-
-    &--confirm {
-      background-color: colors.$color-btn-primary;
-
-      &:hover {
-        background-color: color.adjust(colors.$color-btn-primary, $lightness: -8%);
-      }
-    }
   }
 }

@@ -1,6 +1,7 @@
 import { type SyntheticEvent, useState } from "react"
 import clsx from "clsx"
 import { PopUp } from "@/view/primitives/pop-up"
+import { ActionButton } from "@/view/primitives/action-button"
 import type { Customer } from "@/domain/entities/Customer"
 import styles from "./CustomerPopUp.module.scss"
 
@@ -85,7 +86,11 @@ export const CustomerPopUp = ({
                 )}
                 <input
                   id={String(field.key)}
-                  className={styles["customer-pop-up__input"]}
+                  className={clsx(
+                    styles["customer-pop-up__input"],
+                    !field.editable &&
+                      styles["customer-pop-up__input--disabled"],
+                  )}
                   type="text"
                   value={String(editedCustomer[field.key])}
                   onChange={e => {
@@ -102,25 +107,10 @@ export const CustomerPopUp = ({
         </ul>
 
         <div className={styles["customer-pop-up__actions"]}>
-          <button
-            className={clsx(
-              styles["customer-pop-up__button"],
-              styles["customer-pop-up__button--cancel"],
-            )}
-            onClick={() => onClose(false)}
-            type="button"
-          >
+          <ActionButton onClick={() => onClose(false)} color="warning">
             Cancel
-          </button>
-          <button
-            className={clsx(
-              styles["customer-pop-up__button"],
-              styles["customer-pop-up__button--confirm"],
-            )}
-            type="submit"
-          >
-            Confirm
-          </button>
+          </ActionButton>
+          <ActionButton type="submit">Confirm</ActionButton>
         </div>
       </form>
     </PopUp>
