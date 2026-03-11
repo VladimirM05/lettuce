@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import { EntityPopUp } from "@/view/primitives/entity-pop-up"
+import { CustomerPopUp } from "@/view/components/customer-pop-up"
 import { Search } from "@/view/primitives/search"
 import { Pagination } from "@/view/primitives/pagination"
 import { Table } from "@/view/primitives/table"
@@ -73,11 +73,10 @@ export const Customers = () => {
   return (
     <section className={styles["customers"]}>
       {visibleCustomerPopUp && selectedCustomer && (
-        <EntityPopUp
-          columns={customerColumns}
-          entity={selectedCustomer}
-          onVisibleEntityPopUpChange={handleVisibleCustomerPopUp}
-          onEntityChange={handleUpdateCustomer}
+        <CustomerPopUp
+          customer={selectedCustomer}
+          onClose={handleVisibleCustomerPopUp}
+          onCustomerChange={handleUpdateCustomer}
         />
       )}
       <div className={styles["customers__controls"]}>
