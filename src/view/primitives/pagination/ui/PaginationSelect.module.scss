@@ -1,6 +1,7 @@
 @use '@/view/shared/styles/colors' as colors;
 
 .pagination-select {
+  user-select: none;
   position: relative;
 
   &__inner {

@@ -93,9 +93,9 @@ export const Table = <T,>({
 
       <button
         className={clsx(
-          styles["table_wrapper__scroll-button"],
+          styles["table-wrapper__scroll-button"],
           visibleScrollButton &&
-            styles["table_wrapper__scroll-button--visible"],
+            styles["table-wrapper__scroll-button--visible"],
         )}
         onClick={scrollToTop}
       >
