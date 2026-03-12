@@ -1,4 +1,4 @@
-@use '@/view/shared/styles/colors' as colors;
+@use "@/view/shared/styles/tokens/colors" as colors;
 
 .customers {
   display: flex;
@@ -8,7 +8,9 @@
   padding: 32px;
   background-color: colors.$color-bg-primary;
   border-radius: 16px;
-  box-shadow: -4px -4px 8px rgba(colors.$color-shadow, 0.04), 4px 4px 8px rgba(colors.$color-shadow, 0.04);
+  box-shadow:
+    -4px -4px 8px rgba(colors.$color-shadow, 0.04),
+    4px 4px 8px rgba(colors.$color-shadow, 0.04);
 
   &__controls {
     display: flex;

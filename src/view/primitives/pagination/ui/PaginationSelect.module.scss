@@ -1,4 +1,4 @@
-@use '@/view/shared/styles/colors' as colors;
+@use "@/view/shared/styles/tokens/colors" as colors;
 
 .pagination-select {
   user-select: none;
@@ -41,7 +41,9 @@
     left: 0;
     width: 100%;
     border-radius: 8px;
-    box-shadow: -4px -4px 8px rgba(colors.$color-shadow, 0.04), 4px 4px 8px rgba(colors.$color-shadow, 0.04);
+    box-shadow:
+      -4px -4px 8px rgba(colors.$color-shadow, 0.04),
+      4px 4px 8px rgba(colors.$color-shadow, 0.04);
   }
 
   &__item {

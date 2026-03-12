@@ -1,5 +1,5 @@
 @use "sass:color";
-@use "@/view/shared/styles/colors" as colors;
+@use "@/view/shared/styles/tokens/colors" as colors;
 
 .action-button {
   display: flex;
@@ -24,7 +24,10 @@
     background-color: colors.$color-btn-primary;
 
     &:hover {
-      background-color: color.adjust(colors.$color-btn-primary, $lightness: -8%);
+      background-color: color.adjust(
+        colors.$color-btn-primary,
+        $lightness: -8%
+      );
     }
   }
 
@@ -32,7 +35,10 @@
     background-color: colors.$color-btn-warning;
 
     &:hover {
-      background-color: color.adjust(colors.$color-btn-warning, $lightness: -8%);
+      background-color: color.adjust(
+        colors.$color-btn-warning,
+        $lightness: -8%
+      );
     }
   }
 
@@ -40,7 +46,10 @@
     background-color: colors.$color-btn-secondary;
 
     &:hover {
-      background-color: color.adjust(colors.$color-btn-secondary, $lightness: -10%);
+      background-color: color.adjust(
+        colors.$color-btn-secondary,
+        $lightness: -10%
+      );
     }
   }
 

@@ -1,6 +1,6 @@
-@use 'sass:color';
-@use '@/view/shared/styles/colors' as colors;
-@use '@/view/shared/styles/mixins/fonts' as fonts;
+@use "sass:color";
+@use "@/view/shared/styles/tokens/colors" as colors;
+@use "@/view/shared/styles/mixins/fonts" as fonts;
 
 .table-wrapper {
   position: relative;
@@ -97,7 +97,10 @@
     opacity: 0;
 
     &:hover {
-      background-color: color.adjust(colors.$color-btn-warning, $lightness: -8%)
+      background-color: color.adjust(
+        colors.$color-btn-warning,
+        $lightness: -8%
+      );
     }
 
     &--visible {

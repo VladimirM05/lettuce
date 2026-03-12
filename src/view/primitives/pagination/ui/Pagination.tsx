@@ -1,8 +1,8 @@
 import * as React from "react"
 import { useState } from "react"
 
-import { PaginationSelect } from "./PaginationSelect"
 import { ActionButton } from "@/view/primitives/action-button"
+import { PaginationSelect } from "./PaginationSelect"
 
 import RefreshIcon from "../images/refresh.svg?react"
 import FirstIcon from "../images/first.svg?react"

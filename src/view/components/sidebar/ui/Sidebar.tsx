@@ -48,7 +48,7 @@ export const Sidebar = () => {
 
       <nav className={styles["sidebar__nav"]}>
         <ul className={styles["sidebar__list"]}>
-          {navItems.map((navItem) => (
+          {navItems.map(navItem => (
             <li className={styles["sidebar__item"]} key={navItem.path}>
               <NavLink
                 className={({ isActive }) =>
