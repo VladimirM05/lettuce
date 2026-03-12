@@ -9,6 +9,7 @@
 
   &__title {
     @include fonts.font-medium;
+
     letter-spacing: 0.5px;
     width: 100%;
     border-bottom: 2px solid colors.$color-border-muted;
@@ -34,11 +35,13 @@
 
   &__label {
     @include fonts.font-medium;
+
     width: 100px;
   }
 
   &__wrapper {
     @include fonts.font-regular;
+
     position: relative;
   }
 
