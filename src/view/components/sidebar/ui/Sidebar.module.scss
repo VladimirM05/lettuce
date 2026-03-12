@@ -26,6 +26,7 @@
 
   &__hello-text {
     @include fonts.font-medium;
+
     flex: 1;
     min-width: 0;
     font-size: 18px;
@@ -57,6 +58,7 @@
 
   &__link {
     @include utils.sidebar-hover-effect;
+
     display: flex;
     padding: 12px;
     gap: 8px;
@@ -74,6 +76,7 @@
 
   &__signout-button {
     @include utils.sidebar-hover-effect;
+
     color: inherit;
     width: 100%;
     background-color: transparent;
@@ -86,6 +89,7 @@
 
   &__signout-text {
     @include fonts.font-regular;
+
     letter-spacing: 0.15px;
   }
 }
