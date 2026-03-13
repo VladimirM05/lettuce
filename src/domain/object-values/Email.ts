@@ -5,15 +5,19 @@ export class Email {
     return this._email
   }
 
-  constructor(email: string) {
-    if (this._isValid(email)) {
-      this._email = email
-    } else {
-      throw new Error("email is required")
-    }
+  private constructor(email: string) {
+    this._email = email
   }
 
-  private _isValid = (email: string): boolean => {
+  static create(email: string) {
+    if (!this._isValid(email)) {
+      return { success: false, error: "email is required" }
+    }
+
+    return { success: true, data: new Email(email) }
+  }
+
+  private static _isValid(email: string): boolean {
     return email.includes("@")
   }
 }

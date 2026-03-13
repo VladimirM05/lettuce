@@ -1,3 +1,9 @@
+type CreateNameParams = {
+  success: boolean
+  data?: Name
+  error?: string
+}
+
 export class Name {
   private readonly _name: string
 
@@ -5,15 +11,19 @@ export class Name {
     return this._name
   }
 
-  constructor(name: string) {
-    if (this._isValid(name)) {
-      this._name = name
-    } else {
-      throw new Error("Name is required")
-    }
+  private constructor(name: string) {
+    this._name = name
   }
 
-  private _isValid = (name: string): boolean => {
+  static create(name: string): CreateNameParams {
+    if (!this._isValid(name)) {
+      return { success: false, error: "Name is required" }
+    }
+
+    return { success: true, data: new Name(name) }
+  }
+
+  private static _isValid(name: string): boolean {
     return name.trim().length > 0
   }
 }

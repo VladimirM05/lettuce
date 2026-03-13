@@ -95,7 +95,7 @@
     bottom: spacing.$space-12;
     right: spacing.$space-12;
     cursor: pointer;
-    transition: all ease-out 0.2s;
+    transition: background-color ease-out 0.2s;
     opacity: 0;
 
     &:hover {

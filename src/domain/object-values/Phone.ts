@@ -5,15 +5,19 @@ export class Phone {
     return this._phone
   }
 
-  constructor(phone: string) {
-    if (this._isValid(phone)) {
-      this._phone = phone
-    } else {
-      throw new Error("Phone is required")
-    }
+  private constructor(phone: string) {
+    this._phone = phone
   }
 
-  private _isValid = (phone: string): boolean => {
+  static create(phone: string) {
+    if (!this._isValid(phone)) {
+      return { success: false, error: "Phone is required" }
+    }
+
+    return { success: true, data: new Phone(phone) }
+  }
+
+  private static _isValid(phone: string): boolean {
     return phone.startsWith("+")
   }
 }

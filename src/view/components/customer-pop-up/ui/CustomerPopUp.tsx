@@ -15,15 +15,14 @@ interface CustomerPopUpProps {
 interface CustomerFields<T> {
   key: keyof T
   label: string
-  type: "text" | "phone" | "email" | "date"
   editable: boolean
 }
 
 const customerFields: CustomerFields<Customer>[] = [
-  { key: "name", label: "Name", type: "text", editable: true },
-  { key: "phone", label: "Phone", type: "phone", editable: true },
-  { key: "email", label: "Email", type: "email", editable: true },
-  { key: "dateJoined", label: "Date Joined", type: "date", editable: false },
+  { key: "name", label: "Name", editable: true },
+  { key: "phone", label: "Phone", editable: true },
+  { key: "email", label: "Email", editable: true },
+  { key: "dateJoined", label: "Date Joined", editable: false },
 ]
 
 export const CustomerPopUp = ({
@@ -32,9 +31,7 @@ export const CustomerPopUp = ({
   onCustomerChange,
   errors,
 }: CustomerPopUpProps) => {
-  const [editedCustomer, setEditedCustomer] = useState<Customer>(() => ({
-    ...customer,
-  }))
+  const [editedCustomer, setEditedCustomer] = useState<Customer>(customer)
 
   const handleConfirm = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -73,7 +70,7 @@ export const CustomerPopUp = ({
                     !field.editable &&
                       styles["customer-pop-up__input--disabled"],
                   )}
-                  type={field.type}
+                  type="text"
                   value={String(editedCustomer[field.key])}
                   onChange={e => {
                     setEditedCustomer(prev => ({
