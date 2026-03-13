@@ -1,16 +1,18 @@
 @use "@/view/shared/styles/tokens/colors" as colors;
+@use "@/view/shared/styles/tokens/spacing" as spacing;
+@use "@/view/shared/styles/tokens/radius" as radius;
 @use "@/view/shared/styles/mixins/fonts" as fonts;
 @use "@/view/shared/styles/mixins/utils" as utils;
 
 .sidebar {
-  background-color: colors.$color-sidebar-bg;
-  color: colors.$color-text-inverse;
+  background-color: colors.$primary-25;
+  color: colors.$primary-100;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 320px;
-  border-radius: 16px;
-  padding: 16px;
+  border-radius: radius.$radius-5;
+  padding: spacing.$space-4;
   letter-spacing: 0.5px;
 
   &__header {
@@ -18,10 +20,10 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 12px;
-    gap: 16px;
-    padding: 16px;
+    gap: spacing.$space-4;
+    padding: spacing.$space-4;
     height: 72px;
-    background-color: colors.$color-sidebar-header-bg;
+    background-color: colors.$primary-30;
   }
 
   &__hello-text {
@@ -38,10 +40,10 @@
 
   &__divider {
     width: 100%;
-    background-color: rgba(colors.$color-divider, 0.32);
+    background-color: rgba(colors.$primary-100, 0.32);
     border: none;
     height: 1px;
-    margin: 16px 0;
+    margin: spacing.$space-4 spacing.$space-0;
   }
 
   &__nav {
@@ -53,20 +55,20 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    gap: 8px;
+    gap: spacing.$space-2;
   }
 
   &__link {
     @include utils.sidebar-hover-effect;
 
     display: flex;
-    padding: 12px;
-    gap: 8px;
+    padding: spacing.$space-3;
+    gap: spacing.$space-2;
     cursor: pointer;
     white-space: nowrap;
 
     &--active {
-      background-color: rgba(colors.$color-bg-active, 0.24);
+      background-color: rgba(colors.$primary-100, 0.24);
     }
   }
 
@@ -81,8 +83,8 @@
     width: 100%;
     background-color: transparent;
     display: flex;
-    gap: 8px;
-    padding: 12px;
+    gap: spacing.$space-2;
+    padding: spacing.$space-3;
     cursor: pointer;
     border: none;
   }

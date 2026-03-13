@@ -1,4 +1,3 @@
-@use "sass:color";
 @use "@/view/shared/styles/tokens/colors" as colors;
 @use "@/view/shared/styles/mixins/fonts" as fonts;
 
@@ -20,7 +19,7 @@
   }
 
   &__current-page {
-    border: 1px solid colors.$color-border;
+    border: 1px solid colors.$neutral-90;
     border-radius: 8px;
     transition: border-color ease-out 0.2s;
     width: 64px;
@@ -38,7 +37,7 @@
     }
 
     &:hover {
-      border-color: colors.$color-border-hover;
+      border-color: colors.$neutral-40;
     }
   }
 

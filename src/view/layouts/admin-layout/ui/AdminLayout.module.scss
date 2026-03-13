@@ -1,7 +1,9 @@
+@use "@/view/shared/styles/tokens/colors" as colors;
+
 .admin-layout {
   display: flex;
   height: 100vh;
   padding: 16px;
   gap: 8px;
-  background-color: #f3f2f0;
+  background-color: colors.$neutral-95;
 }

@@ -3,7 +3,7 @@ import styles from "./PopUp.module.scss"
 
 interface PopUpProps {
   children: ReactNode
-  onClose: (close: boolean) => void
+  onClose: () => void
 }
 
 export const PopUp = ({ children, onClose }: PopUpProps) => {
@@ -12,7 +12,7 @@ export const PopUp = ({ children, onClose }: PopUpProps) => {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
-        onClose(false)
+        onClose()
       }
     }
     document.addEventListener("mousedown", handleClickOutside)

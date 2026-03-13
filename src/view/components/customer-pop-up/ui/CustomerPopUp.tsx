@@ -7,8 +7,9 @@ import styles from "./CustomerPopUp.module.scss"
 
 interface CustomerPopUpProps {
   customer: Customer
-  onClose: (close: boolean) => void
+  onClose: () => void
   onCustomerChange: (customer: Customer) => void
+  errors: Partial<Record<keyof Customer, string>> | null
 }
 
 interface CustomerFields<T> {
@@ -29,34 +30,15 @@ export const CustomerPopUp = ({
   customer,
   onClose,
   onCustomerChange,
+  errors,
 }: CustomerPopUpProps) => {
-  const [editedCustomer, setEditedCustomer] = useState<Customer>(customer)
-  const [errors, setErrors] =
-    useState<Partial<Record<keyof Customer, string>>>()
+  const [editedCustomer, setEditedCustomer] = useState<Customer>(() => ({
+    ...customer,
+  }))
 
   const handleConfirm = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    const newErrors: Partial<Record<keyof Customer, string>> = {}
-
-    if (!editedCustomer.name.trim()) {
-      newErrors.name = "Name is required"
-    }
-
-    if (!editedCustomer.phone.startsWith("+")) {
-      newErrors.phone = 'The phone number should start with "+"'
-    }
-
-    if (!editedCustomer.email?.includes("@")) {
-      newErrors.email = 'The mail must contain "@"'
-    }
-
-    setErrors(newErrors)
-
-    if (Object.keys(newErrors).length > 0) return
-
     onCustomerChange(editedCustomer)
-    onClose(false)
   }
 
   return (
@@ -79,7 +61,7 @@ export const CustomerPopUp = ({
                 {field.label}
               </label>
               <div className={styles["customer-pop-up__wrapper"]}>
-                {errors && (
+                {errors && errors[field.key] && (
                   <span className={styles["customer-pop-up__error-text"]}>
                     {errors[field.key]}
                   </span>
@@ -91,7 +73,7 @@ export const CustomerPopUp = ({
                     !field.editable &&
                       styles["customer-pop-up__input--disabled"],
                   )}
-                  type="text"
+                  type={field.type}
                   value={String(editedCustomer[field.key])}
                   onChange={e => {
                     setEditedCustomer(prev => ({
@@ -107,7 +89,7 @@ export const CustomerPopUp = ({
         </ul>
 
         <div className={styles["customer-pop-up__actions"]}>
-          <ActionButton onClick={() => onClose(false)} color="warning">
+          <ActionButton onClick={() => onClose()} color="warning">
             Cancel
           </ActionButton>
           <ActionButton type="submit">Confirm</ActionButton>

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 
-import { CustomerPopUp } from "@/view/components/customer-pop-up"
 import { Search } from "@/view/primitives/search"
 import { Pagination } from "@/view/primitives/pagination"
 import { Table } from "@/view/primitives/table"
+import { CustomerPopUp } from "@/view/components/customer-pop-up"
 
 import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
 import type { Customer } from "@/domain/entities/Customer"
@@ -29,7 +29,11 @@ export const Customers = () => {
 
   const [selectedCustomer, setSelectedCustomer] = useState<Customer>()
   const [visibleCustomerPopUp, setVisibleCustomerPopUp] = useState(false)
+  const [validationErrors, setValidationErrors] = useState<Partial<
+    Record<keyof Customer, string>
+  > | null>({})
 
+  // Search and pagination logic.
   useEffect(() => {
     const loadCustomers = async () => {
       const result = await CustomersInteractor.getCustomers({
@@ -45,7 +49,6 @@ export const Customers = () => {
     void loadCustomers()
   }, [searchValue, currentPage, rowsCount])
 
-  // Search and pagination logic.
   const handleCurrentPage = (page: number) => setCurrentPage(page)
 
   const handleSearchValue = (search: string) => setSearchValue(search)
@@ -58,16 +61,25 @@ export const Customers = () => {
     setVisibleCustomerPopUp(true)
   }
 
-  const handleCloseCustomerPopUp = (visible: boolean) =>
-    setVisibleCustomerPopUp(visible)
+  const handleCloseCustomerPopUp = () => {
+    setValidationErrors({})
+    setVisibleCustomerPopUp(false)
+  }
 
   const handleUpdateCustomer = (updatedCustomer: Customer) => {
-    CustomersInteractor.updateCustomer(updatedCustomer)
+    const result = CustomersInteractor.updateCustomer(updatedCustomer)
+    if (!result.success) {
+      setValidationErrors(result.errors)
+      return
+    }
+
+    setValidationErrors({})
     setCustomers(prev =>
       prev.map(oldCustomer =>
         oldCustomer.id === updatedCustomer.id ? updatedCustomer : oldCustomer,
       ),
     )
+    setVisibleCustomerPopUp(false)
   }
 
   return (
@@ -77,6 +89,7 @@ export const Customers = () => {
           customer={selectedCustomer}
           onClose={handleCloseCustomerPopUp}
           onCustomerChange={handleUpdateCustomer}
+          errors={validationErrors}
         />
       )}
       <div className={styles["customers__controls"]}>

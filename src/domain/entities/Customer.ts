@@ -1,16 +1,20 @@
+import type { Name } from "@/domain/object-values/Name"
+import type { Phone } from "@/domain/object-values/Phone"
+import type { Email } from "@/domain/object-values/Email"
+
 export class Customer {
-  readonly id: number
-  name: string
-  phone: string
+  id: number
+  name: Name
+  phone: Phone
   dateJoined: string
-  email?: string
+  email?: Email
 
   constructor(
     id: number,
-    name: string,
-    phone: string,
+    name: Name,
+    phone: Phone,
     dateJoined: string,
-    email?: string,
+    email?: Email,
   ) {
     this.id = id
     this.name = name

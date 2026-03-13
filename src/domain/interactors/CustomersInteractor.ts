@@ -16,7 +16,8 @@ export class CustomersInteractor {
     const customers = await CustomersGateway.getCustomers()
 
     const filteredCustomers = customers.filter(customer => {
-      const searchField = customer.name + customer.phone + customer.email
+      const searchField =
+        String(customer.name) + customer.phone + customer.email
       return searchField.includes(searchQuery)
     })
 

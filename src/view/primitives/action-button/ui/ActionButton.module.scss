@@ -1,4 +1,3 @@
-@use "sass:color";
 @use "@/view/shared/styles/tokens/colors" as colors;
 
 .action-button {
@@ -9,7 +8,7 @@
   height: 48px;
   border-radius: 8px;
   cursor: pointer;
-  color: colors.$color-text-inverse;
+  color: colors.$primary-100;
   transition: background-color ease-out 0.3s;
 
   &--rect {
@@ -21,40 +20,31 @@
   }
 
   &--primary {
-    background-color: colors.$color-btn-primary;
+    background-color: colors.$primary-50;
 
     &:hover {
-      background-color: color.adjust(
-        colors.$color-btn-primary,
-        $lightness: -8%
-      );
+      background-color: colors.$primary-40;
     }
   }
 
   &--warning {
-    background-color: colors.$color-btn-warning;
+    background-color: colors.$tertiary-45;
 
     &:hover {
-      background-color: color.adjust(
-        colors.$color-btn-warning,
-        $lightness: -8%
-      );
+      background-color: colors.$tertiary-40;
     }
   }
 
   &--secondary {
-    background-color: colors.$color-btn-secondary;
+    background-color: colors.$neutral-95;
 
     &:hover {
-      background-color: color.adjust(
-        colors.$color-btn-secondary,
-        $lightness: -10%
-      );
+      background-color: colors.$neutral-90;
     }
   }
 
   &--disabled {
-    background-color: colors.$color-btn-secondary;
+    background-color: colors.$neutral-90;
     opacity: 0.5;
     cursor: not-allowed;
   }

@@ -6,11 +6,11 @@
   flex: 1;
   gap: 32px;
   padding: 32px;
-  background-color: colors.$color-bg-primary;
+  background-color: colors.$primary-100;
   border-radius: 16px;
   box-shadow:
-    -4px -4px 8px rgba(colors.$color-shadow, 0.04),
-    4px 4px 8px rgba(colors.$color-shadow, 0.04);
+    -4px -4px 8px rgb(colors.$primary-0, 0.04),
+    4px 4px 8px rgb(colors.$primary-0, 0.04);
 
   &__controls {
     display: flex;

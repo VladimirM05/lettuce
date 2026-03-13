@@ -1,5 +1,5 @@
-@use "sass:color";
 @use "@/view/shared/styles/tokens/colors" as colors;
+@use "@/view/shared/styles/tokens/spacing" as spacing;
 @use "@/view/shared/styles/mixins/fonts" as fonts;
 
 .table-wrapper {
@@ -17,9 +17,9 @@
   }
 
   &__header {
-    background-color: colors.$color-table-bg;
+    background-color: colors.$primary-95;
     border-radius: 8px;
-    padding: 16px 32px;
+    padding: spacing.$space-4 spacing.$space-8;
     display: grid;
     gap: 32px;
     margin-bottom: 8px;
@@ -28,14 +28,14 @@
   &__header-cell {
     @include fonts.font-regular;
 
-    color: colors.$color-text-on-primary;
+    color: colors.$primary-40;
     letter-spacing: 0.15px;
   }
 
   &__body {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: spacing.$space-2;
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -50,17 +50,17 @@
 
   &__body-row {
     min-height: 74px;
-    border: 1px solid colors.$color-border-muted;
+    border: 1px solid colors.$neutral-90;
     border-radius: 8px;
-    gap: 32px;
-    padding: 0 32px;
+    gap: spacing.$space-8;
+    padding: spacing.$space-0 spacing.$space-8;
     transition: border-color ease-out 0.2s;
     display: grid;
     align-items: center;
     cursor: pointer;
 
     &:hover {
-      border-color: colors.$color-border-hover;
+      border-color: colors.$neutral-40;
     }
   }
 
@@ -74,7 +74,7 @@
     z-index: 5;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: spacing.$space-8;
     align-items: center;
     position: absolute;
     left: 50%;
@@ -89,20 +89,17 @@
   &__scroll-button {
     z-index: 10;
     position: fixed;
-    background-color: colors.$color-btn-warning;
-    padding: 16px;
-    border-radius: 32px;
-    bottom: 48px;
-    right: 48px;
+    background-color: colors.$tertiary-45;
+    padding: spacing.$space-4;
+    border-radius: spacing.$space-8;
+    bottom: spacing.$space-12;
+    right: spacing.$space-12;
     cursor: pointer;
     transition: all ease-out 0.2s;
     opacity: 0;
 
     &:hover {
-      background-color: color.adjust(
-        colors.$color-btn-warning,
-        $lightness: -8%
-      );
+      background-color: colors.$tertiary-40;
     }
 
     &--visible {
