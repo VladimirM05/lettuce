@@ -1,6 +1,7 @@
 @mixin font-regular {
   font-weight: 400;
   line-height: 24px;
+  letter-spacing: 0.15px;
 }
 
 @mixin font-medium {
