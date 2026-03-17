@@ -2,23 +2,24 @@ import { type SyntheticEvent, useState } from "react"
 import clsx from "clsx"
 import { PopUp } from "@/view/primitives/pop-up"
 import { ActionButton } from "@/view/primitives/action-button"
-import type { Customer } from "@/domain/entities/Customer"
+import type { Customer } from "@/model/entities/Customer"
+import type { CustomerDTO } from "@/model/dto/customerDTO"
 import styles from "./CustomerPopUp.module.scss"
 
 interface CustomerPopUpProps {
   customer: Customer
   onClose: () => void
-  onCustomerChange: (customer: Customer) => void
+  onCustomerChange: (customer: CustomerDTO) => void
   errors: Partial<Record<keyof Customer, string>> | null
 }
 
-interface CustomerFields<T> {
-  key: keyof T
+interface CustomerFields {
+  key: keyof CustomerDTO
   label: string
   editable: boolean
 }
 
-const customerFields: CustomerFields<Customer>[] = [
+const customerFields: CustomerFields[] = [
   { key: "name", label: "Name", editable: true },
   { key: "phone", label: "Phone", editable: true },
   { key: "email", label: "Email", editable: true },
@@ -31,7 +32,13 @@ export const CustomerPopUp = ({
   onCustomerChange,
   errors,
 }: CustomerPopUpProps) => {
-  const [editedCustomer, setEditedCustomer] = useState<Customer>(customer)
+  const [editedCustomer, setEditedCustomer] = useState<CustomerDTO>({
+    id: customer.id,
+    name: customer.name.name,
+    phone: customer.phone.phone,
+    email: customer.email?.email ?? null,
+    dateJoined: customer.dateJoined,
+  })
 
   const handleConfirm = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -47,13 +54,10 @@ export const CustomerPopUp = ({
 
         <ul className={styles["customer-pop-up__list"]}>
           {customerFields.map(field => (
-            <li
-              className={styles["customer-pop-up__item"]}
-              key={String(field.key)}
-            >
+            <li className={styles["customer-pop-up__item"]} key={field.key}>
               <label
                 className={styles["customer-pop-up__label"]}
-                htmlFor={String(field.key)}
+                htmlFor={field.key}
               >
                 {field.label}
               </label>
@@ -64,14 +68,14 @@ export const CustomerPopUp = ({
                   </span>
                 )}
                 <input
-                  id={String(field.key)}
+                  id={field.key}
                   className={clsx(
                     styles["customer-pop-up__input"],
                     !field.editable &&
                       styles["customer-pop-up__input--disabled"],
                   )}
                   type="text"
-                  value={String(editedCustomer[field.key])}
+                  value={editedCustomer[field.key] || ""}
                   onChange={e => {
                     setEditedCustomer(prev => ({
                       ...prev,

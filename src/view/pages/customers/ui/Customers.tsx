@@ -6,9 +6,10 @@ import { Table } from "@/view/primitives/table"
 import { CustomerPopUp } from "@/view/components/customer-pop-up"
 
 import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
-import type { Customer } from "@/domain/entities/Customer"
+import type { Customer } from "@/model/entities/Customer"
 
-import { CustomersInteractor } from "@/domain/interactors/CustomersInteractor"
+import type { CustomerDTO } from "@/model/dto/customerDTO"
+import { CustomersInteractor } from "@/model/interactors/CustomersInteractor"
 
 import styles from "./Customers.module.scss"
 
@@ -18,6 +19,8 @@ const customerColumns: TableColumn<Customer>[] = [
   { key: "email", title: "Email", searchable: true },
   { key: "dateJoined", title: "Date Joined", searchable: false },
 ]
+
+const customersInteractor = new CustomersInteractor()
 
 export const Customers = () => {
   const [customers, setCustomers] = useState<Customer[]>([])
@@ -36,7 +39,7 @@ export const Customers = () => {
   // Search and pagination logic.
   useEffect(() => {
     const loadCustomers = async () => {
-      const result = await CustomersInteractor.getCustomers({
+      const result = await customersInteractor.getCustomers({
         searchQuery: searchValue,
         currentPage: currentPage,
         rowsCount: rowsCount,
@@ -66,17 +69,21 @@ export const Customers = () => {
     setVisibleCustomerPopUp(false)
   }
 
-  const handleUpdateCustomer = (updatedCustomer: Customer) => {
-    const result = CustomersInteractor.updateCustomer(updatedCustomer)
+  const handleUpdateCustomer = (updatedCustomer: CustomerDTO) => {
+    const result = customersInteractor.updateCustomer(updatedCustomer)
     if (!result.success) {
       setValidationErrors(result.errors)
       return
     }
 
+    const newCustomer = result.data
+
     setValidationErrors({})
     setCustomers(prev =>
       prev.map(oldCustomer =>
-        oldCustomer.id === updatedCustomer.id ? updatedCustomer : oldCustomer,
+        newCustomer && oldCustomer.id === newCustomer.id
+          ? newCustomer
+          : oldCustomer,
       ),
     )
     setVisibleCustomerPopUp(false)

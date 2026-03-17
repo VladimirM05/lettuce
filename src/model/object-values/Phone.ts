@@ -1,3 +1,5 @@
+type CreatePhoneParams = {}
+
 export class Phone {
   private readonly _phone: string
 
@@ -9,7 +11,7 @@ export class Phone {
     this._phone = phone
   }
 
-  static create(phone: string) {
+  static create(phone: string): CreatePhoneParams {
     if (!this._isValid(phone)) {
       return { success: false, error: "Phone is required" }
     }

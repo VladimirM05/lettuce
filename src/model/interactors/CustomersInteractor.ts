@@ -1,8 +1,9 @@
-import { Customer } from "@/domain/entities/Customer"
+import { Customer } from "@/model/entities/Customer"
 import { CustomersGateway } from "@/dal/gateways/CustomersGateway"
-import { Name } from "@/domain/object-values/Name"
-import { Phone } from "@/domain/object-values/Phone"
-import { Email } from "@/domain/object-values/Email"
+import { Name } from "@/model/object-values/Name"
+import { Phone } from "@/model/object-values/Phone"
+import { Email } from "@/model/object-values/Email"
+import type { CustomerDTO } from "@/model/dto/customerDTO"
 
 type GetCustomersParams = {
   searchQuery: string
@@ -10,13 +11,21 @@ type GetCustomersParams = {
   rowsCount: number
 }
 
+type UpdateCustomerParams = {
+  success: boolean
+  data: Customer | null
+  errors: Partial<Record<keyof Customer, string>> | null
+}
+
+const customersGateway = new CustomersGateway()
+
 export class CustomersInteractor {
-  static getCustomers = async ({
+  async getCustomers({
     searchQuery,
     currentPage,
     rowsCount,
-  }: GetCustomersParams) => {
-    const customers = await CustomersGateway.getCustomers()
+  }: GetCustomersParams) {
+    const customers = await customersGateway.getCustomers()
 
     const filteredCustomers = customers.filter(customer => {
       const searchField =
@@ -35,20 +44,20 @@ export class CustomersInteractor {
     return { slicedCustomers, totalPages }
   }
 
-  static updateCustomer(customer: Customer) {
+  updateCustomer(customer: CustomerDTO): UpdateCustomerParams {
     const errors: Partial<Record<keyof Customer, string>> = {}
 
-    const nameResult = Name.create(String(customer.name))
+    const nameResult = Name.create(customer.name)
     if (!nameResult.success) errors.name = nameResult.error
 
-    const phoneResult = Phone.create(String(customer.phone))
+    const phoneResult = Phone.create(customer.phone)
     if (!phoneResult.success) errors.phone = phoneResult.error
 
-    const emailResult = Email.create(String(customer.email))
+    const emailResult = Email.create(customer.email ?? "")
     if (!emailResult.success) errors.email = emailResult.error
 
-    if (Object.keys(errors).length > 0) {
-      return { success: false, errors: errors }
+    if (!nameResult.data || !phoneResult.data || !emailResult.data) {
+      return { success: false, data: null, errors: errors }
     }
 
     const newCustomer = new Customer(
@@ -59,8 +68,8 @@ export class CustomersInteractor {
       emailResult.data,
     )
 
-    CustomersGateway.updateCustomer(newCustomer)
+    customersGateway.updateCustomer(newCustomer)
 
-    return { success: true, errors: {} }
+    return { success: true, data: newCustomer, errors: null }
   }
 }

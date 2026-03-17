@@ -1,6 +1,6 @@
-import type { Name } from "@/domain/object-values/Name"
-import type { Phone } from "@/domain/object-values/Phone"
-import type { Email } from "@/domain/object-values/Email"
+import type { Name } from "@/model/object-values/Name"
+import type { Phone } from "@/model/object-values/Phone"
+import type { Email } from "@/model/object-values/Email"
 
 export class Customer {
   private readonly _id: string
