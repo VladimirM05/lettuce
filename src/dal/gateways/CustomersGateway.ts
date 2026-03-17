@@ -2,23 +2,16 @@ import { Customer } from "@/model/entities/Customer"
 import { Name } from "@/model/object-values/Name"
 import { Phone } from "@/model/object-values/Phone"
 import { Email } from "@/model/object-values/Email"
-
-type CustomerDTO = {
-  id: string
-  name: string
-  phone: string
-  email: string | null
-  dateJoined: string
-}
+import type { CustomerDTO } from "@/model/dto/customerDTO"
 
 type CustomersResponse = {
   data: CustomerDTO[]
 }
 
 export class CustomersGateway {
-  private _customers: Customer[] = []
+  private static _customers: Customer[] = []
 
-  async getCustomers(): Promise<Customer[]> {
+  static async getCustomers(): Promise<Customer[]> {
     if (this._customers.length === 0) {
       const response = await fetch("/mock-customers.json")
       const data: CustomersResponse = await response.json()
@@ -29,7 +22,7 @@ export class CustomersGateway {
           const phoneResult = Phone.create(customer.phone)
           const emailResult = Email.create(customer.email ?? "")
 
-          if (!nameResult.data ?? !phoneResult.data ?? !emailResult.data) {
+          if (!nameResult.data || !phoneResult.data || !emailResult.data) {
             return null
           }
 
@@ -47,8 +40,10 @@ export class CustomersGateway {
     return this._customers
   }
 
-  updateCustomer(customer: Customer): void {
-    const index = this._customers.findIndex(c => c.id === customer.id)
+  static updateCustomer(customer: Customer): void {
+    const index = this._customers.findIndex(
+      oldCustomer => oldCustomer.id === customer.id,
+    )
 
     if (index !== -1) {
       this._customers[index] = customer

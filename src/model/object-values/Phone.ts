@@ -1,4 +1,8 @@
-type CreatePhoneParams = {}
+type CreatePhoneParams = {
+  success: boolean
+  data?: Phone
+  error?: string
+}
 
 export class Phone {
   private readonly _phone: string
@@ -9,6 +13,10 @@ export class Phone {
 
   private constructor(phone: string) {
     this._phone = phone
+  }
+
+  toString(): string {
+    return this._phone
   }
 
   static create(phone: string): CreatePhoneParams {

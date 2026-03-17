@@ -25,7 +25,7 @@ export class Customer {
     return this._dateJoined
   }
 
-  get email(): Email | null {
+  get email(): Email {
     return this._email
   }
 

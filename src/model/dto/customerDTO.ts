@@ -1,4 +1,4 @@
-export interface CustomerDTO {
+export type CustomerDTO = {
   id: string
   name: string
   phone: string

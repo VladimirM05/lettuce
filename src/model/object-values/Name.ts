@@ -7,11 +7,15 @@ type CreateNameParams = {
 export class Name {
   private readonly _name: string
 
+  get name(): string {
+    return this._name
+  }
+
   private constructor(name: string) {
     this._name = name
   }
 
-  get name(): string {
+  toString(): string {
     return this._name
   }
 

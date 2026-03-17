@@ -9,9 +9,9 @@ import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
 import type { Customer } from "@/model/entities/Customer"
 
 import type { CustomerDTO } from "@/model/dto/customerDTO"
-import { CustomersInteractor } from "@/model/interactors/CustomersInteractor"
 
 import styles from "./Customers.module.scss"
+import { CustomersInteractor } from "@/model/interactors/CustomersInteractor"
 
 const customerColumns: TableColumn<Customer>[] = [
   { key: "name", title: "Name", searchable: true },
@@ -19,8 +19,6 @@ const customerColumns: TableColumn<Customer>[] = [
   { key: "email", title: "Email", searchable: true },
   { key: "dateJoined", title: "Date Joined", searchable: false },
 ]
-
-const customersInteractor = new CustomersInteractor()
 
 export const Customers = () => {
   const [customers, setCustomers] = useState<Customer[]>([])
@@ -39,7 +37,7 @@ export const Customers = () => {
   // Search and pagination logic.
   useEffect(() => {
     const loadCustomers = async () => {
-      const result = await customersInteractor.getCustomers({
+      const result = await CustomersInteractor.getCustomers({
         searchQuery: searchValue,
         currentPage: currentPage,
         rowsCount: rowsCount,
@@ -70,7 +68,7 @@ export const Customers = () => {
   }
 
   const handleUpdateCustomer = (updatedCustomer: CustomerDTO) => {
-    const result = customersInteractor.updateCustomer(updatedCustomer)
+    const result = CustomersInteractor.updateCustomer(updatedCustomer)
     if (!result.success) {
       setValidationErrors(result.errors)
       return

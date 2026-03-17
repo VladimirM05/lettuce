@@ -15,6 +15,10 @@ export class Email {
     this._email = email
   }
 
+  toString(): string | null {
+    return this._email
+  }
+
   static create(email: string | null): CreateEmailParams {
     if (email && !this._isValid(email)) {
       return { success: false, error: "email is required" }

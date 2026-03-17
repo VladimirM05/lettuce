@@ -17,15 +17,13 @@ type UpdateCustomerParams = {
   errors: Partial<Record<keyof Customer, string>> | null
 }
 
-const customersGateway = new CustomersGateway()
-
 export class CustomersInteractor {
-  async getCustomers({
+  static async getCustomers({
     searchQuery,
     currentPage,
     rowsCount,
   }: GetCustomersParams) {
-    const customers = await customersGateway.getCustomers()
+    const customers = await CustomersGateway.getCustomers()
 
     const filteredCustomers = customers.filter(customer => {
       const searchField =
@@ -44,7 +42,7 @@ export class CustomersInteractor {
     return { slicedCustomers, totalPages }
   }
 
-  updateCustomer(customer: CustomerDTO): UpdateCustomerParams {
+  static updateCustomer(customer: CustomerDTO): UpdateCustomerParams {
     const errors: Partial<Record<keyof Customer, string>> = {}
 
     const nameResult = Name.create(customer.name)
@@ -68,7 +66,7 @@ export class CustomersInteractor {
       emailResult.data,
     )
 
-    customersGateway.updateCustomer(newCustomer)
+    CustomersGateway.updateCustomer(newCustomer)
 
     return { success: true, data: newCustomer, errors: null }
   }
