@@ -1,6 +1,6 @@
 import { lazy } from "react"
 import { createBrowserRouter, Navigate } from "react-router-dom"
-import { AdminLayout } from "@/view/layouts/admin-layout"
+import AdminLayout from "@/view/layouts/admin-layout"
 
 const Users = lazy(() => import("@/view/pages/users"))
 const Customers = lazy(() => import("@/view/pages/customers"))

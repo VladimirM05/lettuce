@@ -1,12 +1,12 @@
 import { type ReactNode, useEffect, useRef } from "react"
-import styles from "./PopUp.module.scss"
+import styles from "./index.module.scss"
 
 interface PopUpProps {
   children: ReactNode
   onClose: () => void
 }
 
-export const PopUp = ({ children, onClose }: PopUpProps) => {
+const PopUp = ({ children, onClose }: PopUpProps) => {
   const ref = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -28,3 +28,5 @@ export const PopUp = ({ children, onClose }: PopUpProps) => {
     </section>
   )
 }
+
+export default PopUp

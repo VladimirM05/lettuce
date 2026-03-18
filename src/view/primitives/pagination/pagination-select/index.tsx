@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import clsx from "clsx"
-import PaginationSelectIcon from "./icons/ArrowDown.svg?react"
-import styles from "./PaginationSelect.module.scss"
+import PaginationSelectIcon from "../icons/ArrowDown.svg?react"
+import styles from "./index.module.scss"
 
 interface PaginationSelectProps {
   rowsCount: number
@@ -11,7 +11,7 @@ interface PaginationSelectProps {
 
 const options: readonly number[] = [10, 50, 100]
 
-export const PaginationSelect = ({
+const PaginationSelect = ({
   rowsCount,
   onChange,
   onCurrentPageChange,
@@ -69,3 +69,5 @@ export const PaginationSelect = ({
     </div>
   )
 }
+
+export default PaginationSelect

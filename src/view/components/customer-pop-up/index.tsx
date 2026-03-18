@@ -1,10 +1,10 @@
 import { type SyntheticEvent, useState } from "react"
 import clsx from "clsx"
-import { PopUp } from "@/view/primitives/pop-up"
-import { ActionButton } from "@/view/primitives/action-button"
+import PopUp from "@/view/primitives/pop-up"
+import ActionButton from "@/view/primitives/action-button"
 import type { Customer } from "@/model/entities/Customer"
 import type { CustomerDTO } from "@/model/dto/customerDTO"
-import styles from "./CustomerPopUp.module.scss"
+import styles from "./index.module.scss"
 
 interface CustomerPopUpProps {
   customer: Customer
@@ -26,7 +26,7 @@ const customerFields: CustomerFields[] = [
   { key: "dateJoined", label: "Date Joined", editable: false },
 ]
 
-export const CustomerPopUp = ({
+const CustomerPopUp = ({
   customer,
   onClose,
   onCustomerChange,
@@ -99,3 +99,5 @@ export const CustomerPopUp = ({
     </PopUp>
   )
 }
+
+export default CustomerPopUp

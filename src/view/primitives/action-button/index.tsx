@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import type { ReactNode } from "react"
-import styles from "./ActionButton.module.scss"
+import styles from "./index.module.scss"
 
 interface ActionButtonProps {
   type?: "submit" | "button"
@@ -12,7 +12,7 @@ interface ActionButtonProps {
   disabled?: boolean
 }
 
-export const ActionButton = ({
+const ActionButton = ({
   type = "button",
   color = "primary",
   shape = "rect",
@@ -39,3 +39,5 @@ export const ActionButton = ({
     </button>
   )
 }
+
+export default ActionButton

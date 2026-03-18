@@ -11,7 +11,7 @@ import PlansIcon from "./icons/Plans.svg?react"
 import SubscriptionsIcon from "./icons/Subscriptions.svg?react"
 import SignoutIcon from "./icons/Signout.svg?react"
 
-import styles from "./Sidebar.module.scss"
+import styles from "./index.module.scss"
 
 type AdminRoute =
   | "users"
@@ -36,7 +36,7 @@ const navItems: NavItem[] = [
   { icon: SubscriptionsIcon, path: "subscriptions", text: "Subscriptions" },
 ]
 
-export const Sidebar = () => {
+const Sidebar = () => {
   return (
     <aside className={styles["sidebar"]}>
       <header className={styles["sidebar__header"]}>
@@ -78,3 +78,5 @@ export const Sidebar = () => {
     </aside>
   )
 }
+
+export default Sidebar

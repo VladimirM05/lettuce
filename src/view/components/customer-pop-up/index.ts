@@ -1,1 +1,0 @@
-export { CustomerPopUp } from "./CustomerPopUp"

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import clsx from "clsx"
-import NoResultsIcon from "./NoResults.svg?react"
-import ArrowUpIcon from "./ArrowUp.svg?react"
-import styles from "./Table.module.scss"
+import NoResultsIcon from "./icons/NoResults.svg?react"
+import ArrowUpIcon from "./icons/ArrowUp.svg?react"
+import styles from "./index.module.scss"
 
 interface TableColumn<T> {
   key: keyof T
@@ -16,11 +16,7 @@ interface TableProps<T> {
   onSelectedRowChange: (selectedRow: T) => void
 }
 
-export const Table = <T,>({
-  columns,
-  data,
-  onSelectedRowChange,
-}: TableProps<T>) => {
+const Table = <T,>({ columns, data, onSelectedRowChange }: TableProps<T>) => {
   const [visibleScrollButton, setVisibleScrollButton] = useState<boolean>(false)
   const ref = useRef<HTMLTableSectionElement | null>(null)
 
@@ -109,3 +105,5 @@ export const Table = <T,>({
     </div>
   )
 }
+
+export default Table

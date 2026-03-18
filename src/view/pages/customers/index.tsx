@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
 
-import { Search } from "@/view/primitives/search"
-import { Pagination } from "@/view/primitives/pagination"
-import { Table } from "@/view/primitives/table"
-import { CustomerPopUp } from "@/view/components/customer-pop-up"
+import Search from "@/view/primitives/search"
+import Pagination from "@/view/primitives/pagination"
+import Table from "@/view/primitives/table"
+import CustomerPopUp from "@/view/components/customer-pop-up"
 
 import type { Customer } from "@/model/entities/Customer"
 import type { CustomerDTO } from "@/model/dto/customerDTO"
 
 import { CustomersInteractor } from "@/model/interactors/CustomersInteractor"
 
-import styles from "./Customers.module.scss"
+import styles from "./index.module.scss"
 
 interface TableColumn {
   key: keyof Customer
@@ -25,7 +25,7 @@ const customerColumns: TableColumn[] = [
   { key: "dateJoined", title: "Date Joined", searchable: false },
 ]
 
-export const Customers = () => {
+const Customers = () => {
   const [customers, setCustomers] = useState<Customer[]>([])
 
   const [currentPage, setCurrentPage] = useState(1)
@@ -79,7 +79,7 @@ export const Customers = () => {
       return
     }
 
-    const newCustomer = result.data
+    const newCustomer: Customer | null = result.data
 
     setValidationErrors({})
     setCustomers(prev =>
@@ -123,3 +123,5 @@ export const Customers = () => {
     </section>
   )
 }
+
+export default Customers

@@ -1,8 +1,8 @@
 import * as React from "react"
 import { useState } from "react"
 
-import { ActionButton } from "@/view/primitives/action-button"
-import { PaginationSelect } from "./PaginationSelect"
+import ActionButton from "@/view/primitives/action-button"
+import PaginationSelect from "./pagination-select"
 
 import RefreshIcon from "./icons/Refresh.svg?react"
 import FirstIcon from "./icons/First.svg?react"
@@ -10,7 +10,7 @@ import ArrowLeftIcon from "./icons/ArrowLeft.svg?react"
 import ArrowRightIcon from "./icons/ArrowRight.svg?react"
 import LastIcon from "./icons/Last.svg?react"
 
-import styles from "./Pagination.module.scss"
+import styles from "./index.module.scss"
 
 interface PaginationProps {
   rowsCount: number
@@ -20,7 +20,7 @@ interface PaginationProps {
   onCurrentPageChange: (value: number) => void
 }
 
-export const Pagination = ({
+const Pagination = ({
   rowsCount,
   currentPage,
   totalPages,
@@ -97,3 +97,5 @@ export const Pagination = ({
     </div>
   )
 }
+
+export default Pagination

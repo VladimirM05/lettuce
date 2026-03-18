@@ -1,19 +1,16 @@
 import { useState } from "react"
 import clsx from "clsx"
-import { ActionButton } from "@/view/primitives/action-button"
-import SearchIcon from "./Search.svg?react"
-import CrossIcon from "./Cross.svg?react"
-import styles from "./Search.module.scss"
+import ActionButton from "@/view/primitives/action-button"
+import SearchIcon from "./icons/Search.svg?react"
+import CrossIcon from "./icons/Cross.svg?react"
+import styles from "./index.module.scss"
 
 interface SearchProps {
   onSearchValueChange: (value: string) => void
   onCurrentPageChange: (page: number) => void
 }
 
-export const Search = ({
-  onSearchValueChange,
-  onCurrentPageChange,
-}: SearchProps) => {
+const Search = ({ onSearchValueChange, onCurrentPageChange }: SearchProps) => {
   const [inputValue, setInputValue] = useState("")
 
   return (
@@ -25,7 +22,7 @@ export const Search = ({
           value={inputValue}
           onChange={e => setInputValue(e.target.value)}
           onKeyDown={e => e.key === "Enter" && onSearchValueChange(inputValue)}
-          placeholder="Search"
+          placeholder="Index"
           type="text"
         />
         {inputValue && (
@@ -47,8 +44,10 @@ export const Search = ({
           onCurrentPageChange(1)
         }}
       >
-        Search
+        Index
       </ActionButton>
     </div>
   )
 }
+
+export default Search
