@@ -4,12 +4,12 @@ import clsx from "clsx"
 import type { ComponentType, SVGProps } from "react"
 
 import LogoIcon from "@/view/shared/icons/Logo.svg?react"
-import UsersIcon from "../icons/Users.svg?react"
-import CustomersIcon from "../icons/Customers.svg?react"
-import ScheduledIcon from "../icons/Scheduled.svg?react"
-import PlansIcon from "../icons/Plans.svg?react"
-import SubscriptionsIcon from "../icons/Subscriptions.svg?react"
-import SignoutIcon from "../icons/Signout.svg?react"
+import UsersIcon from "./icons/Users.svg?react"
+import CustomersIcon from "./icons/Customers.svg?react"
+import ScheduledIcon from "./icons/Scheduled.svg?react"
+import PlansIcon from "./icons/Plans.svg?react"
+import SubscriptionsIcon from "./icons/Subscriptions.svg?react"
+import SignoutIcon from "./icons/Signout.svg?react"
 
 import styles from "./Sidebar.module.scss"
 

@@ -1,1 +1,1 @@
-export { AdminLayout } from "./ui/AdminLayout.tsx"
+export { AdminLayout } from "./AdminLayout.tsx"
