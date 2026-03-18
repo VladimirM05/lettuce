@@ -1,33 +1,22 @@
-type CreatePhoneParams = {
-  success: boolean
-  data?: Phone
-  error?: string
-}
-
 export class Phone {
-  private readonly _phone: string
+  private readonly value: string
 
   get phone(): string {
-    return this._phone
+    return this.value
   }
 
-  private constructor(phone: string) {
-    this._phone = phone
+  constructor(phone: string) {
+    if (!Phone.isValid(phone)) {
+      throw new Error("Phone is required")
+    }
+    this.value = phone
   }
 
   toString(): string {
-    return this._phone
+    return this.value
   }
 
-  static create(phone: string): CreatePhoneParams {
-    if (!this._isValid(phone)) {
-      return { success: false, error: "Phone is required" }
-    }
-
-    return { success: true, data: new Phone(phone) }
-  }
-
-  private static _isValid(phone: string): boolean {
+  private static isValid(phone: string): boolean {
     return phone.startsWith("+")
   }
 }

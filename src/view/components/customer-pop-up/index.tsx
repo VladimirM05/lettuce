@@ -2,19 +2,21 @@ import { type SyntheticEvent, useState } from "react"
 import clsx from "clsx"
 import PopUp from "@/view/primitives/pop-up"
 import ActionButton from "@/view/primitives/action-button"
-import type { Customer } from "@/model/entities/Customer"
-import type { CustomerDTO } from "@/model/dto/customerDTO"
+import { Customer } from "@/model/entities/Customer"
+import { Name } from "@/model/object-values/Name"
+import { Phone } from "@/model/object-values/Phone"
+import { Email } from "@/model/object-values/Email"
 import styles from "./index.module.scss"
 
 interface CustomerPopUpProps {
   customer: Customer
   onClose: () => void
-  onCustomerChange: (customer: CustomerDTO) => void
+  onCustomerChange: (customer: Customer) => void
   errors: Partial<Record<keyof Customer, string>> | null
 }
 
 interface CustomerFields {
-  key: keyof CustomerDTO
+  key: keyof Customer
   label: string
   editable: boolean
 }
@@ -32,17 +34,24 @@ const CustomerPopUp = ({
   onCustomerChange,
   errors,
 }: CustomerPopUpProps) => {
-  const [editedCustomer, setEditedCustomer] = useState<CustomerDTO>({
-    id: customer.id,
-    name: customer.name.name,
-    phone: customer.phone.phone,
-    email: customer.email?.email ?? null,
-    dateJoined: customer.dateJoined,
-  })
+  const [editedCustomer, setEditedCustomer] = useState<Customer>(customer)
 
   const handleConfirm = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
     onCustomerChange(editedCustomer)
+  }
+
+  const handleChange = (fieldKey: string, value: string) => {
+    setEditedCustomer(
+      prev =>
+        new Customer(
+          prev.id,
+          fieldKey === "name" ? new Name(value) : prev.name,
+          fieldKey === "phone" ? new Phone(value) : prev.phone,
+          prev.dateJoined,
+          fieldKey === "email" ? new Email(value) : prev.email,
+        ),
+    )
   }
 
   return (
@@ -75,13 +84,8 @@ const CustomerPopUp = ({
                       styles["customer-pop-up__input--disabled"],
                   )}
                   type="text"
-                  value={editedCustomer[field.key] || ""}
-                  onChange={e => {
-                    setEditedCustomer(prev => ({
-                      ...prev,
-                      [field.key]: e.target.value,
-                    }))
-                  }}
+                  value={String(editedCustomer[field.key])}
+                  onChange={e => handleChange(field.key, e.target.value)}
                   disabled={!field.editable}
                 />
               </div>

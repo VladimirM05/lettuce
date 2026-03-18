@@ -1,20 +1,10 @@
 import { Customer } from "@/model/entities/Customer"
 import { CustomersGateway } from "@/dal/gateways/CustomersGateway"
-import { Name } from "@/model/object-values/Name"
-import { Phone } from "@/model/object-values/Phone"
-import { Email } from "@/model/object-values/Email"
-import type { CustomerDTO } from "@/model/dto/customerDTO"
 
 type GetCustomersParams = {
   searchQuery: string
   currentPage: number
   rowsCount: number
-}
-
-type UpdateCustomerParams = {
-  success: boolean
-  data: Customer | null
-  errors: Partial<Record<keyof Customer, string>> | null
 }
 
 export class CustomersInteractor {
@@ -42,32 +32,7 @@ export class CustomersInteractor {
     return { slicedCustomers, totalPages }
   }
 
-  static updateCustomer(customer: CustomerDTO): UpdateCustomerParams {
-    const errors: Partial<Record<keyof Customer, string>> = {}
-
-    const nameResult = Name.create(customer.name)
-    if (!nameResult.success) errors.name = nameResult.error
-
-    const phoneResult = Phone.create(customer.phone)
-    if (!phoneResult.success) errors.phone = phoneResult.error
-
-    const emailResult = Email.create(customer.email ?? "")
-    if (!emailResult.success) errors.email = emailResult.error
-
-    if (!nameResult.data || !phoneResult.data || !emailResult.data) {
-      return { success: false, data: null, errors: errors }
-    }
-
-    const newCustomer = new Customer(
-      customer.id,
-      nameResult.data,
-      phoneResult.data,
-      customer.dateJoined,
-      emailResult.data,
-    )
-
-    CustomersGateway.updateCustomer(newCustomer)
-
-    return { success: true, data: newCustomer, errors: null }
+  static updateCustomer(customer: Customer): void {
+    CustomersGateway.updateCustomer(customer)
   }
 }

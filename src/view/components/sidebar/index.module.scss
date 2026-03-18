@@ -4,7 +4,7 @@
 
 .sidebar {
   background-color: colors.$primary-25;
-  color: colors.$primary-100;
+  color: colors.$neutral-100;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -38,7 +38,7 @@
 
   &__divider {
     width: 100%;
-    background-color: rgba(colors.$primary-100, 0.32);
+    background-color: rgba(colors.$neutral-100, 0.32);
     border: none;
     height: 1px;
     margin: 16px 0;
@@ -66,7 +66,7 @@
     white-space: nowrap;
 
     &--active {
-      background-color: rgba(colors.$primary-100, 0.24);
+      background-color: rgba(colors.$neutral-100, 0.24);
     }
   }
 

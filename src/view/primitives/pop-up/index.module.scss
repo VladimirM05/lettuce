@@ -7,8 +7,8 @@
   width: 100vw;
   left: 0;
   top: 0;
-  background-color: rgba(colors.$primary-0, 0.1);
-  backdrop-filter: blur(5px);
+  background-color: rgba(colors.$neutral-0, 0.1);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,10 +17,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: colors.$primary-100;
-    border-radius: 24px;
+    background-color: colors.$neutral-100;
+    border-radius: 16px;
     box-shadow:
-      -4px -4px 8px rgba(colors.$primary-0, 0.04),
-      4px 4px 8px rgba(colors.$primary-0, 0.04);
+      -4px -4px 8px rgba(colors.$neutral-0, 0.04),
+      4px 4px 8px rgba(colors.$neutral-0, 0.04);
   }
 }

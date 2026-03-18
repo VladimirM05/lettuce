@@ -3,30 +3,36 @@ import type { Phone } from "@/model/object-values/Phone"
 import type { Email } from "@/model/object-values/Email"
 
 export class Customer {
-  private readonly _id: string
-  private readonly _name: Name
-  private readonly _phone: Phone
-  private readonly _dateJoined: string
-  private readonly _email: Email
+  private readonly idValue: string
+  private nameValue: Name
+  private phoneValue: Phone
+  private readonly dateJoinedValue: string
+  private emailValue: Email
 
   get id(): string {
-    return this._id
+    return this.idValue
   }
-
   get name(): Name {
-    return this._name
+    return this.nameValue
   }
-
   get phone(): Phone {
-    return this._phone
+    return this.phoneValue
   }
-
   get dateJoined(): string {
-    return this._dateJoined
+    return this.dateJoinedValue
+  }
+  get email(): Email {
+    return this.emailValue
   }
 
-  get email(): Email {
-    return this._email
+  set name(name: Name) {
+    this.nameValue = name
+  }
+  set phone(phone: Phone) {
+    this.phoneValue = phone
+  }
+  set email(email: Email) {
+    this.emailValue = email
   }
 
   constructor(
@@ -36,10 +42,10 @@ export class Customer {
     dateJoined: string,
     email: Email,
   ) {
-    this._id = id
-    this._name = name
-    this._phone = phone
-    this._dateJoined = dateJoined
-    this._email = email
+    this.idValue = id
+    this.nameValue = name
+    this.phoneValue = phone
+    this.dateJoinedValue = dateJoined
+    this.emailValue = email
   }
 }

@@ -6,8 +6,6 @@ import Table from "@/view/primitives/table"
 import CustomerPopUp from "@/view/components/customer-pop-up"
 
 import type { Customer } from "@/model/entities/Customer"
-import type { CustomerDTO } from "@/model/dto/customerDTO"
-
 import { CustomersInteractor } from "@/model/interactors/CustomersInteractor"
 
 import styles from "./index.module.scss"
@@ -72,20 +70,13 @@ const Customers = () => {
     setVisibleCustomerPopUp(false)
   }
 
-  const handleUpdateCustomer = (updatedCustomer: CustomerDTO) => {
-    const result = CustomersInteractor.updateCustomer(updatedCustomer)
-    if (!result.success) {
-      setValidationErrors(result.errors)
-      return
-    }
-
-    const newCustomer: Customer | null = result.data
-
+  const handleUpdateCustomer = (updatedCustomer: Customer) => {
+    CustomersInteractor.updateCustomer(updatedCustomer)
     setValidationErrors({})
     setCustomers(prev =>
       prev.map(oldCustomer =>
-        newCustomer && oldCustomer.id === newCustomer.id
-          ? newCustomer
+        updatedCustomer && oldCustomer.id === updatedCustomer.id
+          ? updatedCustomer
           : oldCustomer,
       ),
     )
