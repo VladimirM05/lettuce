@@ -1,1 +1,1 @@
-export { Subscriptions as default } from "./ui/Subscriptions"
+export { Subscriptions as default } from "./Subscriptions"

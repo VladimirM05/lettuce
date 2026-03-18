@@ -5,15 +5,20 @@ import { Pagination } from "@/view/primitives/pagination"
 import { Table } from "@/view/primitives/table"
 import { CustomerPopUp } from "@/view/components/customer-pop-up"
 
-import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
 import type { Customer } from "@/model/entities/Customer"
-
 import type { CustomerDTO } from "@/model/dto/customerDTO"
 
-import styles from "./Customers.module.scss"
 import { CustomersInteractor } from "@/model/interactors/CustomersInteractor"
 
-const customerColumns: TableColumn<Customer>[] = [
+import styles from "./Customers.module.scss"
+
+interface TableColumn {
+  key: keyof Customer
+  title: string
+  searchable: boolean
+}
+
+const customerColumns: TableColumn[] = [
   { key: "name", title: "Name", searchable: true },
   { key: "phone", title: "Phone", searchable: true },
   { key: "email", title: "Email", searchable: true },

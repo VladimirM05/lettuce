@@ -1,8 +1,8 @@
 import { useState } from "react"
 import clsx from "clsx"
 import { ActionButton } from "@/view/primitives/action-button"
-import SearchIcon from "../images/search.svg?react"
-import CrossIcon from "../images/cross.svg?react"
+import SearchIcon from "./Search.svg?react"
+import CrossIcon from "./Cross.svg?react"
 import styles from "./Search.module.scss"
 
 interface SearchProps {

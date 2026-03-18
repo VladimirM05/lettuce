@@ -1,9 +1,14 @@
 import { useEffect, useRef, useState } from "react"
 import clsx from "clsx"
-import type { TableColumn } from "@/view/primitives/table/types/TableColumn"
-import NoResultsIcon from "../images/no-results.svg?react"
-import ArrowUpIcon from "../images/arrow-up.svg?react"
+import NoResultsIcon from "./NoResults.svg?react"
+import ArrowUpIcon from "./ArrowUp.svg?react"
 import styles from "./Table.module.scss"
+
+interface TableColumn<T> {
+  key: keyof T
+  title: string
+  searchable: boolean
+}
 
 interface TableProps<T> {
   columns: TableColumn<T>[]

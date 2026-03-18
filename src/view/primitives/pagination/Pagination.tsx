@@ -4,11 +4,11 @@ import { useState } from "react"
 import { ActionButton } from "@/view/primitives/action-button"
 import { PaginationSelect } from "./PaginationSelect"
 
-import RefreshIcon from "../images/refresh.svg?react"
-import FirstIcon from "../images/first.svg?react"
-import ArrowLeftIcon from "../images/arrow-left.svg?react"
-import ArrowRightIcon from "../images/arrow-right.svg?react"
-import LastIcon from "../images/last.svg?react"
+import RefreshIcon from "./icons/Refresh.svg?react"
+import FirstIcon from "./icons/First.svg?react"
+import ArrowLeftIcon from "./icons/ArrowLeft.svg?react"
+import ArrowRightIcon from "./icons/ArrowRight.svg?react"
+import LastIcon from "./icons/Last.svg?react"
 
 import styles from "./Pagination.module.scss"
 

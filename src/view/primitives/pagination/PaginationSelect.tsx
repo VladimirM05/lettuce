@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import clsx from "clsx"
-import PaginationSelectIcon from "../images/arrow-down.svg?react"
+import PaginationSelectIcon from "./icons/ArrowDown.svg?react"
 import styles from "./PaginationSelect.module.scss"
 
 interface PaginationSelectProps {

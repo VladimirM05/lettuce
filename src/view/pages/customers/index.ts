@@ -1,1 +1,1 @@
-export { Customers as default } from "./ui/Customers"
+export { Customers as default } from "./Customers"
